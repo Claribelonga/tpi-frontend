@@ -1,3 +1,4 @@
+import { Link } from "wouter";
 import { useState } from "react";
 
 export default function Formulario(){
@@ -19,7 +20,9 @@ export default function Formulario(){
                 <input placeholder="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                 <input placeholder="contraseña" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                 <button type="submit">Iniciar Sesión</button>
-                <p>¿No tenes cuenta? <a href="#">Regístrate aquí</a></p>
+                <p>¿No tenes cuenta? {""} 
+                    <Link href="/registrarse"> Registrate aquí</Link>
+                </p>
             </form>
         </div>
     )
