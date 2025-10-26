@@ -48,6 +48,18 @@ export default function useUsuario(){
         break;
     }
   };
+  const limpiarInputs = () => {
+    setNombre("");
+    setApellido("");
+    setPassword("");
+    setEmail("");
+    setDni("");
+    setTelefono("");
+    setCalle("");
+    setNumero("");
+    setPiso("");
+    setDepto("");
+  };
   return [ { nombre, apellido, password, email, dni, telefono, calle, numero, piso, depto },
-    setDato ];
+    setDato, limpiarInputs ];
 }

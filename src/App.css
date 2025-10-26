@@ -1,42 +1,136 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.Formulario{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;         /* no pasa de 400px de ancho */
+  max-height: 600px;        /* no pasa de 600px de alto */
+  overflow: hidden;       
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.FormContenedor{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh - 40px);
+  width: 350px;
+  padding: 2rem;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.logo{
+  height: 75px;
+}
+.gatitos{
+  height: 320px;
+}
+.titulo{
+  color: #4A90E2;
+  font-size: 27px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.pNegrita{
+  font-weight: 500;
+}
+.FormContenedor .inputLogin{
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  outline: none;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+.FormContenedor input:focus{
+  border-bottom-color: #4A90E2;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.FormContenedor button {
+  width: 100%;
+  padding: 8px;
+  background-color: #7E57C2;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
+}
+.FormContenedor button:hover {
+  background-color: #4b3473;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+
+/* Contenedor general */
+.PaginaRegistro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+  /* padding: 10px 4rem; */
+  box-sizing: border-box;
+}
+.PaginaRegistro .FormContenedor{
+  padding: 10px 4rem;
+  margin-left: 10px;
+  height: auto;
+} 
+.ContenedorFormulario {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Inputs */
+.inputGen, .inputMitad {
+  width: 100%;
+  padding: 9px;
+  margin: 6px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  font-size: 0.95rem;
+  transition: 0.2s;
+}
+.inputGen:focus, .inputMitad:focus {
+  border-color: #4A90E2;
+  box-shadow: 0 0 4px rgba(74, 144, 226, 0.3);
+}
+.filaInputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
 }
 
-.card {
-  padding: 2em;
+.inputMitad {
+  flex: 1;
 }
 
-.read-the-docs {
-  color: #888;
+.ContenedorImagen {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: 50px;overflow: hidden;
+}
+
+.perro {
+  max-height: 60vh;
+  margin-right: 6rem;
+  object-fit: contain;
 }
