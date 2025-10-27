@@ -3,6 +3,9 @@ import { Link } from "wouter"
 
 export default function InicioSesion(){
     return(
-        <Formulario/>
+        <div className="PaginaLogin">
+            <Formulario/>
+        </div>
+        
     )
 }

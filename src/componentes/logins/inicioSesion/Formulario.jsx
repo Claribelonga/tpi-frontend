@@ -1,10 +1,11 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useState } from "react";
 
 
 export default function Formulario(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [, navigate] = useLocation();
 
     const enviarDatos = (e) => {
         e.preventDefault(); // Evita que la página se recargue
@@ -12,6 +13,7 @@ export default function Formulario(){
         // Aquí iría la lógica para enviar Email y Contraseña a la API (axios)
         console.log('Intento de inicio de sesión con:', { email, password });
         alert(`Intentando iniciar sesión con Email: ${email}`);
+         navigate("/inicio");
     };
 
     return(

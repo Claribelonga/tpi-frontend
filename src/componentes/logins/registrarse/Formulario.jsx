@@ -5,8 +5,38 @@ import useUsuario from "./useUsuario";
 export default function Formulario({onGuardar}){
     const [usuario, setDato, limpiarInputs] = useUsuario();
 
+    const validarDatos = (datos) => {
+  const errores = [];
+
+  const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+  if (!soloLetras.test(datos.nombre)) errores.push("El nombre solo puede contener letras");
+  if (!soloLetras.test(datos.apellido)) errores.push("El apellido solo puede contener letras");
+
+  // 8 nros para el dni
+  if (!/^\d{8}$/.test(datos.dni)) errores.push("El DNI debe tener 8 números");
+
+  // telefono 10 dígitos (sin espacios)
+  if (!/^\d{10}$/.test(datos.telefono)) errores.push("El teléfono debe tener 10 dígitos");
+
+  // Número de calle: solo números
+  if (!/^\d+$/.test(datos.numero)) errores.push("El número de calle debe ser numérico");
+
+  // Email: aunque HTML lo valida, lo reforzamos
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.email)) errores.push("El email no es válido");
+
+  // Contraseña mínima 6 caracteres
+  if (datos.password.length < 6) errores.push("La contraseña debe tener al menos 6 caracteres");
+
+  return errores;
+};
+
     const guardar = (e) =>{
         e.preventDefault();
+        const errores = validarDatos(usuario);
+        if(errores.length>0){
+            alert ("errorres encontrados: " + errores.join("\n-"))
+            return;
+        }
         console.log("datos del usuario: ", usuario);
         onGuardar(usuario);
     }

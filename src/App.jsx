@@ -1,6 +1,9 @@
 import { Router, Route, Redirect, Link } from "wouter";
 import InicioSesion from "./componentes/logins/inicioSesion/Main"
 import Registrarse from "./componentes/logins/registrarse/Main"
+import PantallaGeneral from "./componentes/comun/PantallaGeneral";
+
+// import Inicio from "./componentes/cliente/inicio"
 import './App.css'
 
 function App() {
@@ -15,6 +18,8 @@ function App() {
         <Route path="/login" component={InicioSesion} />
 
         <Route path="/registrarse" component={Registrarse} />
+
+        <Route path="/inicio" component={PantallaGeneral} />
       </Router>
       </div>
   )
