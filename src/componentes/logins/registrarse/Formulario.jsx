@@ -60,7 +60,7 @@ export default function Formulario({onGuardar}){
                 <input className="inputGen" type="text" placeholder="numero" value={usuario.numero} onChange={(e) => setDato("numero",e.target.value)} required/>
                 <input className="inputGen" type="text" placeholder="piso" value={usuario.piso} onChange={(e) => setDato("piso",e.target.value)}/>
                 <input className="inputGen" type="text" placeholder="departamento" value={usuario.depto} onChange={(e) => setDato("depto",e.target.value)}/>
-                <button type="submit">Registrarse</button>
+                <button className="btn-violeta" type="submit">Registrarse</button>
             </form>
             </div>
 

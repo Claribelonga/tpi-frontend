@@ -80,7 +80,7 @@ html, body{
   border-bottom-color: #4A90E2;
 }
 
-.FormContenedor button {
+.btn-violeta {
   width: 100%;
   padding: 8px;
   background-color: #7E57C2;
@@ -93,7 +93,7 @@ html, body{
   margin-bottom: 20px;
   transition: background-color 0.3s;
 }
-.FormContenedor button:hover {
+.btn-violeta:hover {
   background-color: #9C51C7;
 }
 
@@ -238,4 +238,8 @@ html, body{
 .icono{
   height: 20px;
   margin-right: 20px;
+}
+
+.banner{
+  border-radius: 18px;
 }

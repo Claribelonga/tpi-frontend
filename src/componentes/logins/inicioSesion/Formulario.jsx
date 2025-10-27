@@ -23,7 +23,7 @@ export default function Formulario(){
                 <span className="titulo">Ingresa a tu cuenta VetSur</span>
                 <input className="inputLogin" placeholder="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                 <input className="inputLogin" placeholder="contraseña" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
-                <button type="submit">Iniciar Sesión</button>
+                <button className="btn-violeta" type="submit">Iniciar Sesión</button>
                 <p className="pNegrita">¿No tenes cuenta? {""} 
                     <Link href="/registrarse"> Registrate aquí</Link>
                 </p>

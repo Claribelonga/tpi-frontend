@@ -3,7 +3,7 @@ import InicioSesion from "./componentes/logins/inicioSesion/Main"
 import Registrarse from "./componentes/logins/registrarse/Main"
 import PantallaGeneral from "./componentes/comun/PantallaGeneral";
 
-// import Inicio from "./componentes/cliente/inicio"
+import Inicio from "./componentes/comun/Inicio"
 import './App.css'
 
 function App() {
