@@ -3,14 +3,14 @@ import { useState } from "react";
 export default function useUsuario(){
     const [nombre, setNombre] = useState("");
     const [apellido, setApellido] = useState("");
-    const [password, setPassword] = useState("");
+    const [contraseña, setContraseña] = useState("");
     const [email, setEmail] = useState("");
     const [dni, setDni] = useState("");
     const [telefono, setTelefono] = useState("");
     const [calle, setCalle] = useState("");
     const [numero, setNumero] = useState("");
     const [piso, setPiso] = useState("");
-    const [depto, setDepto] = useState("");
+    const [departamento, setDepartamento] = useState("");
 
     const setDato = (campo, valor) => {
     switch (campo) {
@@ -20,8 +20,8 @@ export default function useUsuario(){
       case "apellido":
         setApellido(valor);
         break;
-      case "password":
-        setPassword(valor);
+      case "contraseña":
+        setContraseña(valor);
         break;
       case "email":
         setEmail(valor);
@@ -41,8 +41,8 @@ export default function useUsuario(){
       case "piso":
         setPiso(valor);
         break;
-      case "depto":
-        setDepto(valor);
+      case "departamento":
+        setDepartamento(valor);
         break;
       default:
         break;
@@ -51,15 +51,15 @@ export default function useUsuario(){
   const limpiarInputs = () => {
     setNombre("");
     setApellido("");
-    setPassword("");
+    setContraseña("");
     setEmail("");
     setDni("");
     setTelefono("");
     setCalle("");
     setNumero("");
     setPiso("");
-    setDepto("");
+    setDepartamento("");
   };
-  return [ { nombre, apellido, password, email, dni, telefono, calle, numero, piso, depto },
+  return [ { nombre, apellido, contraseña, email, dni, telefono, calle, numero, piso, departamento },
     setDato, limpiarInputs ];
 }

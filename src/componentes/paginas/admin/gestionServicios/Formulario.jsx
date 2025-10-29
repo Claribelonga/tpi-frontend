@@ -1,7 +1,7 @@
 export default function Formulario(){
-    return (
+    return(
         <div>
-            <p>formulary</p>
+            <p>Form Serv</p>
         </div>
     )
-} 
+}

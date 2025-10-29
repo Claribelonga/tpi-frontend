@@ -1,7 +1,7 @@
 import { useState } from "react";
 const servicios = [
   {nombre: "Peluquería", precio:"$3000"},
-  {nombre: "Corugía", precio:"$3000"},
+  {nombre: "Cirugía", precio:"$3000"},
   {nombre: "Vacunación", precio:"$3000"},
   {nombre: "Analisis", precio:"$3000"},
   {nombre: "Ecografia", precio:"$3000"},

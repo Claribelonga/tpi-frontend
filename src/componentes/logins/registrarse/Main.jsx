@@ -6,19 +6,22 @@ export default function Registrarse(){
 
     const [, navigate] = useLocation();
 
+     //POST
     const guardar = (datos)=>{
-      const url = "";
-    //   const config = {
-    //     headers: {authorization: "46809863"}
-    //   }  
+      const url = "http://localhost:5000/api/usuarios/registro";
+      // const config = {
+      //   headers: {authorization: "123456"}
+      // }  
       axios.post(url, datos)
       .then((resp)=>{
-        console.log("usuario guardado: ",resp.data)
-        navigate('/login'); //si el posst es exitoso redirige automaticamente al inicio de la pagina
+        console.log(resp.data)
+        navigate("/login");
+        console.log("usuario guardado")
+        alert("usuario registrado")
       })
       .catch((error) =>{
-        console.error("error al guardar: ",error)
-        alert("no se guardo el registro")
+        console.error(error)
+        alert("usu no registrard")
       })
     }
 

@@ -25,7 +25,7 @@ export default function Formulario({onGuardar}){
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.email)) errores.push("El email no es válido");
 
   // Contraseña mínima 6 caracteres
-  if (datos.password.length < 6) errores.push("La contraseña debe tener al menos 6 caracteres");
+  if (datos.contraseña.length < 6) errores.push("La contraseña debe tener al menos 6 caracteres");
 
   return errores;
 };
@@ -52,16 +52,20 @@ export default function Formulario({onGuardar}){
                     <input className="inputMitad" type="text" placeholder="nombre" value={usuario.nombre} onChange={(e) => setDato("nombre",e.target.value)} required/>
                     <input className="inputMitad" type="text" placeholder="apellido" value={usuario.apellido} onChange={(e) => setDato("apellido",e.target.value)} required/>
                 </div>
-                <input className="inputGen" type="password" placeholder="contraseña" value={usuario.password} onChange={(e) => setDato("password",e.target.value)} required/>
+                <input className="inputGen" type="password" placeholder="contraseña" value={usuario.contraseña} onChange={(e) => setDato("contraseña",e.target.value)} required/>
                 <input className="inputGen" type="email" placeholder="email" value={usuario.email} onChange={(e) => setDato("email",e.target.value)} required/>
                 <input className="inputGen" type="text" placeholder="dni" value={usuario.dni} onChange={(e) => setDato("dni",e.target.value)} required/>
                 <input className="inputGen" type="text" placeholder="teléfono" value={usuario.telefono} onChange={(e) => setDato("telefono",e.target.value)} required/>
                 <input className="inputGen" type="text" placeholder="calle" value={usuario.calle} onChange={(e) => setDato("calle",e.target.value)} required/>
                 <input className="inputGen" type="text" placeholder="numero" value={usuario.numero} onChange={(e) => setDato("numero",e.target.value)} required/>
                 <input className="inputGen" type="text" placeholder="piso" value={usuario.piso} onChange={(e) => setDato("piso",e.target.value)}/>
-                <input className="inputGen" type="text" placeholder="departamento" value={usuario.depto} onChange={(e) => setDato("depto",e.target.value)}/>
+                <input className="inputGen" type="text" placeholder="departamento" value={usuario.departamento} onChange={(e) => setDato("departamento",e.target.value)}/>
                 <button className="btn-violeta" type="submit">Registrarse</button>
+                <p className="pNegrita">¿Ya tenes cuenta? {""} 
+                    <Link href="/login"> Inicia Sesión</Link>
+                </p>
             </form>
+                
             </div>
 
             <div className="ContenedorImagen">

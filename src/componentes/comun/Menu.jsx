@@ -10,21 +10,21 @@ export default function Menu() {
 
       <nav className="menu">
         <div className="superior">
-            <Link href="/menu/inicio" className="menu-item">
+            <Link href="/Inicio" className="menu-item">
             <img src="/img/casa.png" alt="home" className="icono"></img>
             Inicio</Link>
-            <Link href="/menu/perfil" className="menu-item">
+            <Link href="/gestionCliente" className="menu-item">
             <img src="/img/usuario.png" alt="home" className="icono"></img>
-            Mi Perfil</Link>
-            <Link href="/menu/mis-turnos" className="menu-item">
+            Gestionar Clientes</Link>
+            <Link href="/gestionVete" className="menu-item">
             <img src="/img/agenda.png" alt="home" className="icono"></img>
-            Mis Turnos</Link>
-            <Link href="/menu/sacar-turno" className="menu-item">
+            Gestionar Veterinarios</Link>
+            <Link href="/gestionServicios" className="menu-item">
             <img src="/img/mas.png" alt="home" className="icono"></img>
-            Sacar Turno</Link>
-            <Link href="/menu/mis-mascotas" className="menu-item">
+            Gestionar Servicios</Link>
+            <Link href="/gestionEspe" className="menu-item">
             <img src="/img/pata.png" alt="patita" className="icono"></img>
-            Mis Mascotas</Link>
+            Gestionar Especilidades</Link>
         </div>
         <div className="inferior">
             <Link href="/login" className="menu-item salir">

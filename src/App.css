@@ -45,7 +45,7 @@ html, body{
   flex-direction: column;
   align-items: center;
   height: calc(100vh - 40px);
-  width: 350px;
+  width: 400px;
   padding: 2rem;
   border-radius: 15px;
   background-color: #fff;
@@ -104,17 +104,23 @@ html, body{
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: hidden;
+  width: auto;
+  /* overflow: hidden; */
   background-color: #fff;
   /* padding: 10px 4rem; */
   box-sizing: border-box;
 }
 .PaginaRegistro .FormContenedor{
-  padding: 10px 4rem;
+  padding: 10px 3rem;
   margin-left: 10px;
   height: auto;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 } 
+.ContenedorForm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .ContenedorFormulario {
   flex: 1;
   display: flex;
@@ -141,21 +147,21 @@ html, body{
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  width: 369px;
 }
 .inputMitad {
   flex: 1;
 }
 .ContenedorImagen {
-  flex: 1;
+  /* flex: 1;
   display: flex;
   justify-content: flex-end;
-  align-items: center;
-  margin-left: 50px;overflow: hidden;
+  align-items: center; */
+  /* margin-left: 50px; */
+  overflow: hidden;
 }
 .perro {
   max-height: 60vh;
-  margin-right: 6rem;
+  margin-left: 6rem;
   object-fit: contain;
 }
 
@@ -237,7 +243,7 @@ html, body{
 }
 .icono{
   height: 20px;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .banner{

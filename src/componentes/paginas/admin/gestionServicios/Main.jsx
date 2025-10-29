@@ -1,6 +1,6 @@
-import Formulario from "./Formulario";
-import Listado from "./Listado";
-import Menu from "../../../comun/Menu";
+import Formulario from "./Formulario"
+import Listado from "./Listado"
+import Menu from "../../../comun/Menu"
 
 export default function Main(){
     return(
