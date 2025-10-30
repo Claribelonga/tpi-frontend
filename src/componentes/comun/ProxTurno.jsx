@@ -5,13 +5,13 @@ import { Link } from "wouter";
 export default function ProximoTurno() {
   const [turno, setTurno] = useState(null);
 
-  useEffect(() => {
-    const idCliente = 1;
-    axios
-      .get(`https://api-vetsur.com/turnos/ultimo/${idCliente}`)
-      .then((res) => setTurno(res.data))
-      .catch((err) => console.error("Error al obtener el turno", err));
-  }, []);
+  // useEffect(() => {
+  //   const idCliente = 1;
+  //   axios
+  //     .get(`https://api-vetsur.com/turnos/ultimo/${idCliente}`)
+  //     .then((res) => setTurno(res.data))
+  //     .catch((err) => console.error("Error al obtener el turno", err));
+  // }, []);
 
   if (!turno) {
     return (
