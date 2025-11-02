@@ -5,7 +5,7 @@ import PantallaGeneral from "./componentes/comun/PantallaGeneral";
 import Inicio from "./componentes/comun/Inicio"
 import GestionCliente from "./componentes/paginas/admin/gestionCliente/Main"
 import GestionVete from "./componentes/paginas/admin/gestionVete/Main"
-import GestionEspe from "./componentes/paginas/admin/gestionEspecialidades/MainListado"
+import GestionEspe from "./componentes/paginas/admin/gestionEspecialidades/Main"
 import GestionServicios from "./componentes/paginas/admin/gestionServicios/Main"
 import './App.css'
 

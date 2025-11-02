@@ -139,7 +139,7 @@ html, body{
   transition: 0.2s;
 }
 .inputGen:focus, .inputMitad:focus {
-  border-color: #4A90E2;
+  border-color: #7E57C2;
   box-shadow: 0 0 4px rgba(74, 144, 226, 0.3);
 }
 .filaInputs {
@@ -243,9 +243,117 @@ html, body{
 }
 .icono{
   height: 20px;
-  margin-right: 10px;
+  /* margin-right: 10px; */
 }
-
 .banner{
   border-radius: 18px;
+}
+
+.cont-form {
+  margin-right: 350px;
+  /* max-width: 900px;
+  margin: 40px auto;
+  background-color: white; */
+  /* padding: 30px 40px; */
+  /* border-radius: 12px; */
+  /* box-shadow: 0 2px 10px rgba(0,0,0,0.05); */
+}
+
+.cont-form h2 {
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+  color: #222;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border-bottom: #CDCDCD 1px solid;
+  margin-bottom: 20px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+span {
+  font-weight: 600;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 230px;
+}
+.form-button{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.form-button .btn-violeta{
+  width: 150px;
+  margin-top: 0;
+}
+
+.buscador{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: #ccc;
+  width: 293px;
+  padding: 10px;
+  border:#ccc 1px solid;
+  border-radius: 12px;
+  margin: 10px 0 40px 0;
+}
+.buscador:focus{
+  border: 1px #7E57C2 solid;
+}
+.input-buscador{
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+}
+.listado-clientes-container {
+  width: max-content;
+  margin-top: 20px;
+  border-radius: 10px;
+  overflow: hidden; /* para redondear bien el borde superior */
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.listado-clientes-container .tabla{
+  margin-top: 12px;
+}
+.thead {
+  background-color: #d5e5f8;
+  color: #000;
+}
+th {
+  text-align: left;
+  padding: 12px 15px;
+  font-weight: 600;
+  border-bottom: 1px solid #ddd;
+}
+td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+.thead tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.thead tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+.btn-edit{
+  color: #7E57C2;
 }

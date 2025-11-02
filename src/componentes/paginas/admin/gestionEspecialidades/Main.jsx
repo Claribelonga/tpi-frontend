@@ -1,14 +1,13 @@
 import Menu from "../../../comun/Menu";
-
-export default function MainListado(){
+import Listado from "./listado";
+export default function Main(){
     return(
-
         <div className="Cont-Padre">
             <div className="menu-lateral">
                 <Menu></Menu>
             </div>
             <div className="area-contenido">
-                <p>Listado de Especialidades ahre</p>
+                <Listado></Listado>
             </div>
         </div>
     )

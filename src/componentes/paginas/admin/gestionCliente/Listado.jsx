@@ -2,10 +2,11 @@
 export default function Listado({ clientes, onEditar }){ 
     return(
         <div className="listado-clientes-container">
-            <h3>Clientes Registrados ({clientes.length})</h3>
+            <span>Clientes Registrados</span>
+            <div className="tabla">
             {clientes.length > 0 ? (
-                <table>
-                    <thead>
+                <table className="tabla">
+                    <thead className="thead">
                         <tr>
                             <th>Nombre</th>
                             <th>DNI</th>
@@ -13,7 +14,7 @@ export default function Listado({ clientes, onEditar }){
                             <th>Direcciones</th>
                             <th>Teléfono</th>
                             <th>Mis Mascotas</th>
-                            <th>Acciones</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,7 +31,7 @@ export default function Listado({ clientes, onEditar }){
                                         ? cliente.mascotas.map(m => m.nombre).join(", ")
                                         : "Sin mascotas"}</td>
                                 <td>
-                                    <button onClick={() => onEditar(cliente)}>Editar</button>
+                                    <button className="btn-edit" onClick={() => onEditar(cliente)}>Editar   <img src="/img/lapiz.png" alt="lapiz" className="icono"/></button>
                                 </td>
                             </tr>
                         ))}
@@ -39,6 +40,7 @@ export default function Listado({ clientes, onEditar }){
             ) : (
                 <p>No hay clientes registrados.</p>
             )}
+            </div>
         </div>
     )
 }

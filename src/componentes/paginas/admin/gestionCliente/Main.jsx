@@ -1,6 +1,7 @@
 import Formulario from "./Formulario"
 import Listado from "./Listado"
 import Menu from "../../../comun/Menu"
+import Buscador from "./Buscador"
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 
@@ -10,7 +11,7 @@ export default function Main(){
 
      //GET
     const obtenerClientes =() =>{
-      const url = "http://localhost:5000/api/personas/ver";
+      const url = "http://localhost:5000/api/clientes/";
       axios.get(url)
       .then((resp)=>{
         setClientes(resp.data);
@@ -31,10 +32,10 @@ export default function Main(){
      const guardarCliente = (datos) => {
         //hago un if si hay un editarcliente PUT sino un POST
         if (clienteEdit) {
-            const url = `https://localhost:5000/api/personas/editarcliente/${id_usuario}`;
+            const url = `http://localhost:5000/api/clientes/editarcliente/${clienteEdit.usuario.id_usuario}`;
             axios.put (url, datos)
             .then((resp) => {
-                console.log(resp.data);
+                console.log("cliente actualizado: ",resp.data);
                 obtenerClientes();
                 setClienteEdit(null); //limpia el formularioo
             })
@@ -42,10 +43,10 @@ export default function Main(){
         }
         else {
             //POST normal para crear
-            const url = "http://localhost:5000/api/personas/crearcliente";
+            const url = "http://localhost:5000/api/clientes/crearcliente";
             axios.post(url, datos)
             .then((resp) => {
-                console.log(resp.data)
+                console.log("cliente creado: ",resp.data)
                 obtenerClientes()
             })
             .catch ((error) => {
@@ -85,6 +86,7 @@ export default function Main(){
                 guardarCliente={guardarCliente}
                 clienteEdit={clienteEdit}
                 />
+                <Buscador/>
                 <Listado
                 clientes={clientes}
                 onEditar={(cliente) => setClienteEdit(cliente)}
