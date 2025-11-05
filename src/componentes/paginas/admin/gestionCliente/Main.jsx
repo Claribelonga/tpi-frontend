@@ -1,6 +1,6 @@
 import Formulario from "./Formulario"
 import Listado from "./Listado"
-import Menu from "../../../comun/Menu"
+// import Menu from "../../../comun/Menu"
 import Buscador from "./Buscador"
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
@@ -14,7 +14,7 @@ export default function Main(){
       const url = "http://localhost:5000/api/clientes/";
       axios.get(url)
       .then((resp)=>{
-        setClientes(resp.data);
+        setClientes(resp.data.personas);
         console.log(resp.data)
       })
       .catch((error) =>{
@@ -77,11 +77,13 @@ export default function Main(){
 
 
     return(
-        <div className="Cont-Padre">
-            <div className="menu-lateral">
-                <Menu></Menu>
-            </div>
-            <div className="area-contenido">
+        // <div className="Cont-Padre">
+        //     <div className="menu-lateral">
+        //         <Menu></Menu>
+        //     </div>
+            
+        // </div>
+        <div className="area-contenido">
                 <Formulario 
                 guardarCliente={guardarCliente}
                 clienteEdit={clienteEdit}
@@ -92,6 +94,5 @@ export default function Main(){
                 onEditar={(cliente) => setClienteEdit(cliente)}
                 />
             </div>
-        </div>
     )
 }

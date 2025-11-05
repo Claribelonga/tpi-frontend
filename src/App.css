@@ -166,7 +166,11 @@ html, body{
 }
 
 /*Estructura pantalla general*/
-.Cont-Padre{
+/* .Cont-Padre{
+  display: flex;
+  height: 100vh;
+} */
+ .layout {
   display: flex;
   height: 100vh;
 }
@@ -184,7 +188,7 @@ html, body{
 }
 /* 2. Estilos del Área de Contenido (Ocupa el resto) */
 .area-contenido{
-  margin-left: 290px;
+  margin-left: 130px;
     flex-grow: 1; /* Esto hace que ocupe todo el espacio sobrante */
     padding: 30px;
     background-color: #ffffff;
