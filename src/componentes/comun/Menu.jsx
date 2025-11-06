@@ -1,11 +1,24 @@
-import { Link } from "wouter"
+import { Link} from "wouter"
+import { useLocation } from "wouter";
+//estructura del menu compartida, un switch/ ifelse con 
+export default function Menu({rol}) {
 
-export default function Menu() {
+  const [, navigate] = useLocation();
+
+  const handleLogout = () => {
+    // 1️⃣ Borrar los datos del usuario
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("rol");
+    window.dispatchEvent(new Event("sessionChange"));
+    // 2️⃣ Redirigir al login
+    navigate("/login");
+  };
+
   return (
     <div className="sidebar">
       <div className="Logo">
         <img src="/img/logoVetSur.png" alt="logoVioleta" className="logo"></img>
-        <span className="vet">Vet</span><span className="sur">Sur</span>
+        <h5 className="vet">Vet</h5><h5 className="sur">Sur</h5>
       </div>
 
       <nav className="menu">
@@ -27,9 +40,10 @@ export default function Menu() {
             Gestionar Especilidades</Link>
         </div>
         <div className="inferior">
-            <Link href="/login" className="menu-item salir">
-            <img src="/img/salida.png" alt="home" className="icono"></img>
-            Salir</Link>
+          <a className="menu-item salir" onClick={handleLogout}>
+             <img src="/img/salida.png" alt="home" className="icono"></img>
+             Cerrar Sesión
+          </a>
         </div>
         
         
@@ -38,3 +52,6 @@ export default function Menu() {
   );
 }
 
+            // <Link href="/login" className="menu-item salir">
+            // <img src="/img/salida.png" alt="home" className="icono"></img>
+            // Salir</Link>

@@ -7,7 +7,7 @@ export default function InicioSesion(){
     const [, navigate] = useLocation();
 
     const handleLogin = (datos) =>{
-        const url = "http://localhost:5000/api/usuarios/login";
+        const url = "http://localhost:5000/api/usuarios/login/";
         //enviamos los datos ingresados
         axios.post( url, {user: datos.user, pass: datos.pass}) 
         .then ((res) => {
@@ -18,6 +18,7 @@ export default function InicioSesion(){
                 sessionStorage.setItem("token", token); // Guardamos el token en sessionStorage
                 const rol = res.data.rol;
                 sessionStorage.setItem("rol", rol);
+                window.dispatchEvent(new Event("sessionChange"));
                  // Esperamos un tick para que React actualice antes de navegar
         setTimeout(() => {
           if (rol === 1) navigate("/inicio");

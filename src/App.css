@@ -179,7 +179,7 @@ html, body{
   top: 0;
   left: 0;
   height: 100vh;
-  width: 290px; /* Ancho fijo para el menú */
+  width: 300px; /* Ancho fijo para el menú */
   flex-shrink: 0; /* Evita que se encoja si no hay espacio */
   background-color: #d5e5f8; 
   border-radius: 42px;
@@ -188,11 +188,11 @@ html, body{
 }
 /* 2. Estilos del Área de Contenido (Ocupa el resto) */
 .area-contenido{
-  margin-left: 130px;
-    flex-grow: 1; /* Esto hace que ocupe todo el espacio sobrante */
-    padding: 30px;
-    background-color: #ffffff;
-    /* overflow-y: auto; */
+  margin-left: 290px;
+  flex-grow: 1; /* Esto hace que ocupe todo el espacio sobrante */
+  padding: 30px;
+  background-color: #ffffff;
+  /* overflow-y: auto; */
 }
 /* Menuuu */
 .sidebar{
@@ -360,4 +360,44 @@ td {
 }
 .btn-edit{
   color: #7E57C2;
+}
+.btn-estado {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Cuando el servicio está activo → verde */
+.btn-estado.activo {
+  background-color: #28a745; /* verde */
+}
+
+/* Cuando el servicio está inactivo → rojo */
+.btn-estado.inactivo {
+  background-color: #dc3545; /* rojo */
+}
+
+.mensaje-bienvenida {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  left: 40%;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 15px;
+  font-weight: bold;
+  animation: fadeOut 4s ease forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; display: none; }
 }

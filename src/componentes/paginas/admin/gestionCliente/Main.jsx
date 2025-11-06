@@ -55,35 +55,8 @@ export default function Main(){
         }
      }
 
-
-
-
-
-
-    // const guardarCliente = (datos)=>{
-    //   const url = "http://localhost:5000/api/personas/crearcliente";
-    //   axios.post(url, datos)
-    //   .then((resp)=>{
-    //     console.log(resp.data)
-    //     console.log("usuario guardado")
-    //     alert("usuario registrado")
-    //     obtenerClientes();
-    //   })
-    //   .catch((error) =>{
-    //     console.error(error)
-    //     alert("usu no registrard")
-    //   })
-    // }
-
-
     return(
-        // <div className="Cont-Padre">
-        //     <div className="menu-lateral">
-        //         <Menu></Menu>
-        //     </div>
-            
-        // </div>
-        <div className="area-contenido">
+        <div>
                 <Formulario 
                 guardarCliente={guardarCliente}
                 clienteEdit={clienteEdit}
@@ -93,6 +66,6 @@ export default function Main(){
                 clientes={clientes}
                 onEditar={(cliente) => setClienteEdit(cliente)}
                 />
-            </div>
+        </div>
     )
 }

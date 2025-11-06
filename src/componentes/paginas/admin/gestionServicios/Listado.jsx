@@ -1,7 +1,7 @@
 export default function Listado({servicios, onEditar, onCambiarEstado}){
     return(
          <div className="listado-clientes-container">
-            <span>Clientes Registrados</span>
+            <span>Servicios Registrados</span>
             <div className="tabla">
                 <table>
                     <thead className="thead">
@@ -18,8 +18,9 @@ export default function Listado({servicios, onEditar, onCambiarEstado}){
                                 <td>{servicio.nombre}</td>
                                 <td>{servicio.precio}</td>
                                 <td>
-                                    <button onClick={() => onCambiarEstado(servicio.id_servicio, servicio.estado)}>
-                                        {servicio.estado === 1 ? "Activo" : "Inactivo"}</button>
+                                    <button onClick={() => onCambiarEstado(servicio.id_servicio, servicio.estado)} className={servicio.estado === 1 ? "btn-estado activo" : "btn-estado inactivo"}>
+                                        {servicio.estado === 1 ? "Activo" : "Inactivo"}
+                                    </button>
                                 </td>
                                 <td>
                                     <button className="btn-edit" onClick={() => onEditar(servicio)}>Editar   <img src="/img/lapiz.png" alt="lapiz" className="icono"/></button>

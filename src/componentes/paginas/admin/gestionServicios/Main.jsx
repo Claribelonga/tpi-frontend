@@ -51,10 +51,6 @@ export default function Main(){
         })
     }
     return(
-        <div className="Cont-Padre">
-            <div className="menu-lateral">
-                <Menu></Menu>
-            </div>
             <div className="area-contenido">
                 <Formulario
                 onGuardar={guardarServicio}
@@ -66,6 +62,5 @@ export default function Main(){
                 onCambiarEstado={cambiarEstado}
                 />
             </div>
-        </div>
     )
 }

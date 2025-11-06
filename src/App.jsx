@@ -2,7 +2,7 @@ import { Router, Route, Redirect, Link } from "wouter";
 import { useState, useEffect } from "react";
 //componentes comunes:
 import Menu from "./componentes/comun/Menu";
-import PantallaGeneral from "./componentes/comun/PantallaGeneral";
+// import PantallaGeneral from "./componentes/comun/PantallaGeneral";
 import Inicio from "./componentes/comun/Inicio";
 //login y registro:
 import InicioSesion from "./componentes/logins/inicioSesion/Main"
@@ -12,28 +12,43 @@ import GestionCliente from "./componentes/paginas/admin/gestionCliente/Main"
 import GestionVete from "./componentes/paginas/admin/gestionVete/Main"
 import GestionEspe from "./componentes/paginas/admin/gestionEspecialidades/Main"
 import GestionServicios from "./componentes/paginas/admin/gestionServicios/Main"
-
 //estilos:
 import './App.css'
 //usar un switch para meter todas las rutas
 //el menu deberia estar aca fijo y cuando se logee recien mostrar el menu
 
 function App() {
-  const token = sessionStorage.getItem("token");
-  const rol = Number(sessionStorage.getItem("rol")); // lo guardamos como número
-   // Estado del token y del rol
-  // const [token, setToken] = useState(sessionStorage.getItem("token"));
-  // const [rol, setRol] = useState(sessionStorage.getItem("rol"));
+  const [token, setToken] = useState(sessionStorage.getItem("token"));
+  const [rol, setRol] = useState(Number(sessionStorage.getItem("rol")));
+  const [mensaje, setMensaje] = useState("");
 
-  // Este efecto se dispara cuando cambian los valores en sessionStorage
+  //cuando cambia el token en sessionStorage, actualizamos el estado
   useEffect(() => {
-    const handleStorageChange = () => {
-      setToken(sessionStorage.getItem("token"));
-      setRol(sessionStorage.getItem("rol"));
+    const updateSession = () => {
+      const storedToken = sessionStorage.getItem("token");
+      const storedRol = Number(sessionStorage.getItem("rol"));
+      setToken(storedToken);
+      setRol(storedRol);
     };
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+
+    //escuchamos un evento personalizado que dispararemos desde login/logout
+    window.addEventListener("sessionChange", updateSession);
+
+    return () => {
+      window.removeEventListener("sessionChange", updateSession);
+    };
   }, []);
+
+  //mensajes de bienvenida
+  useEffect(() => {
+    if (token && rol) {
+      if (rol === 1) setMensaje("Bienvenido al panel de administración");
+      else if (rol === 2) setMensaje("Bienvenido al panel del veterinario");
+      else if (rol === 3) setMensaje("Bienvenido al panel del cliente");
+
+      setTimeout(() => setMensaje(""), 4000);
+    }
+  }, [token, rol]);
 
   return (
      <div className="App">
@@ -52,7 +67,12 @@ function App() {
               <Menu rol={rol}/>
             </div>
             <div className="area-contenido">
-              <Route path="/inicio"><PantallaGeneral /></Route>
+               {mensaje && (
+                <div className="mensaje-bienvenida">
+                  {mensaje}
+                </div>
+              )}
+              <Route path="/inicio"><Inicio /></Route>
 
               {/* ADMIN */}
               {rol === 1 && (
@@ -86,28 +106,3 @@ function App() {
 }
 
 export default App
-
-      {/* <Router>
-
-        <Route path="/">
-          <Redirect to="/login" />
-        </Route>
-
-        <Route path="/login">
-        <InicioSesion />
-        </Route>
-
-        <Route path="/registrarse">
-        <Registrarse /> //el profe dijo que era mejor asi que con component ya que por aca le pasarias las props o params(aunque no se de que )
-        </Route> 
-
-        <Route path="/inicio" component={PantallaGeneral} />
-
-        <Route path="/gestionCliente" component={GestionCliente} />
-        
-        <Route path="/gestionVete" component={GestionVete} />
-
-        <Route path="/gestionServicios" component={GestionServicios} />
-
-        <Route path="/gestionEspe" component={GestionEspe}/>
-      </Router> */}
