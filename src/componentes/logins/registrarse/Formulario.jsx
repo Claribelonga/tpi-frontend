@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import useUsuario from "./useUsuario";
+import useUsuario from "../../../hooks/useUsuario"
 
 export default function Formulario({onGuardar}){
     const [usuario, setDato, limpiarInputs] = useUsuario();

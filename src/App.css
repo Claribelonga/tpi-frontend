@@ -304,7 +304,10 @@ span {
   width: 150px;
   margin-top: 0;
 }
-
+.cont-buscador{
+  display: flex;
+  flex-direction: row;
+}
 .buscador{
   display: flex;
   flex-direction: row;
@@ -354,7 +357,6 @@ td {
 .thead tr:first-child th:first-child {
   border-top-left-radius: 10px;
 }
-
 .thead tr:first-child th:last-child {
   border-top-right-radius: 10px;
 }
@@ -380,7 +382,6 @@ td {
 .btn-estado.inactivo {
   background-color: #dc3545; /* rojo */
 }
-
 .mensaje-bienvenida {
   display: flex;
   justify-content: center;
@@ -395,9 +396,210 @@ td {
   font-weight: bold;
   animation: fadeOut 4s ease forwards;
 }
-
+.mensaje-bienvenida.exito{
+  background-color: #d4edda;
+}
+.mensaje-bienvenida.error{
+  background-color: #dc3545;
+}
 @keyframes fadeOut {
   0% { opacity: 1; }
   80% { opacity: 1; }
   100% { opacity: 0; display: none; }
+}
+
+/*home*/
+/* Contenedor principal */
+.contenedor-turno {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 20px 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Tarjeta de turno */
+.card-turno {
+  border: 1.5px solid #9c5df5;
+  border-radius: 10px;
+  padding: 14px 18px;
+  width: 330px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+}
+.card-turno .btn-violeta{
+  width: auto;
+}
+
+/* Títulos y textos */
+.titulo-turno {
+  font-weight: 600;
+  margin: 0;
+  color: #000;
+}
+
+.texto-turno {
+  font-size: 14px;
+  color: #333;
+  margin: 2px 0;
+}
+
+.btn-violeta.grande {
+  padding: 10px 20px;
+  font-size: 15px;
+}
+
+/* Estado sin turno */
+.sin-turno {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.sin-turno p {
+  margin-bottom: 10px;
+}
+/*servicios seccion*/
+.servicios-container {
+  text-align: left;
+  margin: 30px 0;
+}
+
+.titulo-servicios {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 20px;
+}
+
+.grid-servicios {
+  display: grid;
+  /*grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));*/
+  grid-template-columns: repeat(auto-fit, minmax(250px, 330px));
+  gap: 30px;
+  margin: 20px 0;
+}
+/* h3{
+  font-family: "Poppins", sans-serif;
+} */
+.card-servicio {
+  border: 1px solid #4A90E2; /* bordecito violeta suave */
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  background-color: #fff;
+  width: 330px;
+}
+
+.card-servicio:hover {
+  transform: translateY(-4px);
+}
+
+.icono-servicio {
+  background-color: #d5e5f8;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px auto;
+  font-size: 28px;
+}
+.serv-img{
+  height: 40px;
+  width: auto;
+}
+.nombre-servicio {
+  font-weight: 500;
+}
+.card-vete{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.img-vete{
+  background-color: #d5e5f8;
+  border-radius: 50%;
+  border: 1px solid #4A90E2;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vete-img{
+  height: 100px;
+  width: auto;
+}
+.nombre-vete{
+  color: #555;
+}
+
+/*Footer*/
+.footer {
+  background-color: #f3f3f3;
+  border-radius: 12px;
+  padding: 25px 40px;
+  margin-top: 40px;
+  font-family: "Poppins", sans-serif;
+  color: #222;
+}
+
+.footer-contenido {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 15px;
+}
+
+.footer-contacto h4 {
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.footer-contacto p {
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.icono {
+  font-size: 18px;
+}
+
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-logos img {
+  height: 35px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.footer-logos img:hover {
+  opacity: 1;
+}
+
+.footer-copy {
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
 }

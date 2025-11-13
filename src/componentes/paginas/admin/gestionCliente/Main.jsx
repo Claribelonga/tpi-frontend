@@ -8,11 +8,21 @@ import axios from "axios";
 export default function Main(){
     const [clientes, setClientes] = useState([]);
     const [clienteEdit, setClienteEdit] = useState(null);
+    const [mensaje, setMensaje] = useState("");
+    const [tipoMensaje, setTipoMensaje] = useState(""); // "exito" o "error"
 
+
+    const token = sessionStorage.getItem("token");
      //GET
-    const obtenerClientes =() =>{
-      const url = "http://localhost:5000/api/clientes/";
-      axios.get(url)
+    const obtenerClientes = (busqueda = "") =>{
+      console.log("Buscando:", busqueda);
+      const url = `http://localhost:5000/api/clientes?busqueda=${busqueda}`;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      axios.get(url, config)
       .then((resp)=>{
         setClientes(resp.data.personas);
         console.log(resp.data)
@@ -21,8 +31,6 @@ export default function Main(){
         console.error(error)
       })
     }
-
-
     useEffect(() => {
       obtenerClientes();
     },[])
@@ -37,9 +45,17 @@ export default function Main(){
             .then((resp) => {
                 console.log("cliente actualizado: ",resp.data);
                 obtenerClientes();
+                setMensaje("✅ Cliente registrado con éxito");
+                setTipoMensaje("exito");
                 setClienteEdit(null); //limpia el formularioo
+                setTimeout(() => setMensaje(""), 4000);
             })
-            .catch((error) => console.error(error));
+            .catch((error) => {
+              console.error(error);
+              setMensaje("❌ Error al registrar cliente");
+              setTipoMensaje("error");
+              setTimeout(() => setMensaje(""), 4000);
+            });
         }
         else {
             //POST normal para crear
@@ -47,25 +63,37 @@ export default function Main(){
             axios.post(url, datos)
             .then((resp) => {
                 console.log("cliente creado: ",resp.data)
+                setMensaje("✅ Cliente registrado con éxito");
+                setTipoMensaje("exito");
                 obtenerClientes()
+                setTimeout(() => setMensaje(""), 4000);
             })
             .catch ((error) => {
                 console.error(error);
+                setMensaje("❌ Error al registrar cliente");
+                setTipoMensaje("error");
+                setTimeout(() => setMensaje(""), 4000);
             })
         }
      }
 
     return(
         <div>
-                <Formulario 
-                guardarCliente={guardarCliente}
-                clienteEdit={clienteEdit}
-                />
-                <Buscador/>
-                <Listado
-                clientes={clientes}
-                onEditar={(cliente) => setClienteEdit(cliente)}
-                />
+          {mensaje && (
+            <div className={`mensaje-bienvenida ${tipoMensaje}`}>
+              {mensaje}
+            </div>
+          )}
+          <Formulario
+          guardarCliente={guardarCliente}
+          clienteEdit={clienteEdit}
+          />
+          <Buscador
+          onBuscar={obtenerClientes}/>
+          <Listado
+          clientes={clientes}
+          onEditar={(cliente) => setClienteEdit(cliente)}
+          />
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useUsuario from "../../../logins/registrarse/useUsuario"
+import useUsuario from "../../../../hooks/useUsuario";
 export default function Formulario({guardarCliente, clienteEdit}){
     const [usuario, setDato, limpiarInputs] = useUsuario();
 

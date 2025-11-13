@@ -13,7 +13,7 @@ export default function Listado({ clientes, onEditar }){
                             <th>Email</th>
                             <th>Direcciones</th>
                             <th>Teléfono</th>
-                            <th>Mis Mascotas</th>
+                            <th>Mascotas</th>
                             <th>Acción</th>
                         </tr>
                     </thead>

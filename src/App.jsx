@@ -12,14 +12,21 @@ import GestionCliente from "./componentes/paginas/admin/gestionCliente/Main"
 import GestionVete from "./componentes/paginas/admin/gestionVete/Main"
 import GestionEspe from "./componentes/paginas/admin/gestionEspecialidades/Main"
 import GestionServicios from "./componentes/paginas/admin/gestionServicios/Main"
+//Pantallas de veterinario:
+import AgendaTurnos from "./componentes/paginas/veterinario/agendaDeTurnos/Main"
+import Diagnosticos from "./componentes/paginas/veterinario/diagnosticos/Main"
+import MiPefil from "./componentes/paginas/veterinario/miPerfil/Main"
+import Pacientes from "./componentes/paginas/veterinario/pacientes/Main"
 //estilos:
 import './App.css'
 //usar un switch para meter todas las rutas
 //el menu deberia estar aca fijo y cuando se logee recien mostrar el menu
 
 function App() {
-  const [token, setToken] = useState(sessionStorage.getItem("token"));
-  const [rol, setRol] = useState(Number(sessionStorage.getItem("rol")));
+  // const [token, setToken] = useState(sessionStorage.getItem("token"));
+  // const [rol, setRol] = useState(Number(sessionStorage.getItem("rol")));
+  const [token, setToken] = useState("admin@gmail.com")
+  const [rol, setRol] = useState(2)
   const [mensaje, setMensaje] = useState("");
 
   //cuando cambia el token en sessionStorage, actualizamos el estado
@@ -86,9 +93,12 @@ function App() {
 
               {/* VETERINARIO */}
               {rol === 2 && (
-                <Route path="/veterinario">
-                  <h2>Pantalla Veterinario</h2>
-                </Route>
+                <>
+                  <Route path="/agendaDeTurnos"><AgendaTurnos /></Route>
+                  <Route path="/diagnosticos"><Diagnosticos /></Route>
+                  <Route path="/miPerfil"><MiPefil /></Route>
+                  <Route path="/pacientes"><Pacientes /></Route>
+                </>
               )}
 
               {/* CLIENTE */}

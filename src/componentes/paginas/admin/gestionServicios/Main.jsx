@@ -51,7 +51,7 @@ export default function Main(){
         })
     }
     return(
-            <div className="area-contenido">
+            <div>
                 <Formulario
                 onGuardar={guardarServicio}
                 // servicioEdit={servicioEdit}

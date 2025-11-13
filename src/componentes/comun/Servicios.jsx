@@ -9,25 +9,21 @@ const servicios = [
 ];
 
 export default function Servicios(){
+  return(
+    <div className="servicios-container">
+      <h3 className="titulo-servicio">Nuestros Servicios</h3>
 
-    return (
-    <div>
-      <h3 className="">
-        Nuestros Servicios
-      </h3>
-      <div className="">
+      <div className="grid-servicios">
         {servicios.map((servicio, i) => (
-          <div
-            key={i}
-            className="">
-            <div className="">
-              <span className="">✂️</span>
+          <div key={i} className="card-servicio">
+            <div className="icono-servicio">
+              <img src="/img/corazon.png" alt="corazon" className="serv-img"/>
             </div>
-            <p className="">{servicio.nombre}</p>
-            <p>{servicio.precio}</p>
+            <p className="nombre-servicio">{servicio.nombre}</p>
+            <p className="precio-servicio">{servicio.precio}</p>
           </div>
         ))}
       </div>
     </div>
-  );
+  )
 }
