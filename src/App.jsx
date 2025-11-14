@@ -23,10 +23,10 @@ import './App.css'
 //el menu deberia estar aca fijo y cuando se logee recien mostrar el menu
 
 function App() {
-  // const [token, setToken] = useState(sessionStorage.getItem("token"));
-  // const [rol, setRol] = useState(Number(sessionStorage.getItem("rol")));
-  const [token, setToken] = useState("admin@gmail.com")
-  const [rol, setRol] = useState(2)
+  const [token, setToken] = useState(sessionStorage.getItem("token"));
+  const [rol, setRol] = useState(Number(sessionStorage.getItem("rol")));
+  // const [token, setToken] = useState("admin@gmail.com")
+  // const [rol, setRol] = useState(1)
   const [mensaje, setMensaje] = useState("");
 
   //cuando cambia el token en sessionStorage, actualizamos el estado
