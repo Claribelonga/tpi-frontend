@@ -7,10 +7,16 @@ import axios from "axios"
 export default function Main(){
     const [servicios, setServicios] = useState([]);
     const [servicioEdit, setServicioEdit] = useState();
+    const token = sessionStorage.getItem("token");
      //GET
     const obtenerServicios =() =>{
+        const config = {
+        headers: {
+          Authorization: token,
+        },
+      }
       const url = "http://localhost:5000/api/servicios/";
-      axios.get(url)
+      axios.get(url, config)
       .then((resp)=>{
         setServicios(resp.data);
         console.log(resp.data)
@@ -25,9 +31,14 @@ export default function Main(){
 
     //PUT ESTADO
     const cambiarEstado = (id_servicio, estadoActual) => {
+         const config = {
+        headers: {
+          Authorization: token,
+        },
+      }
         const url = `http://localhost:5000/api/servicios/modificarestado/${id_servicio}`
         const nuevoEstado = estadoActual === 1 ? 0 : 1; // si está activo, lo inactiva; si está inactivo, lo activa
-        axios.put(url, {estado: nuevoEstado})
+        axios.put(url, {estado: nuevoEstado}, config)
         .then((resp) => {
             console.log("Estado actualizado");
             obtenerServicios();
@@ -39,8 +50,13 @@ export default function Main(){
 
     //POST
     const guardarServicio = (servicio) => {
+         const config = {
+        headers: {
+          Authorization: token,
+        },
+      }
         const url = `http://localhost:5000/api/servicios/crearservicio`
-        axios.post(url, servicio)
+        axios.post(url, servicio, config)
         .then((resp)=>{
             console.log("servicio creado: ",resp.data)
             obtenerServicios();

@@ -13,15 +13,17 @@ export default function Main(){
 
 
     const token = sessionStorage.getItem("token");
+    console.log("TOKEN: ", token);
+
      //GET
     const obtenerClientes = (busqueda = "") =>{
       console.log("Buscando:", busqueda);
-      const url = `http://localhost:5000/api/clientes?busqueda=${busqueda}`;
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: token,
         },
       }
+      const url = `http://localhost:5000/api/clientes?busqueda=${busqueda}`;
       axios.get(url, config)
       .then((resp)=>{
         setClientes(resp.data.personas);
@@ -38,10 +40,15 @@ export default function Main(){
 
      //POST
      const guardarCliente = (datos) => {
+      const config = {
+        headers: {
+          Authorization: token,
+        },
+      }
         //hago un if si hay un editarcliente PUT sino un POST
         if (clienteEdit) {
             const url = `http://localhost:5000/api/clientes/editarcliente/${clienteEdit.usuario.id_usuario}`;
-            axios.put (url, datos)
+            axios.put (url, datos, config)
             .then((resp) => {
                 console.log("cliente actualizado: ",resp.data);
                 obtenerClientes();
@@ -60,7 +67,7 @@ export default function Main(){
         else {
             //POST normal para crear
             const url = "http://localhost:5000/api/clientes/crearcliente";
-            axios.post(url, datos)
+            axios.post(url, datos, config)
             .then((resp) => {
                 console.log("cliente creado: ",resp.data)
                 setMensaje("✅ Cliente registrado con éxito");
