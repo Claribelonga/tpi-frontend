@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-export default function Buscador ({onBuscar}){
+export default function Buscador ({onBuscar, titulo, placeholder}){
     const [texto, setTexto] = useState("");
 
   const handleBuscar = () => {
-    onBuscar(texto); // Llama al padre (Main) con el texto de búsqueda
+    onBuscar(texto, 1); // Llama al padre (Main) con el texto de búsqueda
   };
 
   const handleKeyPress = (e) => {
@@ -18,10 +18,10 @@ export default function Buscador ({onBuscar}){
   }
     return (
         <div className="">
-            <span>Buscar Cliente</span>
+            <span>{titulo}</span>
             <div className="cont-buscador">
             <div className="buscador">
-                <input type="text"  placeholder="Ingrese Nombre y Apellido" className="input-buscador" value={texto} onChange={(e) => setTexto(e.target.value)} onKeyDown={handleKeyPress}/>
+                <input type="text"  placeholder={placeholder} className="input-buscador" value={texto} onChange={(e) => setTexto(e.target.value)} onKeyDown={handleKeyPress}/>
                 <img src="/img/lupa.png" alt="lupa"className="icono" onClick={handleBuscar} style={{ cursor: "pointer" }}/>
             </div>
              {(texto &&
