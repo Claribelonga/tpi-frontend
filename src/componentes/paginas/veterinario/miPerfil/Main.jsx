@@ -34,6 +34,6 @@ export default function Main() {
 
     return (
         // 1. Corrección del nombre de la prop
-        <Formulario perfil={perfil} />  
+        <Formulario perfil={perfil} /> 
     );
 }
