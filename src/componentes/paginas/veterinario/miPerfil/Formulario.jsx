@@ -17,43 +17,41 @@ export default function Formulario({ perfil }) {
     return (
         <div className="PaginaRegistro">
             {/* Contenedor de la imagen y título */}
-            <div className="ContenedorImagen">
-                <p>Mi perfil</p>
-                <img src="img/perro.jpg" alt="perro" className="perro" />
+            <div className="ContenedorImagenH2">
+            <h2 className="MiPerfilH2">Mi perfil</h2>
+            <div className="ContenedorImagenPerfil">
+                <img src="img/perfil.png" alt="usuario" className="perfil" />
             </div>
-
+            </div>
             <div className="ContenedorForm">
                 {/* Nota: Usar <div> en lugar de <form> es mejor si no hay submit */}
-                <div className="FormContenedor">
+                <div className="FormContenedorPerfil">
                     
-                    <h3>Datos personales</h3>
+                    <h3 className="MiPerfilH3">Datos personales</h3>
                     
                     {/* Nombre y Apellido: Usamos filaInputs para los inputMitad */}
                     <div className="filaInputs">
-                        <input className="inputMitad" type="text" value={nombre || ''} readOnly />
-                        <input className="inputMitad" type="text" value={apellido || ''} readOnly />
+                        <input className="inputMitadPerfil" type="text" value={nombre || ''} readOnly />
+                        <input className="inputMitadPerfil" type="text" value={apellido || ''} readOnly />
                     </div>
                     
-                    <input className="inputGen" type="text" value={email || ''} readOnly />
-                    <input className="inputGen" type="text" value={dni || ''} readOnly />
-                    <input className="inputGen" type="text" value={telefono || ''} readOnly />
+                    <input className="inputGenPerfil" type="text" value={email || ''} readOnly />
+                    <input className="inputGenPerfil" type="text" value={dni || ''} readOnly />
+                    <input className="inputGenPerfil" type="text" value={telefono || ''} readOnly />
                     
-                    <h3>Dirección</h3>
                     
                     {/* Dirección: Agrupamos en filaInputs, aunque sean inputGen, para mantener la consistencia */}
                     <div className="filaInputs">
                         {/* Calle y Número combinados */}
-                        <input className="inputGen" type="text" value={`${calle || ''} ${numero || ''}`} readOnly />
+                        <input className="inputGenPerfil" type="text" value={`${calle || ''} ${numero || ''}`} readOnly />
+                          <input className="inputGenPerfil" type="text" value={piso || '-'} readOnly />
+                          <input className="inputGenPerfil" type="text" value={departamento || '-'} readOnly />
                     </div>
-                    
-                    {/* Piso y Departamento (pueden ir en inputGen normal o agrupados si quieres usar inputMitad) */}
-                    <input className="inputGen" type="text" value={piso || '-'} readOnly />
-                    <input className="inputGen" type="text" value={departamento || '-'} readOnly />
 
-                    <h3>Datos profesionales</h3>
+                    <h3 className="MiPerfilH3">Datos profesionales</h3>
                     
-                    <input className="inputGen" type="text" value={matricula || ''} readOnly />
-                    <input className="inputGen" type="text" value={nombre_especialidad || ''} readOnly />
+                    <input className="inputGenPerfil" type="text" value={matricula || ''} readOnly />
+                    <input className="inputGenPerfil" type="text" value={nombre_especialidad || ''} readOnly />
                     
                 </div>
             </div>
