@@ -603,3 +603,30 @@ td {
   border-top: 1px solid #ddd;
   padding-top: 10px;
 }
+
+/*error sintax*/
+.error{
+  color: red;
+  font-size: 14px;
+}
+
+/*paginacion*/
+.paginacion {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+}
+.paginacion button {
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  background-color: #7E57C2;
+  color: white;
+}
+.paginacion button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
