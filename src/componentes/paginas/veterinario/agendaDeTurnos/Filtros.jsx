@@ -25,20 +25,21 @@ export default function Filtros({ onChange }) {
             });
     }, [token]);
 
-    const aplicarFiltros = () => {
+    // cada vez que cambian servicio o fecha, avisamos al Main
+    useEffect(() => {
         onChange({ servicio, fecha });
-    };
+    }, [servicio, fecha, onChange]);
 
     return (
         <div>
             <h3>Filtros</h3>
 
             <div>
-                <label>Servicio: </label>
                 <select 
                     value={servicio} 
                     onChange={(e) => setServicio(e.target.value)}
                 >
+                    <option value="" disabled>Servicios</option>
                     <option value="">Todos</option>
                     {servicios.map((s) => (
                         <option key={s.id_servicio} value={s.nombre}>
@@ -49,15 +50,12 @@ export default function Filtros({ onChange }) {
             </div>
 
             <div>
-                <label>Fecha: </label>
                 <input 
                     type="date" 
                     value={fecha} 
                     onChange={(e) => setFecha(e.target.value)} 
                 />
             </div>
-
-            <button onClick={aplicarFiltros}>Aplicar</button>
         </div>
     );
 }

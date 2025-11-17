@@ -685,3 +685,110 @@ td {
     margin: 15px 0;
 }
 
+/* agenda de turnos */
+.tarjetaTurnoVete {
+  width: 300px;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: border 0.2s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tarjetaServicioVete {
+  font-weight: bold;
+  font-size: 16px;   /* servicio 16px */
+  margin-bottom: 0.5rem;
+  color: #767676;    /* gris */
+}
+
+.tarjetaInfoVete {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;   /* fecha y mascota 16px */
+  gap: 0.5rem;
+  max-width: 100%;
+  position: relative;
+  top: -5px;         /* sube todo el bloque 5px */
+}
+
+.tarjetaInfoVete span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: normal; /* por defecto no bold */
+}
+
+/* nombre de mascota en bold y negro, 18px */
+.tarjetaInfoVete span:first-child {
+  font-weight: bold;
+  font-size: 18px;
+  color: #000;
+}
+
+/* fecha en gris, no bold, 16px */
+.tarjetaInfoVete span:last-child {
+  font-weight: normal;
+  font-size: 16px;
+  color: #767676;
+}
+
+.tarjetaHoraEstadoVete {
+  display: flex;
+  justify-content: flex-start; /* hora y botón más juntos a la izquierda */
+  align-items: center;
+  font-size: 16px;   /* hora 16px */
+  width: 100%;
+  gap: 6.8rem;
+}
+
+.tarjetaHoraVete {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: normal; /* no bold */
+  font-size: 16px;
+  color: #767676;      /* gris */
+}
+
+.tarjetaEstadoVete {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tarjetaTurnoVete.seleccionada {
+  border: 2px solid #007bff; /* azul */
+  border-radius: 10px;
+}
+
+.btn-estado {
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+/* pendiente */
+.btn-estado.pendiente {
+  background-color: #B39DDB;
+  color: #fff;
+}
+
+/* finalizado */
+.btn-estado.finalizado {
+  background-color: #C27C7C;
+  color: #fff;
+}
+
+

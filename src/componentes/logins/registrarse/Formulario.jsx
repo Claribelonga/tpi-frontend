@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import useUsuario from "../../../hooks/useUsuario"
 
 export default function Formulario({onGuardar}){
-    const [usuario, setDato, limpiarInputs] = useUsuario();
+    const { datos: usuario, setDato, limpiarInputs, errores } = useUsuario();
 
     const validarDatos = (datos) => {
   const errores = [];
