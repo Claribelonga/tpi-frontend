@@ -2,15 +2,12 @@ import { useEffect } from "react";
 import useUsuario from "../../../../hooks/useUsuario";
 
 export default function Formulario({guardarCliente, clienteEdit}){
-    // const [usuario, setDato, limpiarInputs] = useUsuario();
     const { datos, errores, setDato, validarTodo, limpiarInputs } = useUsuario();
-
-
     useEffect(() => {
         if (clienteEdit) {
             setDato("nombre", clienteEdit.nombre);
             setDato("apellido", clienteEdit.apellido);
-            setDato("contraseña", ""); //no se edita visible
+            setDato("contraseña", clienteEdit,""); //no se edita visible
             setDato("email", clienteEdit.usuario.email);
             setDato("dni", clienteEdit.dni);
             setDato("telefono", clienteEdit.telefono);

@@ -20,7 +20,7 @@ export default function Listado({ clientes, onEditar }){
                     <tbody>
                         {clientes.map((cliente) => (
                             <tr key={cliente.id_persona}>
-                                <td>{cliente.nombre} {cliente.apellido}</td>
+                                <td data-label="Nombre">{cliente.nombre} {cliente.apellido}</td>
                                 <td>{cliente.dni}</td>
                                 <td>{cliente.usuario?.email}</td>
                                 <td>{cliente.direccion.calle} {cliente.direccion.numero}
