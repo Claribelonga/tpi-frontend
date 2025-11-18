@@ -791,4 +791,15 @@ td {
   color: #fff;
 }
 
+.containerAgendaDeTurnos {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 200px;
+}
+.leftColumna {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 

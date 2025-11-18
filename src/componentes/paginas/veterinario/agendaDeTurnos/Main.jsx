@@ -24,18 +24,22 @@ export default function Main() {
   }, [filtros, token]);
 
   return (
-    <>
+    <div className="containerAgendaDeTurnos">
+      <div className="leftColumna">
       <Filtros onChange={setFiltros} />
       <Listado
         turnos={turnos}
         onSeleccionar={(turno) => setTurnoSeleccionado(turno)} // pasamos callback
       />
+      </div>
+      <div className="rightColumna">
       {turnoSeleccionado && (
         <Formulario
           idMascota={turnoSeleccionado.id_mascota}
           idTurno={turnoSeleccionado.id_turno}
-        />
+        />  
       )}
-    </>
+      </div>
+      </div>
   );
 }
