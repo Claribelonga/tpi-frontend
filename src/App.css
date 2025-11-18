@@ -689,7 +689,7 @@ td {
 .tarjetaTurnoVete {
   width: 300px;
   height: 100px;
-  border: 1px solid #ccc;
+  border: 1px solid #AEADAD;
   border-radius: 8px;
   padding: 0.5rem;
   background-color: #fff;
@@ -746,7 +746,7 @@ td {
   align-items: center;
   font-size: 16px;   /* hora 16px */
   width: 100%;
-  gap: 6.8rem;
+  gap: 5.6rem;
 }
 
 .tarjetaHoraVete {
@@ -800,6 +800,117 @@ td {
 .leftColumna {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
+}
+.contenedorFiltros{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding: 20px 0 20px 0;
+}
+.filtroSelect,
+.filtroInput {
+  width: 150px;
+  height: 45px;
+  border: 1px solid #AEADAD;
+  box-shadow: 0 1px 2px #494949; /* sombreado más bajo */
+  color: #999898;
+  font-size: 16px;              /* texto más grande */
+  text-align: center;           /* centra el texto */
+  padding: 0.5rem;
+  border-radius: 20px;
+  outline: none;
 }
 
+/* opcional: efecto al enfocar */
+.filtroSelect:focus,
+.filtroInput:focus {
+  border-color: #007bff;
+}
+.filtroSelect {
+  width: 175px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: url("../public/img/filtrar.png") no-repeat right 10px center;
+  background-size: 16px;
+}
+.formularioAgendaDeTurnos {
+  display: flex;
+  flex-direction: column;
+  width: 520px;
+  padding: 2rem;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-left: -90px;
+  margin-top: 50px; /* bajado 50px */
+  height: auto;
+  border: 1px solid #C6C5C5;
+}
+
+.tituloFicha {
+  color: #999898;
+  margin-bottom: 1rem;
+}
+
+.fichaDatos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filaFicha {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #AEADAD;
+  padding-bottom: 5px;
+  width: calc(100% - 20px); /* línea más corta */
+}
+
+.datoFicha {
+  color: #767676;
+  font-weight: 600; /* semibold */
+  width: 48%;
+}
+
+.contenedorDiagnosticoForm {
+  margin-top: 20px; /* separación */
+}
+
+.formDiagnostico {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputDiagnostico {
+  width: 300px;
+  height: 45px;
+  border: 1px solid #A8ACAF;
+  border-radius: 6px;
+  padding: 0.5rem;
+  font-size: 14px;
+  color: #555;
+}
+
+textarea.inputDiagnostico {
+  height: 80px; /* más alto para texto */
+  resize: none;
+}
+
+.btnGuardar {
+  background-color: #4A90E2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btnGuardar:hover {
+  background-color: #357ABD;
+}

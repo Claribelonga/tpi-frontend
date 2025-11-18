@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -11,6 +10,16 @@ export default function Formulario({ idMascota, idTurno }) {
   const [archivo, setArchivo] = useState(null);
 
   const token = sessionStorage.getItem("token");
+
+  // 👉 Función para formatear fecha a dd/mm/aa
+  const formatearFecha = (fechaStr) => {
+    if (!fechaStr) return "";
+    const fecha = new Date(fechaStr);
+    const dia = String(fecha.getDate()).padStart(2, "0");
+    const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+    const anio = String(fecha.getFullYear()).slice(-2); // últimos 2 dígitos
+    return `${dia}/${mes}/${anio}`;
+  };
 
   // Obtener ficha de datos de la mascota
   useEffect(() => {
@@ -36,17 +45,15 @@ export default function Formulario({ idMascota, idTurno }) {
       peso_actual: pesoActual,
     };
 
-    // si hay archivo cargado
     if (archivo) {
       formData.archivo_nombre = archivo.name;
-      formData.archivo_ruta = archivo.name; // en backend deberías guardar ruta real
+      formData.archivo_ruta = archivo.name;
       formData.fecha_subida = new Date().toISOString().slice(0, 19).replace("T", " ");
     }
 
     try {
-      await axios.post("http://localhost:5000/api/diagnosticos/", formData, config);
+      await axios.post("http://localhost:5000/api/diagnosticos", formData, config);
       alert("Diagnóstico registrado correctamente");
-      // limpiar formulario
       setDiagnostico("");
       setTratamiento("");
       setObservaciones("");
@@ -59,54 +66,83 @@ export default function Formulario({ idMascota, idTurno }) {
   };
 
   return (
-    <div className="formularioTurno">
-      <h3>Ficha de Datos</h3>
+    <div className="formularioAgendaDeTurnos">
+      <h3 className="tituloFicha">Datos de la mascota y el dueño</h3>
       {ficha ? (
         <div className="fichaDatos">
-          <p><strong>Dueño:</strong> {ficha.dueno_nombre} {ficha.dueno_apellido}</p>
-          <p><strong>DNI:</strong> {ficha.dueno_dni}</p>
-          <p><strong>Teléfono:</strong> {ficha.dueno_telefono}</p>
-          <p><strong>Mascota:</strong> {ficha.nombre_mascota}</p>
-          <p><strong>Especie:</strong> {ficha.nombre_especie}</p>
-          <p><strong>Raza:</strong> {ficha.nombre_raza}</p>
-          <p><strong>Sexo:</strong> {ficha.sexo}</p>
-          <p><strong>Fecha Nac.:</strong> {ficha.fecha_nacimiento}</p>
-          <p><strong>Altura:</strong> {ficha.altura} cm</p>
-          <p><strong>Peso:</strong> {ficha.peso} kg</p>
+          <div className="filaFicha">
+            <p className="datoFicha"><strong>Dueño:</strong> {ficha.dueno_nombre} {ficha.dueno_apellido}</p>
+            <p className="datoFicha"><strong>DNI:</strong> {ficha.dueno_dni}</p>
+          </div>
+          <div className="filaFicha">
+            <p className="datoFicha"><strong>Teléfono:</strong> {ficha.dueno_telefono}</p>
+            <p className="datoFicha"><strong>Mascota:</strong> {ficha.nombre_mascota}</p>
+          </div>
+          <div className="filaFicha">
+            <p className="datoFicha"><strong>Especie:</strong> {ficha.nombre_especie}</p>
+            <p className="datoFicha"><strong>Raza:</strong> {ficha.nombre_raza}</p>
+          </div>
+          <div className="filaFicha">
+            <p className="datoFicha"><strong>Sexo:</strong> {ficha.sexo}</p>
+            {/* 👇 acá usamos la función de formateo */}
+            <p className="datoFicha"><strong>Fecha Nac.:</strong> {formatearFecha(ficha.fecha_nacimiento)}</p>
+          </div>
+          <div className="filaFicha">
+            <p className="datoFicha"><strong>Altura:</strong> {ficha.altura} cm</p>
+            <p className="datoFicha"><strong>Peso:</strong> {ficha.peso} kg</p>
+          </div>
         </div>
       ) : (
         <p>Selecciona una tarjeta para ver la ficha de datos</p>
       )}
 
-      <h3>Diagnóstico</h3>
-      <form onSubmit={handleSubmit} className="formDiagnostico">
-        <div>
-          <label>Diagnóstico:</label>
-          <textarea value={diagnostico} onChange={(e) => setDiagnostico(e.target.value)} />
-        </div>
-        <div>
-          <label>Tratamiento:</label>
-          <textarea value={tratamiento} onChange={(e) => setTratamiento(e.target.value)} />
-        </div>
-        <div>
-          <label>Observaciones:</label>
-          <textarea value={observaciones} onChange={(e) => setObservaciones(e.target.value)} />
-        </div>
-        <div>
-          <label>Peso actual:</label>
-          <input
-            type="number"
-            step="0.1"
-            value={pesoActual}
-            onChange={(e) => setPesoActual(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Archivo:</label>
-          <input type="file" onChange={(e) => setArchivo(e.target.files[0])} />
-        </div>
-        <button type="submit">Guardar diagnóstico</button>
-      </form>
+      <div className="contenedorDiagnosticoForm">
+        <h3 className="tituloFicha">Generar diagnóstico</h3>
+        <form onSubmit={handleSubmit} className="formDiagnostico">
+          <div>
+            <textarea
+              className="inputDiagnostico"
+              placeholder="Diagnóstico"
+              value={diagnostico}
+              onChange={(e) => setDiagnostico(e.target.value)}
+            />
+          </div>
+          <div>
+            <textarea
+              className="inputDiagnostico"
+              placeholder="Tratamiento"
+              value={tratamiento}
+              onChange={(e) => setTratamiento(e.target.value)}
+            />
+          </div>
+          <div>
+            <textarea
+              className="inputDiagnostico"
+              placeholder="Observaciones"
+              value={observaciones}
+              onChange={(e) => setObservaciones(e.target.value)}
+            />
+          </div>
+          <div>
+            <input
+              type="number"
+              step="0.1"
+              className="inputDiagnostico"
+              placeholder="Peso actual"
+              value={pesoActual}
+              onChange={(e) => setPesoActual(e.target.value)}
+            />
+          </div>
+          <div>
+            <input
+              type="file"
+              className="inputDiagnostico"
+              onChange={(e) => setArchivo(e.target.files[0])}
+            />
+          </div>
+          <button type="submit" className="btnGuardar">Guardar diagnóstico</button>
+        </form>
+      </div>
     </div>
   );
 }

@@ -30,32 +30,36 @@ export default function Filtros({ onChange }) {
         onChange({ servicio, fecha });
     }, [servicio, fecha, onChange]);
 
-    return (
-        <div>
-            <h3>Filtros</h3>
+   return (
+  <div>
+    <h2>Agenda de turnos</h2>
+    <div className="contenedorFiltros">
+      <div>
+        <select
+          className="filtroSelect"
+          value={servicio}
+          onChange={(e) => setServicio(e.target.value)}
+        >
+          <option value="" disabled>Servicios</option>
+          <option value="">Todos</option>
+          {servicios.map((s) => (
+            <option key={s.id_servicio} value={s.nombre}>
+              {s.nombre}
+            </option>
+          ))}
+        </select>
+      </div>
 
-            <div>
-                <select 
-                    value={servicio} 
-                    onChange={(e) => setServicio(e.target.value)}
-                >
-                    <option value="" disabled>Servicios</option>
-                    <option value="">Todos</option>
-                    {servicios.map((s) => (
-                        <option key={s.id_servicio} value={s.nombre}>
-                            {s.nombre}
-                        </option>
-                    ))}
-                </select>
-            </div>
+      <div>
+        <input
+          type="date"
+          className="filtroInput"
+          value={fecha}
+          onChange={(e) => setFecha(e.target.value)}
+        />
+      </div>
+    </div>
+  </div>
+);
 
-            <div>
-                <input 
-                    type="date" 
-                    value={fecha} 
-                    onChange={(e) => setFecha(e.target.value)} 
-                />
-            </div>
-        </div>
-    );
 }
