@@ -36,10 +36,6 @@ export default function Menu({rol}) {
             <img src="/img/mas.png" alt="servicios" className="icono" />
             Gestionar Servicios
           </Link>
-          <Link href="/gestionEspe" className="menu-item">
-            <img src="/img/pata.png" alt="especialidades" className="icono" />
-            Gestionar Especialidades
-          </Link>
         </>
       );
       break;
@@ -58,12 +54,8 @@ export default function Menu({rol}) {
             <img src="/img/agenda.png" alt="agenda" className="icono" />
             Ver Agenda de Turnos
           </Link>
-          <Link href="/pacientes" className="menu-item">
-            <img src="/img/pata.png" alt="pacientes" className="icono" />
-            Pacientes
-          </Link>
           <Link href="/diagnosticos" className="menu-item">
-            <img src="/img/diagnostico.png" alt="diagnostico" className="icono" />
+            <img src="/img/pata.png" alt="diagnostico" className="icono" />
             Diagnósticos
           </Link>
         </>

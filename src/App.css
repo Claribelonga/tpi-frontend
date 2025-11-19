@@ -29,7 +29,7 @@ html, body{
   height: 100vh; /* Ocupa toda la altura de la ventana */
   width: 100vw; /* Ocupa todo el ancho de la ventana */
 }
-.PaginaLogin .FormContenedor{
+.PaginaLogin .FormContenedor .FormContenedorPerfil{
   width: 400px;
 }
 .Formulario{
@@ -66,7 +66,7 @@ html, body{
 .pNegrita{
   font-weight: 500;
 }
-.FormContenedor .inputLogin{
+.FormContenedor .inputLogin ,.FormContenedorPerfil{
   width: 100%;
   padding: 12px;
   margin: 5px 0;
@@ -110,7 +110,7 @@ html, body{
   /* padding: 10px 4rem; */
   box-sizing: border-box;
 }
-.PaginaRegistro .FormContenedor{
+.PaginaRegistro .FormContenedor {
   padding: 10px 3rem;
   margin-left: 10px;
   height: auto;
@@ -128,7 +128,7 @@ html, body{
   align-items: center;
 }
 /* Inputs */
-.inputGen, .inputMitad {
+.inputGen, .inputMitad, .inputGenPerfil, .inputMitadPerfil{
   width: 100%;
   padding: 9px;
   margin: 6px 0;
@@ -717,3 +717,286 @@ td {
   text-align: right;
 }
 
+/*veterinario*/
+.MiPerfilH2 { 
+    color: #000;
+}
+.perfil{
+    height: 128px;
+    width: 128px
+}
+.ContenedorImagenPerfil{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #D9D9D9;
+    border-radius: 20px;
+    height: 175px;
+    width: 223px;
+}
+.ContenedorImagenH2{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    /* MOVER IZQUIERDA: Ajustado de -140px a -190px (50px más a la izquierda) */
+    margin-left: -190px; /* <-- Nueva posición lateral */
+    
+    /* SEPARACIÓN: Mantiene la separación de 100px */
+    margin-right: 200px; 
+    
+    /* ELEVACIÓN: Ajustado de -270px a -320px (50px más arriba) */
+    margin-top: -320px; /* <-- Nueva posición vertical */
+}
+.MiPerfilH3{
+    color: #777777;
+}
+.FormContenedorPerfil{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    padding: 2rem;
+    border-radius: 15px; /* Borde redondeado */
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+    
+    /* MOVER IZQUIERDA: Sin cambios */
+    margin-left: -90px; 
+    
+    /* ELEVACIÓN: Sin cambios */
+    margin-top: -20px; 
+    
+    height: auto;
+}
+.inputGenPerfil, .inputMitadPerfil{
+    margin: 15px 0;
+}
+
+/* agenda de turnos */
+.tarjetaTurnoVete {
+  width: 300px;
+  height: 100px;
+  border: 1px solid #AEADAD;
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: border 0.2s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tarjetaServicioVete {
+  font-weight: bold;
+  font-size: 16px;   /* servicio 16px */
+  margin-bottom: 0.5rem;
+  color: #767676;    /* gris */
+}
+
+.tarjetaInfoVete {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;   /* fecha y mascota 16px */
+  gap: 0.5rem;
+  max-width: 100%;
+  position: relative;
+  top: -5px;         /* sube todo el bloque 5px */
+}
+
+.tarjetaInfoVete span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: normal; /* por defecto no bold */
+}
+
+/* nombre de mascota en bold y negro, 18px */
+.tarjetaInfoVete span:first-child {
+  font-weight: bold;
+  font-size: 18px;
+  color: #000;
+}
+
+/* fecha en gris, no bold, 16px */
+.tarjetaInfoVete span:last-child {
+  font-weight: normal;
+  font-size: 16px;
+  color: #767676;
+}
+
+.tarjetaHoraEstadoVete {
+  display: flex;
+  justify-content: flex-start; /* hora y botón más juntos a la izquierda */
+  align-items: center;
+  font-size: 16px;   /* hora 16px */
+  width: 100%;
+  gap: 5.6rem;
+}
+
+.tarjetaHoraVete {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: normal; /* no bold */
+  font-size: 16px;
+  color: #767676;      /* gris */
+}
+
+.tarjetaEstadoVete {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tarjetaTurnoVete.seleccionada {
+  border: 2px solid #007bff; /* azul */
+  border-radius: 10px;
+}
+
+.btn-estado {
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+/* pendiente */
+.btn-estado.pendiente {
+  background-color: #B39DDB;
+  color: #fff;
+}
+
+/* finalizado */
+.btn-estado.finalizado {
+  background-color: #C27C7C;
+  color: #fff;
+}
+
+.containerAgendaDeTurnos {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 200px;
+}
+.leftColumna {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.contenedorFiltros{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding: 20px 0 20px 0;
+}
+.filtroSelect,
+.filtroInput {
+  width: 150px;
+  height: 45px;
+  border: 1px solid #AEADAD;
+  box-shadow: 0 1px 2px #494949; /* sombreado más bajo */
+  color: #999898;
+  font-size: 16px;              /* texto más grande */
+  text-align: center;           /* centra el texto */
+  padding: 0.5rem;
+  border-radius: 20px;
+  outline: none;
+}
+
+/* opcional: efecto al enfocar */
+.filtroSelect:focus,
+.filtroInput:focus {
+  border-color: #007bff;
+}
+.filtroSelect {
+  width: 175px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: url("../public/img/filtrar.png") no-repeat right 10px center;
+  background-size: 16px;
+}
+.formularioAgendaDeTurnos {
+  display: flex;
+  flex-direction: column;
+  width: 520px;
+  padding: 2rem;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-left: -90px;
+  margin-top: 50px; /* bajado 50px */
+  height: auto;
+  border: 1px solid #C6C5C5;
+}
+
+.tituloFicha {
+  color: #999898;
+  margin-bottom: 1rem;
+}
+
+.fichaDatos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filaFicha {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #AEADAD;
+  padding-bottom: 5px;
+  width: calc(100% - 20px); /* línea más corta */
+}
+
+.datoFicha {
+  color: #767676;
+  font-weight: 600; /* semibold */
+  width: 48%;
+}
+
+.contenedorDiagnosticoForm {
+  margin-top: 20px; /* separación */
+}
+
+.formDiagnostico {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputDiagnostico {
+  width: 300px;
+  height: 45px;
+  border: 1px solid #A8ACAF;
+  border-radius: 6px;
+  padding: 0.5rem;
+  font-size: 14px;
+  color: #555;
+}
+
+textarea.inputDiagnostico {
+  height: 80px; /* más alto para texto */
+  resize: none;
+}
+
+.btnGuardar {
+  background-color: #4A90E2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btnGuardar:hover {
+  background-color: #357ABD;
+}

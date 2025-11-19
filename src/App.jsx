@@ -17,6 +17,7 @@ import AgendaTurnos from "./componentes/paginas/veterinario/agendaDeTurnos/Main"
 import Diagnosticos from "./componentes/paginas/veterinario/diagnosticos/Main"
 import MiPefil from "./componentes/paginas/veterinario/miPerfil/Main"
 import Pacientes from "./componentes/paginas/veterinario/pacientes/Main"
+
 //estilos:
 import './App.css'
 //usar un switch para meter todas las rutas
@@ -103,9 +104,11 @@ function App() {
 
               {/* CLIENTE */}
               {rol === 3 && (
+                
                 <Route path="/cliente">
                   <h2>Pantalla Cliente</h2>
                 </Route>
+                
               )}
             </div>
           </div>
