@@ -2,6 +2,7 @@ import Formulario from "./Formulario"
 import Listado from "./Listado"
 import Buscador from "../../../comun/Buscador"
 import Paginacion from "../../../comun/paginacion";
+import Mensaje from "../../../comun/Mensaje";
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 
@@ -10,11 +11,22 @@ export default function Main(){
   const [totalPaginas, setTotalPaginas] = useState(1);
   const [clientes, setClientes] = useState([]);
   const [clienteEdit, setClienteEdit] = useState(null);
-  const [mensaje, setMensaje] = useState("");
-  const [tipoMensaje, setTipoMensaje] = useState(""); // "exito" o "error"
+  // Estados para mensajes
+  const [textoMensaje, setTextoMensaje] = useState("");
+  const [tipoMensaje, setTipoMensaje] = useState("info"); // "exito" | "error" | "info"
 
   const token = sessionStorage.getItem("token");
   console.log("token: ", token);
+    // Función reutilizable para mostrar mensajes (se autohide)
+  const mostrarMensaje = (texto, tipo = "info", duracionMs = 3000) => {
+    setTextoMensaje(texto);
+    setTipoMensaje(tipo);
+    if (duracionMs > 0) {
+      setTimeout(() => {
+        setTextoMensaje("");
+      }, duracionMs);
+    }
+  };
 
   //GET
   const obtenerClientes = (busqueda = "", pagina = 1) =>{
@@ -34,6 +46,7 @@ export default function Main(){
       setTotalPaginas(resp.data.totalPaginas);
     })
     .catch((error) => {
+      mostrarMensaje("Error al obtener servicios", "error");
       console.error(error);
     })
   }
@@ -60,16 +73,14 @@ export default function Main(){
       .then((resp) => {
         console.log("cliente actualizado: ", resp.data);
         obtenerClientes();
-        setMensaje("✅ Cliente registrado con éxito");
+        mostrarMensaje("✅ Cliente registrado con éxito");
         setTipoMensaje("exito");
         setClienteEdit(null); //limpia el formularioo
-        setTimeout(() => setMensaje(""), 4000);
       })
       .catch((error) => {
         console.error(error)
-        setMensaje("❌ Error al registrar cliente");
+        mostrarMensaje("❌ Error al registrar cliente");
         setTipoMensaje("error");
-        setTimeout(() => setMensaje(""), 4000);
       })
     } else {
       //POST normal para crear cliente
@@ -77,27 +88,19 @@ export default function Main(){
       axios.post(url, datos, config)
       .then((resp) => {
         console.log("cliente creado: ",resp.data)
-        setMensaje("✅ Cliente registrado con éxito");
-        setTipoMensaje("exito");
+        alert("✅ Cliente registrado con éxito");
         obtenerClientes()
-        setTimeout(() => setMensaje(""), 4000);
       })
       .catch ((error) => {
         console,error(error);
-        setMensaje("❌ Error al registrar cliente");
-        setTipoMensaje("error");
-        setTimeout(() => setMensaje(""), 4000);
+        alert("❌ Error al registrar cliente");
       })
     }
   }
 
   return(
     <div>
-      {mensaje && (
-        <div className={`mensaje-bienvenida${tipoMensaje}`}>
-          {mensaje}
-        </div>
-      )}
+      <Mensaje texto={textoMensaje} tipo={tipoMensaje} />
       <Formulario
       guardarCliente={guardarCliente}
       clienteEdit={clienteEdit}

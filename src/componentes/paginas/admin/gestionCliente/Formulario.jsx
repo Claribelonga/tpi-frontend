@@ -81,11 +81,11 @@ export default function Formulario({guardarCliente, clienteEdit}){
                     <div className="inputs-grid">
                         <div>
                             <input className="inputGen" type="email" placeholder="email" value={datos.email} onChange={(e) => setDato("email",e.target.value)} required/>
-                            {errores.email && <p className="error">{errores.email}</p>}
+                            {errores.email && <p className="error" autoComplete="off">{errores.email}</p>}
                         </div>
                         <div>
                             <input className="inputGen" type="password" placeholder="contraseña" value={datos.contraseña} onChange={(e) => setDato("contraseña",e.target.value)} required={!clienteEdit}/>
-                            {errores.contraseña && <p className="error">{errores.contraseña}</p>}
+                            {errores.contraseña && <p className="error">{errores.contraseña} autoComplete="off"</p>}
                         </div>
                         <div>
                             <input className="inputGen" type="text" placeholder="teléfono" value={datos.telefono} onChange={(e) => setDato("telefono",e.target.value)} required/>

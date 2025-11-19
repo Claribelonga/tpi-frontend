@@ -2,10 +2,9 @@ import { Link, useLocation } from "wouter";
 import { useState } from "react";
 
 
-export default function Formulario({ onLogin}){
+export default function Formulario({ onLogin, error }){
     const [user, setUser] = useState("");
     const [pass, setPass] = useState("");
-    // const [, navigate] = useLocation();
 
     const enviarDatos = (e) => {
         e.preventDefault(); // Evita que la página se recargue
@@ -20,8 +19,9 @@ export default function Formulario({ onLogin}){
             <form className="FormContenedor" onSubmit={enviarDatos}>
                 <img src="/img/logoVetSur.png" alt="logoVioleta" className="logo"></img>
                 <span className="titulo">Ingresa a tu cuenta VetSur</span>
-                <input className="inputLogin" placeholder="email" type="email" value={user} onChange={(e) => setUser(e.target.value)} required/>
+                <input className="inputLogin" placeholder="email" type="email" value={user} onChange={(e) => setUser(e.target.value)} required />
                 <input className="inputLogin" placeholder="contraseña" type="password" value={pass} onChange={(e) => setPass(e.target.value)} required/>
+                {error && <p className="error">{error}</p>}
                 <button className="btn-violeta" type="submit">Iniciar Sesión</button>
                 <p className="pNegrita">¿No tenes cuenta? {""} 
                     <Link href="/registrarse"> Registrate aquí</Link>
