@@ -776,7 +776,7 @@ td {
 /* agenda de turnos */
 .tarjetaTurnoVete {
   width: 300px;
-  height: 100px;
+  min-height: 110px;   /* altura mínima, pero puede crecer */
   border: 1px solid #AEADAD;
   border-radius: 8px;
   padding: 0.5rem;
@@ -787,8 +787,9 @@ td {
   text-overflow: ellipsis;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* no centres verticalmente */
 }
+
 
 .tarjetaServicioVete {
   font-weight: bold;
@@ -883,7 +884,7 @@ td {
   display: flex;
   align-items: flex-start;
   padding: 20px;
-  gap: 200px;
+  gap: 155px;
 }
 .leftColumna {
   display: flex;
@@ -928,16 +929,14 @@ td {
   display: flex;
   flex-direction: column;
   width: 520px;
-  padding: 2rem;
+  padding: 20px 30px;
   border-radius: 15px;
   background-color: #fff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  margin-left: -90px;
   margin-top: 50px; /* bajado 50px */
   height: auto;
   border: 1px solid #C6C5C5;
 }
-
 .tituloFicha {
   color: #999898;
   margin-bottom: 1rem;
@@ -946,7 +945,7 @@ td {
 .fichaDatos {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .filaFicha {
@@ -975,7 +974,7 @@ td {
 
 .inputDiagnostico {
   width: 300px;
-  height: 45px;
+  height: 38px;
   border: 1px solid #A8ACAF;
   border-radius: 6px;
   padding: 0.5rem;
@@ -984,7 +983,7 @@ td {
 }
 
 textarea.inputDiagnostico {
-  height: 80px; /* más alto para texto */
+  height: 70px; /* más alto para texto */
   resize: none;
 }
 
@@ -1001,4 +1000,45 @@ textarea.inputDiagnostico {
 
 .btnGuardar:hover {
   background-color: #357ABD;
+}
+.listadoTurnoVete {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  max-height: 500px;       /* límite de altura */
+  overflow-y: auto;        /* activa scroll vertical */
+  scrollbar-width: thin;   /* estiliza scrollbar en Firefox */
+  scrollbar-color: #999 #f0f0f0; /* colores en Firefox */
+}
+
+/* opcional: estilizar scrollbar en Chrome/Edge */
+.listadoTurnoVete::-webkit-scrollbar {
+  width: 8px;
+}
+
+.listadoTurnoVete::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.listadoTurnoVete::-webkit-scrollbar-thumb {
+  background-color: #999;
+  border-radius: 4px;
+}
+.rightColumna {
+  max-height: 630px;
+  overflow-y: auto;   /* activa scroll vertical */
+  padding-right: 10px; /* opcional: espacio para que no tape el scrollbar */
+}
+.contenedorDiagnosticoForm {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  padding: 2rem;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+  margin: 20px auto 0 auto; /* 👈 centra solo este hijo */
 }

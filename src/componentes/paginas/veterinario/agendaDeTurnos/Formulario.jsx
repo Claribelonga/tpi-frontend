@@ -71,25 +71,25 @@ export default function Formulario({ idMascota, idTurno }) {
       {ficha ? (
         <div className="fichaDatos">
           <div className="filaFicha">
-            <p className="datoFicha"><strong>Dueño:</strong> {ficha.dueno_nombre} {ficha.dueno_apellido}</p>
-            <p className="datoFicha"><strong>DNI:</strong> {ficha.dueno_dni}</p>
+            <p className="datoFicha">Dueño: {ficha.dueno_nombre} {ficha.dueno_apellido}</p>
+            <p className="datoFicha">DNI: {ficha.dueno_dni}</p>
           </div>
           <div className="filaFicha">
-            <p className="datoFicha"><strong>Teléfono:</strong> {ficha.dueno_telefono}</p>
-            <p className="datoFicha"><strong>Mascota:</strong> {ficha.nombre_mascota}</p>
+            <p className="datoFicha">Teléfono: {ficha.dueno_telefono}</p>
+            <p className="datoFicha">Mascota: {ficha.nombre_mascota}</p>
           </div>
           <div className="filaFicha">
-            <p className="datoFicha"><strong>Especie:</strong> {ficha.nombre_especie}</p>
-            <p className="datoFicha"><strong>Raza:</strong> {ficha.nombre_raza}</p>
+            <p className="datoFicha">Especie: {ficha.nombre_especie}</p>
+            <p className="datoFicha">Raza: {ficha.nombre_raza}</p>
           </div>
           <div className="filaFicha">
-            <p className="datoFicha"><strong>Sexo:</strong> {ficha.sexo}</p>
+            <p className="datoFicha">Sexo: {ficha.sexo}</p>
             {/* 👇 acá usamos la función de formateo */}
-            <p className="datoFicha"><strong>Fecha Nac.:</strong> {formatearFecha(ficha.fecha_nacimiento)}</p>
+            <p className="datoFicha">Fecha Nac.: {formatearFecha(ficha.fecha_nacimiento)}</p>
           </div>
           <div className="filaFicha">
-            <p className="datoFicha"><strong>Altura:</strong> {ficha.altura} cm</p>
-            <p className="datoFicha"><strong>Peso:</strong> {ficha.peso} kg</p>
+            <p className="datoFicha">Altura: {ficha.altura} cm</p>
+            <p className="datoFicha">Peso: {ficha.peso} kg</p>
           </div>
         </div>
       ) : (
