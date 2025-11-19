@@ -1,74 +1,72 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "wouter";
 
 export default function ProximoTurno() {
-  //const [turno, setTurno] = useState(null);
+  const [turno, setTurno] = useState(null);
+  const [cargando, setCargando] = useState(true);
 
-  const [turno, setTurno] = useState({
-  fecha: "Miércoles, 10 de octubre",
-  hora: "12:00hs",
-  servicio: "Consulta general",
-  veterinario: "Dr. López",
-});
+  const token = sessionStorage.getItem("token");
 
-  // useEffect(() => {
-  //   const idCliente = 1;
-  //   axios
-  //     .get(`https://api-vetsur.com/turnos/ultimo/${idCliente}`)
-  //     .then((res) => setTurno(res.data))
-  //     .catch((err) => console.error("Error al obtener el turno", err));
-  // }, []);
+  useEffect(() => {
+    obtenerProximoTurno();
+  }, []);
 
+  const obtenerProximoTurno = () => {
+    const config = {
+      headers: { Authorization: token }
+    };
+
+    axios.get("http://localhost:5000/api/turnos/proximo", config)
+      .then((resp) => {
+        console.log("Proximo turno:", resp.data);
+        setTurno(resp.data.turno);
+      })
+      .catch((error) => {
+        console.error(error);
+
+        // Si es 404, significa que el cliente NO tiene turnos futuros
+        if (error.response && error.response.status === 404) {
+          setTurno(null);
+        }
+      })
+      .finally(() => setCargando(false));
+  };
+
+  if (cargando) return <p>Cargando...</p>;  // opcional
+
+  // 👉 No hay turnos
   if (!turno) {
     return (
       <div className="sin-turno">
-        <p>No tenes turnos próximos agendados</p>
-        <Link href="/cliente/sacarTurno/Main">
-        <button className="btn-violeta">Sacar Turno</button>
+        <p>No tenés turnos próximos agendados</p>
+        <Link href="sacarTurno">
+          <button className="btn-violeta">Sacar Turno</button>
         </Link>
       </div>
     );
   }
 
-   return (
+  // 👉 Hay turno
+  return (
     <div className="contenedor-turno">
       <div className="card-turno">
         <div className="info-turno">
           <p className="titulo-turno">Próximo turno</p>
+
           <p className="texto-turno">{turno.fecha}</p>
           <p className="texto-turno">{turno.hora}</p>
+          <p className="texto-turno">Mascota: {turno.nombre_mascota}</p>
         </div>
-        <button className="btn-violeta">Cancelar</button>
+
+        <button className="btn-violeta">
+          Cancelar
+        </button>
       </div>
 
-      <Link href="/cliente/mis-turnos">
+      <Link href="/misTurno">
         <button className="btn-violeta grande">Ver Todos Mis Turnos</button>
       </Link>
     </div>
   );
-  // return (
-  //   <div className="">
-  //     <div className="">
-  //       <div>
-  //         <p className="">Próximo turno</p>
-  //         <p className="">
-  //           {turno.fecha} - {turno.hora}
-  //         </p>
-  //         <p className="">
-  //           Servicio: {turno.servicio} · {turno.veterinario}
-  //         </p>
-  //       </div>
-  //       <button className="btn-violeta">
-  //         Cancelar
-  //       </button>
-  //     </div>
-
-  //     <Link href="/cliente/mis-turnos">
-  //       <button className="btn-violeta">
-  //         Ver todos mis turnos
-  //       </button>
-  //     </Link>
-  //   </div>
-  // );
 }

@@ -31,7 +31,6 @@ export default function Main() {
     if (!perfil) {
         return <p>Cargando perfil del veterinario...</p>;
     }
-
     return (
         // 1. Corrección del nombre de la prop
         <Formulario perfil={perfil} /> 

@@ -68,11 +68,11 @@ export default function Menu({rol}) {
             <img src="/img/casa.png" alt="home" className="icono" />
             Inicio
           </Link>
-          <Link href="/perfil" className="menu-item">
+          <Link href="/miPerfil" className="menu-item">
             <img src="/img/usuario.png" alt="perfil" className="icono" />
             Mi Perfil
           </Link>
-          <Link href="/turnos" className="menu-item">
+          <Link href="/misTurnos" className="menu-item">
             <img src="/img/agenda.png" alt="turnos" className="icono" />
             Mis Turnos
           </Link>
@@ -80,14 +80,13 @@ export default function Menu({rol}) {
             <img src="/img/mas.png" alt="sacar" className="icono" />
             Sacar Turno
           </Link>
-          <Link href="/mascotas" className="menu-item">
+          <Link href="/misMascotas" className="menu-item">
             <img src="/img/pata.png" alt="mascotas" className="icono" />
             Mis Mascotas
           </Link>
         </>
         )
   }
-
   return (
     <div className="sidebar">
       <div className="Logo">
@@ -97,22 +96,7 @@ export default function Menu({rol}) {
 
       <nav className="menu">
         <div className="superior">
-            {/* <Link href="/Inicio" className="menu-item">
-            <img src="/img/casa.png" alt="home" className="icono"></img>
-            Inicio</Link>
-            <Link href="/gestionCliente" className="menu-item">
-            <img src="/img/usuario.png" alt="home" className="icono"></img>
-            Gestionar Clientes</Link>
-            <Link href="/gestionVete" className="menu-item">
-            <img src="/img/agenda.png" alt="home" className="icono"></img>
-            Gestionar Veterinarios</Link>
-            <Link href="/gestionServicios" className="menu-item">
-            <img src="/img/mas.png" alt="home" className="icono"></img>
-            Gestionar Servicios</Link>
-            <Link href="/gestionEspe" className="menu-item">
-            <img src="/img/pata.png" alt="patita" className="icono"></img>
-            Gestionar Especilidades</Link> */}
-            {menuItems}
+          {menuItems}
         </div>
         <div className="inferior">
           <a className="menu-item salir" onClick={handleLogout}>
@@ -120,13 +104,7 @@ export default function Menu({rol}) {
              Cerrar Sesión
           </a>
         </div>
-        
-        
       </nav>
     </div>
   );
 }
-
-            // <Link href="/login" className="menu-item salir">
-            // <img src="/img/salida.png" alt="home" className="icono"></img>
-            // Salir</Link>
