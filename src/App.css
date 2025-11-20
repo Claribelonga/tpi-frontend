@@ -789,15 +789,12 @@ td {
   flex-direction: column;
   justify-content: flex-start; /* no centres verticalmente */
 }
-
-
 .tarjetaServicioVete {
   font-weight: bold;
   font-size: 16px;   /* servicio 16px */
   margin-bottom: 0.5rem;
   color: #767676;    /* gris */
 }
-
 .tarjetaInfoVete {
   display: flex;
   justify-content: space-between;
@@ -807,28 +804,22 @@ td {
   position: relative;
   top: -5px;         /* sube todo el bloque 5px */
 }
-
 .tarjetaInfoVete span {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: normal; /* por defecto no bold */
 }
-
-/* nombre de mascota en bold y negro, 18px */
 .tarjetaInfoVete span:first-child {
   font-weight: bold;
   font-size: 18px;
   color: #000;
 }
-
-/* fecha en gris, no bold, 16px */
 .tarjetaInfoVete span:last-child {
   font-weight: normal;
   font-size: 16px;
   color: #767676;
 }
-
 .tarjetaHoraEstadoVete {
   display: flex;
   justify-content: flex-start; /* hora y botón más juntos a la izquierda */
@@ -837,7 +828,6 @@ td {
   width: 100%;
   gap: 5.6rem;
 }
-
 .tarjetaHoraVete {
   white-space: nowrap;
   overflow: hidden;
@@ -846,18 +836,16 @@ td {
   font-size: 16px;
   color: #767676;      /* gris */
 }
-
 .tarjetaEstadoVete {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-
 .tarjetaTurnoVete.seleccionada {
-  border: 2px solid #007bff; /* azul */
+  border: 2px solid #007bff;
   border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* sombra más marcada */
 }
-
 .btn-estado {
   border: none;
   border-radius: 6px;

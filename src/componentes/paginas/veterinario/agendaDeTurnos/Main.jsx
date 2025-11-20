@@ -7,7 +7,7 @@ import Listado from "./Listado";
 export default function Main() {
   const [turnos, setTurnos] = useState([]);
   const [filtros, setFiltros] = useState({ servicio: "", fecha: "" });
-  const [turnoSeleccionado, setTurnoSeleccionado] = useState(null); // turno activo
+  const [turnoSeleccionado, setTurnoSeleccionado] = useState(null);
   const token = sessionStorage.getItem("token");
 
   const obtenerTurnos = () => {
@@ -19,27 +19,34 @@ export default function Main() {
       .catch((err) => console.error(err));
   };
 
+  // 👉 primera carga + refresco cada 10 segundos
   useEffect(() => {
     obtenerTurnos();
+
+    const interval = setInterval(() => {
+      obtenerTurnos();
+    }, 10000); // refresca cada 10 segundos
+
+    return () => clearInterval(interval); // limpiar al desmontar
   }, [filtros, token]);
 
   return (
     <div className="containerAgendaDeTurnos">
       <div className="leftColumna">
-      <Filtros onChange={setFiltros} />
-      <Listado
-        turnos={turnos}
-        onSeleccionar={(turno) => setTurnoSeleccionado(turno)} // pasamos callback
-      />
+        <Filtros onChange={setFiltros} />
+        <Listado
+          turnos={turnos}
+          onSeleccionar={(turno) => setTurnoSeleccionado(turno)}
+        />
       </div>
       <div className="rightColumna">
-      {turnoSeleccionado && (
-        <Formulario
-          idMascota={turnoSeleccionado.id_mascota}
-          idTurno={turnoSeleccionado.id_turno}
-        />  
-      )}
+        {turnoSeleccionado && (
+          <Formulario
+            idMascota={turnoSeleccionado.id_mascota}
+            idTurno={turnoSeleccionado.id_turno}
+          />
+        )}
       </div>
-      </div>
+    </div>
   );
 }
