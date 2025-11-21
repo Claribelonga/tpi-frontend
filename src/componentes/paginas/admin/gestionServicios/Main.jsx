@@ -106,10 +106,6 @@ export default function Main() {
 
   return (
     <div>
-      <Formulario 
-        onGuardar={guardarServicio} 
-        servicioEdit={servicioEdit} 
-      />
       <Listado
         servicios={servicios}
         onEditar={(servicio) => setServicioEdit(servicio)} 
@@ -119,6 +115,10 @@ export default function Main() {
         paginaActual={paginaActual}
         totalPaginas={totalPaginas}
         cambiarPagina={cambiarPagina}
+      />
+      <Formulario 
+        onGuardar={guardarServicio} 
+        servicioEdit={servicioEdit} 
       />
     </div>
   );

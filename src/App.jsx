@@ -10,7 +10,7 @@ import Registrarse from "./componentes/logins/registrarse/Main"
 //Pantallas segun rol: 
 import GestionCliente from "./componentes/paginas/admin/gestionCliente/Main"
 import GestionVete from "./componentes/paginas/admin/gestionVete/Main"
-import GestionEspe from "./componentes/paginas/admin/gestionEspecialidades/Main"
+// import GestionEspe from "./componentes/paginas/admin/gestionEspecialidades/Main"
 import GestionServicios from "./componentes/paginas/admin/gestionServicios/Main"
 //Pantallas de veterinario:
 import AgendaTurnos from "./componentes/paginas/veterinario/agendaDeTurnos/Main"
@@ -92,7 +92,6 @@ function App() {
                   <Route path="/gestionCliente"><GestionCliente /></Route>
                   <Route path="/gestionServicios"><GestionServicios /></Route>
                   <Route path="/gestionVete"><GestionVete /></Route>
-                  <Route path="/gestionEspe"><GestionEspe /></Route>
                 </>
               )}
 

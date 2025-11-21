@@ -14,7 +14,7 @@ export default function Listado({ clientes, onEditar }){
                             <th>Direcciones</th>
                             <th>Teléfono</th>
                             <th>Mascotas</th>
-                            <th>Acción</th>
+                            <th>Editar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,7 +31,7 @@ export default function Listado({ clientes, onEditar }){
                                         ? cliente.mascotas.map(m => m.nombre).join(", ")
                                         : "Sin mascotas"}</td>
                                 <td>
-                                    <button className="btn-edit" onClick={() => onEditar(cliente)}>Editar   <img src="/img/lapiz.png" alt="lapiz" className="icono"/></button>
+                                    <button className="btn-edit" onClick={() => onEditar(cliente)}><img src="/img/lapiz.png" alt="lapiz" className="icono"/></button>
                                 </td>
                             </tr>
                         ))}

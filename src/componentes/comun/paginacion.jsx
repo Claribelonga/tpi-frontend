@@ -1,4 +1,3 @@
-
 export default function Paginacion({ paginaActual, totalPaginas, cambiarPagina }){
     return(
         <div className="paginacion">

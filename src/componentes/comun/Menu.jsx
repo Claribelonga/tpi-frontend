@@ -99,10 +99,10 @@ export default function Menu({rol}) {
           {menuItems}
         </div>
         <div className="inferior">
-          <a className="menu-item salir" onClick={handleLogout}>
+          <Link className="menu-item" onClick={handleLogout}>
              <img src="/img/salida.png" alt="home" className="icono"></img>
              Cerrar Sesión
-          </a>
+          </Link>
         </div>
       </nav>
     </div>
