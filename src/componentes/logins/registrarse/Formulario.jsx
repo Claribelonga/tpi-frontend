@@ -49,17 +49,47 @@ export default function Formulario({onGuardar}){
                 <span className="titulo">Crea tu cuenta</span>
 
                 <div className="filaInputs">
+                    <div className="inputContainer">
+                        <label>Nombre:</label>
                     <input className="inputMitad" type="text" placeholder="nombre" value={usuario.nombre} onChange={(e) => setDato("nombre",e.target.value)} required/>
+                    </div>
+                    <div className="inputContainer">
+                        <label>Apellido:</label>
                     <input className="inputMitad" type="text" placeholder="apellido" value={usuario.apellido} onChange={(e) => setDato("apellido",e.target.value)} required/>
+                    </div>
                 </div>
+                <div className="inputContainer">
+                    <label>Contraseña:</label>
                 <input className="inputGen" type="password" placeholder="contraseña" value={usuario.contraseña} onChange={(e) => setDato("contraseña",e.target.value)} required/>
+                </div>
+                <div className="inputContainer">
+                    <label>Email:</label>
                 <input className="inputGen" type="email" placeholder="email" value={usuario.email} onChange={(e) => setDato("email",e.target.value)} required/>
+                </div>
+                <div className="inputContainer">
+                    <label>DNI:</label>
                 <input className="inputGen" type="text" placeholder="dni" value={usuario.dni} onChange={(e) => setDato("dni",e.target.value)} required/>
+                </div>
+                <div className="inputContainer">
+                    <label>Teléfono:</label>
                 <input className="inputGen" type="text" placeholder="teléfono" value={usuario.telefono} onChange={(e) => setDato("telefono",e.target.value)} required/>
+                </div>
+                <div className="inputContainer">
+                    <label>Calle:</label>
                 <input className="inputGen" type="text" placeholder="calle" value={usuario.calle} onChange={(e) => setDato("calle",e.target.value)} required/>
+                </div>
+                <div className="inputContainer">
+                    <label>Número:</label>
                 <input className="inputGen" type="text" placeholder="numero" value={usuario.numero} onChange={(e) => setDato("numero",e.target.value)} required/>
+                </div>
+                <div className="inputContainer">
+                    <label>Piso:</label>
                 <input className="inputGen" type="text" placeholder="piso" value={usuario.piso} onChange={(e) => setDato("piso",e.target.value)}/>
+                </div>
+                <div className="inputContainer">
+                    <label>Departamento:</label>
                 <input className="inputGen" type="text" placeholder="departamento" value={usuario.departamento} onChange={(e) => setDato("departamento",e.target.value)}/>
+                </div>
                 <button className="btn-violeta" type="submit">Registrarse</button>
                 <p className="pNegrita">¿Ya tenes cuenta? {""} 
                     <Link href="/login"> Inicia Sesión</Link>

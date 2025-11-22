@@ -16,7 +16,7 @@ export default function Listado({ veterinarios, onEditar }) {
               <th>Teléfono</th>
               <th>Matrícula</th>
               <th>Especialidad</th>
-              <th>Acciones</th>
+              <th>Editar</th>
             </tr>
           </thead>
           <tbody>
@@ -35,7 +35,6 @@ export default function Listado({ veterinarios, onEditar }) {
                 <td>
                   <button className="btn-edit" onClick={() => onEditar(v)} >
                     <img src="/img/lapiz.png" alt="lapiz" className="icono"/>
-                    Editar
                   </button>
                 </td>
               </tr>

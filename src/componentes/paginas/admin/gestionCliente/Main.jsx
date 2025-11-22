@@ -92,7 +92,7 @@ export default function Main(){
         obtenerClientes()
       })
       .catch ((error) => {
-        console,error(error);
+        console.error(error);
         alert("❌ Error al registrar cliente");
       })
     }
@@ -101,10 +101,6 @@ export default function Main(){
   return(
     <div>
       <Mensaje texto={textoMensaje} tipo={tipoMensaje} />
-      <Formulario
-      guardarCliente={guardarCliente}
-      clienteEdit={clienteEdit}
-      />
       <Buscador
       onBuscar={obtenerClientes}
       titulo={"Buscar Cliente"}
@@ -118,6 +114,10 @@ export default function Main(){
       paginaActual={paginaActual}
       totalPaginas={totalPaginas}
       cambiarPagina={cambiarPagina}/>
+      <Formulario
+      guardarCliente={guardarCliente}
+      clienteEdit={clienteEdit}
+      />
     </div>
   )   
 }

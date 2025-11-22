@@ -7,7 +7,7 @@ export default function Formulario({guardarCliente, clienteEdit}){
         if (clienteEdit) {
             setDato("nombre", clienteEdit.nombre);
             setDato("apellido", clienteEdit.apellido);
-            setDato("contraseña", clienteEdit,""); //no se edita visible
+            setDato("contraseña",""); //no se edita visible
             setDato("email", clienteEdit.usuario.email);
             setDato("dni", clienteEdit.dni);
             setDato("telefono", clienteEdit.telefono);

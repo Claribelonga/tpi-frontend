@@ -118,11 +118,6 @@ export default function Main(){
             {mensaje && (
                 <div className={`mensaje-bienvenida ${tipoMensaje}`}>{mensaje}</div>
             )}
-            <Formulario
-            guardarVeterinario={guardarVeterinario}
-            vetEdit={vetEdit}
-            especialidades={especialidades} //lo paso al form para el select
-            />
             <Buscador
             onBuscar={obtenerVeterinarios}
             titulo={"Buscar veterinario"}
@@ -136,6 +131,11 @@ export default function Main(){
             paginaActual={paginaActual}
             totalPaginas={totalPaginas}
             cambiarPagina={cambiarPagina}
+            />
+            <Formulario
+            guardarVeterinario={guardarVeterinario}
+            vetEdit={vetEdit}
+            especialidades={especialidades} //lo paso al form para el select
             />
         </div>
     )
