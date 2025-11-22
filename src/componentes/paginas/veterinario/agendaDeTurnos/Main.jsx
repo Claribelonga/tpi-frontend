@@ -40,13 +40,15 @@ export default function Main() {
         />
       </div>
       <div className="rightColumna">
-        {turnoSeleccionado && (
-          <Formulario
-            idMascota={turnoSeleccionado.id_mascota}
-            idTurno={turnoSeleccionado.id_turno}
-          />
-        )}
-      </div>
+          {turnoSeleccionado ? (
+            <Formulario
+              idMascota={turnoSeleccionado.id_mascota}
+              idTurno={turnoSeleccionado.id_turno}
+            />
+          ) : (
+            <p>Selecciona una tarjeta para ver la ficha de datos</p>
+          )}
+        </div>
     </div>
   );
 }

@@ -6,8 +6,9 @@ import Buscador from "./Buscador";
 export default function Main() {
     return (
         <>
-       <Listado/>
        <Buscador/>
+       <Listado/>
+       
        </>
     )
 }

@@ -21,35 +21,66 @@ export default function Formulario({ idMascota, idTurno }) {
     return `${dia}/${mes}/${anio}`;
   };
 
-  // Obtener ficha de la mascota
+  // 👉 Obtener ficha de la mascota
   useEffect(() => {
-    if (!idMascota) return;
+    if (!idMascota) {
+      setFicha(null); // limpiar si no hay mascota seleccionada
+      return;
+    }
     const config = { headers: { Authorization: token } };
     axios
       .get(`http://localhost:5000/api/turnos/fichadatos?id_mascota=${idMascota}`, config)
       .then((resp) => setFicha(resp.data.ficha))
-      .catch((err) => console.error("Error al obtener ficha:", err));
+      .catch((err) => {
+        console.error("Error al obtener ficha:", err);
+        setFicha(null); // limpiar en caso de error
+      });
   }, [idMascota, token]);
 
-  // Obtener diagnóstico existente
-useEffect(() => {
-  if (!idTurno) return;
-  const config = { headers: { Authorization:  token } };
-  axios
-    .get(`http://localhost:5000/api/diagnosticos/turno?id_turno=${idTurno}`, config)
-    .then((resp) => {
-      const diag = resp.data.diagnostico;
-      if (diag) {
-        setDiagnosticoExistente(diag);
-        setDiagnostico(diag.diagnostico);
-        setTratamiento(diag.tratamiento);
-        setObservaciones(diag.observaciones);
-        setPesoActual(diag.peso_actual);
-      }
-    })
-    .catch((err) => console.error("Error al obtener diagnóstico:", err));
-}, [idTurno, token]);
+  // 👉 Obtener diagnóstico existente
+  useEffect(() => {
+    if (!idTurno) {
+      setDiagnosticoExistente(null);
+      setDiagnostico("");
+      setTratamiento("");
+      setObservaciones("");
+      setPesoActual("");
+      setArchivo(null);
+      return;
+    }
+    const config = { headers: { Authorization: token } };
+    axios
+      .get(`http://localhost:5000/api/diagnosticos/turno?id_turno=${idTurno}`, config)
+      .then((resp) => {
+        const diag = resp.data.diagnostico;
+        if (diag) {
+          setDiagnosticoExistente(diag);
+          setDiagnostico(diag.diagnostico);
+          setTratamiento(diag.tratamiento);
+          setObservaciones(diag.observaciones);
+          setPesoActual(diag.peso_actual);
+        } else {
+          // limpiar si no hay diagnóstico
+          setDiagnosticoExistente(null);
+          setDiagnostico("");
+          setTratamiento("");
+          setObservaciones("");
+          setPesoActual("");
+          setArchivo(null);
+        }
+      })
+      .catch((err) => {
+        console.error("Error al obtener diagnóstico:", err);
+        setDiagnosticoExistente(null);
+        setDiagnostico("");
+        setTratamiento("");
+        setObservaciones("");
+        setPesoActual("");
+        setArchivo(null);
+      });
+  }, [idTurno, token]);
 
+  // 👉 Guardar diagnóstico
   const handleSubmit = async (e) => {
     e.preventDefault();
     const config = { headers: { Authorization: token } };
@@ -68,9 +99,16 @@ useEffect(() => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/diagnosticos", formData, config);
+      const resp = await axios.post("http://localhost:5000/api/diagnosticos", formData, config);
       alert("Diagnóstico registrado correctamente");
-      setDiagnosticoExistente(formData); // ahora se muestra en modo lectura
+      setDiagnosticoExistente(resp.data.diagnostico); // usar respuesta del backend
+
+      // refrescar ficha con datos actualizados
+      const respFicha = await axios.get(
+        `http://localhost:5000/api/turnos/fichadatos?id_mascota=${idMascota}`,
+        config
+      );
+      setFicha(respFicha.data.ficha);
     } catch (err) {
       console.error("Error al registrar diagnóstico:", err);
       alert("Error al registrar diagnóstico");
