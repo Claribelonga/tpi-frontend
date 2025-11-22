@@ -174,6 +174,16 @@ export default function Formulario({ perfil, setPerfil }) {
               />
             </label>
             <label>
+              Contraseña
+              <input
+                name="contraseña"
+                type="text"
+                className={`inputGenPerfil ${!formData.contraseña ? "inputError" : ""}`}
+                value={formData.contraseña}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
               DNI
               <input
                 name="dni"

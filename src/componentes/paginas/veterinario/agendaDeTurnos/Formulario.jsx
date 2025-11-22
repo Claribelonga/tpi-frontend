@@ -9,6 +9,7 @@ export default function Formulario({ idMascota, idTurno }) {
   const [pesoActual, setPesoActual] = useState("");
   const [archivo, setArchivo] = useState(null);
   const [diagnosticoExistente, setDiagnosticoExistente] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const token = sessionStorage.getItem("token");
 
@@ -21,7 +22,7 @@ export default function Formulario({ idMascota, idTurno }) {
     return `${dia}/${mes}/${anio}`;
   };
 
-  // 👉 Obtener ficha de la mascota
+  //  Obtener ficha de la mascota
   useEffect(() => {
     if (!idMascota) {
       setFicha(null); // limpiar si no hay mascota seleccionada
@@ -37,7 +38,7 @@ export default function Formulario({ idMascota, idTurno }) {
       });
   }, [idMascota, token]);
 
-  // 👉 Obtener diagnóstico existente
+  //  Obtener diagnóstico existente
   useEffect(() => {
     if (!idTurno) {
       setDiagnosticoExistente(null);
@@ -80,125 +81,157 @@ export default function Formulario({ idMascota, idTurno }) {
       });
   }, [idTurno, token]);
 
-  // 👉 Guardar diagnóstico
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const config = { headers: { Authorization: token } };
-    const formData = {
-      id_turno: idTurno,
-      diagnostico,
-      tratamiento,
-      observaciones,
-      peso_actual: pesoActual,
-    };
+  //  Guardar diagnóstico
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  const newErrors = {};
 
-    if (archivo) {
-      formData.archivo_nombre = archivo.name;
-      formData.archivo_ruta = archivo.name;
-      formData.fecha_subida = new Date().toISOString().slice(0, 19).replace("T", " ");
-    }
+  if (!diagnostico.trim()) newErrors.diagnostico = "El diagnóstico es obligatorio";
+  if (!tratamiento.trim()) newErrors.tratamiento = "El tratamiento es obligatorio";
+  if (!observaciones.trim()) newErrors.observaciones = "Las observaciones son obligatorias";
 
-    try {
-      const resp = await axios.post("http://localhost:5000/api/diagnosticos", formData, config);
-      alert("Diagnóstico registrado correctamente");
-      setDiagnosticoExistente(resp.data.diagnostico); // usar respuesta del backend
+  if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors);
+    return; // corta el envío
+  }
 
-      // refrescar ficha con datos actualizados
-      const respFicha = await axios.get(
-        `http://localhost:5000/api/turnos/fichadatos?id_mascota=${idMascota}`,
-        config
-      );
-      setFicha(respFicha.data.ficha);
-    } catch (err) {
-      console.error("Error al registrar diagnóstico:", err);
-      alert("Error al registrar diagnóstico");
-    }
+  setErrors({}); // limpia errores si todo está bien
+
+  const config = { headers: { Authorization: token } };
+  const pesoAEnviar = pesoActual ? pesoActual : ficha?.peso;
+
+  const formData = {
+    id_turno: idTurno,
+    diagnostico,
+    tratamiento,
+    observaciones,
+    peso_actual: pesoAEnviar,
   };
 
-  return (
-    <div className="formularioAgendaDeTurnos">
-      <h3 className="tituloFicha">Datos de la mascota y el dueño</h3>
-      {ficha ? (
-        <div className="fichaDatos">
-          <div className="filaFicha">
-            <p className="datoFicha">Dueño: {ficha.dueno_nombre} {ficha.dueno_apellido}</p>
-            <p className="datoFicha">DNI: {ficha.dueno_dni}</p>
-          </div>
-          <div className="filaFicha">
-            <p className="datoFicha">Teléfono: {ficha.dueno_telefono}</p>
-            <p className="datoFicha">Mascota: {ficha.nombre_mascota}</p>
-          </div>
-          <div className="filaFicha">
-            <p className="datoFicha">Especie: {ficha.nombre_especie}</p>
-            <p className="datoFicha">Raza: {ficha.nombre_raza}</p>
-          </div>
-          <div className="filaFicha">
-            <p className="datoFicha">Sexo: {ficha.sexo}</p>
-            <p className="datoFicha">Fecha Nac.: {formatearFecha(ficha.fecha_nacimiento)}</p>
-          </div>
-          <div className="filaFicha">
-            <p className="datoFicha">Altura: {ficha.altura} cm</p>
-            <p className="datoFicha">Peso: {ficha.peso} kg</p>
-          </div>
-        </div>
-      ) : (
-        <p>Selecciona una tarjeta para ver la ficha de datos</p>
-      )}
+  if (archivo) {
+    formData.archivo_nombre = archivo.name;
+    formData.archivo_ruta = archivo.name;
+    formData.fecha_subida = new Date().toISOString().slice(0, 19).replace("T", " ");
+  }
 
-      <div className="contenedorDiagnosticoForm">
-        <h3 className="tituloFicha">Generar diagnóstico</h3>
-        <form onSubmit={handleSubmit} className="formDiagnostico">
-          <div>
-            <textarea
-              className="inputDiagnostico"
-              placeholder="Diagnóstico"
-              value={diagnostico}
-              onChange={(e) => setDiagnostico(e.target.value)}
-              disabled={!!diagnosticoExistente}
-            />
+  try {
+    const resp = await axios.post("http://localhost:5000/api/diagnosticos", formData, config);
+    setDiagnosticoExistente(resp.data.diagnostico);
+
+    await axios.put(
+      "http://localhost:5000/api/turnos/modificarestado",
+      { id_turno: idTurno, estado: "finalizado" },
+      config
+    );
+
+    const respFicha = await axios.get(
+      `http://localhost:5000/api/turnos/fichadatos?id_mascota=${idMascota}`,
+      config
+    );
+    setFicha(respFicha.data.ficha);
+  } catch (err) {
+    console.error("Error al registrar diagnóstico:", err);
+  }
+};
+  return (
+  <div className="formularioAgendaDeTurnos">
+    <h3 className="tituloFicha">Datos del dueño</h3>
+    {ficha ? (
+      <div className="fichaDatos">
+        <div className="filaFicha">
+          <p className="datoFicha">Dueño: {ficha.dueno_nombre} {ficha.dueno_apellido}</p>
+          <p className="datoFicha">DNI: {ficha.dueno_dni}</p>
+        </div>
+        <div className="filaFicha">
+          <p className="datoFicha">Teléfono: {ficha.dueno_telefono}</p>
+        </div>
+    <h3 className="tituloFicha">Datos de la mascota</h3>
+        <div className="filaFicha">
+          <p className="datoFicha">Mascota: {ficha.nombre_mascota}</p>
+          <p className="datoFicha">Especie: {ficha.nombre_especie}</p>
           </div>
-          <div>
-            <textarea
-              className="inputDiagnostico"
-              placeholder="Tratamiento"
-              value={tratamiento}
-              onChange={(e) => setTratamiento(e.target.value)}
-              disabled={!!diagnosticoExistente}
-            />
+        <div className="filaFicha">
+          <p className="datoFicha">Raza: {ficha.nombre_raza}</p>
+          <p className="datoFicha">Sexo: {ficha.sexo}</p>
+        </div>
+        <div className="filaFicha">
+          <p className="datoFicha">Fecha Nac.: {formatearFecha(ficha.fecha_nacimiento)}</p>
+          <p className="datoFicha">Altura: {ficha.altura} cm</p>
           </div>
-          <div>
-            <textarea
-              className="inputDiagnostico"
-              placeholder="Observaciones"
-              value={observaciones}
-              onChange={(e) => setObservaciones(e.target.value)}
-              disabled={!!diagnosticoExistente}
-            />
+          <div className="filaFicha">
+          <p className="datoFicha">Peso: {ficha.peso} kg</p>
           </div>
-          <div>
-            <input
-              type="number"
-              step="0.1"
-              className="inputDiagnostico"
-              placeholder="Peso actual"
-              value={pesoActual}
-              onChange={(e) => setPesoActual(e.target.value)}
-              disabled={!!diagnosticoExistente}
-            />
-          </div>
-          <div>
-            <input
-              type="file"
-              className="inputDiagnostico"
-              onChange={(e) => setArchivo(e.target.files[0])}
-              disabled={!!diagnosticoExistente}
-            />
-          </div>
-          {!diagnosticoExistente && (
-            <button type="submit" className="btnGuardar">Guardar diagnóstico</button>
-          )}
-        </form>
+        
       </div>
+    ) : (
+      <p >Selecciona una tarjeta para ver la ficha de datos</p>
+    )}
+
+    <div className="contenedorDiagnosticoForm">
+      <h3 className="tituloFicha">Generar diagnóstico</h3>
+      <form onSubmit={handleSubmit} className="formDiagnostico">
+        <div>
+          <textarea
+            className={`inputDiagnostico ${errors.diagnostico ? "error" : ""}`}
+            placeholder="Diagnóstico"
+            value={diagnostico}
+            onChange={(e) => setDiagnostico(e.target.value)}
+            disabled={!!diagnosticoExistente}
+          />
+          {errors.diagnostico && <p className="error-text">{errors.diagnostico}</p>}
+        </div>
+        <div>
+          <textarea
+            className={`inputDiagnostico ${errors.tratamiento ? "error" : ""}`}
+            placeholder="Tratamiento"
+            value={tratamiento}
+            onChange={(e) => setTratamiento(e.target.value)}
+            disabled={!!diagnosticoExistente}
+          />
+          {errors.tratamiento && <p className="error-text">{errors.tratamiento}</p>}
+        </div>
+        <div>
+          <textarea
+            className={`inputDiagnostico ${errors.observaciones ? "error" : ""}`}
+            placeholder="Observaciones"
+            value={observaciones}
+            onChange={(e) => setObservaciones(e.target.value)}
+            disabled={!!diagnosticoExistente}
+          />
+          {errors.observaciones && <p className="error-text">{errors.observaciones}</p>}
+        </div>
+        <div>
+          <input
+            type="number"
+            step="0.1"
+            className="inputDiagnostico"
+            placeholder="Peso actual"
+            value={pesoActual}
+            onChange={(e) => {
+              const value = parseFloat(e.target.value);
+              if (value > 0) {
+                setPesoActual(e.target.value);
+              } else {
+                setPesoActual(""); // limpia si ponen 0 o negativo
+              }
+            }}
+            disabled={!!diagnosticoExistente}
+          />
+        </div>
+        <div>
+          <input
+            type="file"
+            className="inputDiagnostico"
+            onChange={(e) => setArchivo(e.target.files[0])}
+            disabled={!!diagnosticoExistente}
+          />
+        </div>
+        {!diagnosticoExistente && (
+          <button type="submit" className="btnGuardar">Guardar diagnóstico</button>
+        )}
+      </form>
     </div>
-  );
+  </div>
+);
+
 }

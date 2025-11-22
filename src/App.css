@@ -875,24 +875,25 @@ td {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* sombra más marcada */
 }
-.btn-estado {
-  border: none;
-  border-radius: 6px;
-  padding: 0.4rem 0.8rem;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
+.btn-estadoVeterinario {
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    cursor: default;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+
 }
 
 /* pendiente */
-.btn-estado.pendiente {
+.btn-estadoVeterinario.pendiente {
   background-color: #B39DDB;
   color: #fff;
 }
 
 /* finalizado */
-.btn-estado.finalizado {
+.btn-estadoVeterinario.finalizado {
   background-color: #C27C7C;
   color: #fff;
 }
@@ -901,19 +902,36 @@ td {
   display: flex;
   align-items: flex-start;
   padding: 20px;
-  gap: 155px;
+  gap: 145px;
 }
 .leftColumna {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.contenedorFiltros{
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  padding: 20px 0 20px 0;
+.contenedorFiltros {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+  gap: 0.6rem;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
+
+.contenedorFiltros > div {
+  display: flex;
+}
+
+.btnClearFiltros {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  width: 25px;
+  color: #c00;
+  cursor: pointer;
+}
+
+
 .filtroSelect,
 .filtroInput {
   width: 150px;
@@ -967,10 +985,11 @@ td {
 
 .filaFicha {
   display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #AEADAD;
-  padding-bottom: 5px;
-  width: calc(100% - 20px); /* línea más corta */
+    justify-content: space-between;
+    border-bottom: 1px solid #AEADAD;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: calc(100% - 20px);
 }
 
 .datoFicha {
@@ -1021,8 +1040,7 @@ textarea.inputDiagnostico {
   display: flex;
   flex-direction: column;
   gap: 10px;
-
-  max-height: 500px;       /* límite de altura */
+  max-height: 470px;       /* límite de altura */
   overflow-y: auto;        /* activa scroll vertical */
   scrollbar-width: thin;   /* estiliza scrollbar en Firefox */
   scrollbar-color: #999 #f0f0f0; /* colores en Firefox */
@@ -1148,4 +1166,28 @@ textarea.inputDiagnostico {
   display: flex;
   justify-content: first baseline;
 }
+
+.error-text {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+.sinTurnoSeleccionado {
+  margin-top: 170px;
+    
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    font-weight: 500;
+    background: linear-gradient(to right, #f9f9f9, #f1f1f1);
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    
+    width: 80%;
+    height: 200px;
+    align-items: center;
+    align-content: center;               /* ancho controlado */
+}
+
+
 

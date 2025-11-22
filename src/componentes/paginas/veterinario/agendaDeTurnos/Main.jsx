@@ -6,17 +6,17 @@ import Listado from "./Listado";
 
 export default function Main() {
   const [turnos, setTurnos] = useState([]);
-  const [filtros, setFiltros] = useState({ servicio: "", fecha: "" });
+  const [filtros, setFiltros] = useState({ servicio: "", fecha: "", estado: "" }); // 👈 ahora incluye estado
   const [turnoSeleccionado, setTurnoSeleccionado] = useState(null);
   const token = sessionStorage.getItem("token");
 
   const obtenerTurnos = () => {
     const config = { headers: { Authorization: token } };
-    const url = `http://localhost:5000/api/turnos/veterinario?servicio=${filtros.servicio}&fecha=${filtros.fecha}`;
+    const url = `http://localhost:5000/api/turnos/veterinario?servicio=${filtros.servicio}&fecha=${filtros.fecha}&estado=${filtros.estado}`;
     axios
       .get(url, config)
       .then((resp) => setTurnos(resp.data.turnos))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Error al obtener turnos:", err));
   };
 
   // 👉 primera carga + refresco cada 10 segundos
@@ -40,15 +40,15 @@ export default function Main() {
         />
       </div>
       <div className="rightColumna">
-          {turnoSeleccionado ? (
-            <Formulario
-              idMascota={turnoSeleccionado.id_mascota}
-              idTurno={turnoSeleccionado.id_turno}
-            />
-          ) : (
-            <p>Selecciona una tarjeta para ver la ficha de datos</p>
-          )}
-        </div>
+        {turnoSeleccionado ? (
+          <Formulario
+            idMascota={turnoSeleccionado.id_mascota}
+            idTurno={turnoSeleccionado.id_turno}
+          />
+        ) : (
+          <p className="sinTurnoSeleccionado">Selecciona una tarjeta para ver la ficha de datos</p>
+        )}
+      </div>
     </div>
   );
 }
