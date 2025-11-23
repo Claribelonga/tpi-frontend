@@ -101,6 +101,7 @@ export default function Main(){
   return(
     <div>
       <Mensaje texto={textoMensaje} tipo={tipoMensaje} />
+      <h2>Gestionar Clientes</h2>
       <Buscador
       onBuscar={obtenerClientes}
       titulo={"Buscar Cliente"}

@@ -34,7 +34,7 @@ export default function Formulario({guardarCliente, clienteEdit}){
     }
     return(
         <div className="cont-form">
-            <h2>Gestionar Clientes</h2>
+            <h3>{clienteEdit ? "Guardar Cambios" : "Registrar Cliente"}</h3>
             <form className="formulario" onSubmit={guardar}>
                 <div className="form-section">
                     <span className="">Datos Personales</span>

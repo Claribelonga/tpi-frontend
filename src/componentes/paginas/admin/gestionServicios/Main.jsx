@@ -106,6 +106,7 @@ export default function Main() {
 
   return (
     <div>
+      <h2>Gestionar Servicios</h2>
       <Listado
         servicios={servicios}
         onEditar={(servicio) => setServicioEdit(servicio)} 

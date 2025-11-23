@@ -28,7 +28,7 @@ export default function Formulario({guardarVeterinario, vetEdit, especialidades}
   };
     return(
         <div className="cont-form">
-      <h2>Gestionar Veterinarios</h2>
+      <h3> {vetEdit ? "Guardar Cambios" : "Registrar Veterinario"}</h3>
       <form className="formulario" onSubmit={guardar}>
         <div className="form-section">
           <span>Datos Personales</span>

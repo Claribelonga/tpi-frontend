@@ -42,12 +42,12 @@ export default function Filtros({ onChange }) {
     <div className="contenedorFiltros">
       <div>
         <select
-          className="filtro-boton"
+          className="filtroSelect"
           value={servicio}
           onChange={(e) => setServicio(e.target.value)}
         >
-          <option value="" disabled className="filtro-opcion">Servicios</option>
-          <option value="" className="filtro-opcion">Todos</option>
+          <option value="" disabled>Servicios</option>
+          <option value="">Todos</option>
           {servicios.map((s) => (
             <option key={s.id_servicio} value={s.nombre}>
               {s.nombre}

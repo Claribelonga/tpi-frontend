@@ -32,7 +32,7 @@ export default function Listado({ mascotas, onEditar }) {
               <td>{m.sexo}</td>
               <td>{formatearFecha(m.fecha_nacimiento)}</td>
               <td>{m.altura} cm</td>
-              <td>{m.peso} gr</td>
+              <td>{m.peso} kg</td>
 
               <td>
                 <button onClick={() => onEditar(m)} className="btn-edit" >

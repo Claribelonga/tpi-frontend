@@ -118,6 +118,7 @@ export default function Main(){
             {mensaje && (
                 <div className={`mensaje-bienvenida ${tipoMensaje}`}>{mensaje}</div>
             )}
+            <h2>Gestionar Veterinarios</h2>
             <Buscador
             onBuscar={obtenerVeterinarios}
             titulo={"Buscar veterinario"}

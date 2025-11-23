@@ -140,7 +140,7 @@ export default function Formulario({ perfil, setPerfil }) {
         <div className="modalOverlay">
           <div className="modalContent">
             <div className="modalArriba">
-              <button className="btnCloseModal" onClick={() => setShowModal(false)}>x</button>
+              <button className="btnCloseModal" onClick={() => setShowModal(false)}><img src="/img/equis.png" className="icono" /></button>
               <h3>Editar datos personales</h3>
             </div>
             <label>

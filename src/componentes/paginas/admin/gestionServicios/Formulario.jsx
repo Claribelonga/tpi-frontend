@@ -85,7 +85,7 @@ export default function Formulario({ onGuardar, servicioEdit, mostrarMensaje }) 
 
   return (
     <div className="cont-form">
-      <h2>Gestionar Servicios</h2>
+      <h3>{servicioEdit ? "Guardar Cambios" : "Registrar Servicio"}</h3>
       <form className="formulario" onSubmit={guardar}>
         <div className="form-section">
           <div className="inputs-grid">

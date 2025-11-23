@@ -245,7 +245,7 @@ html, body{
   margin-right: 350px;
 }
 
-.cont-form h2 {
+h2 {
   margin-bottom: 20px;
   font-size: 1.6rem;
   color: #222;
@@ -638,9 +638,7 @@ td {
 }
 
 /*veterinario*/
-.MiPerfilH2 { 
-    color: #000;
-}
+
 .perfil{
     height: 128px;
     width: 128px
@@ -818,6 +816,7 @@ td {
   flex-direction: column;
   justify-content: flex-start; /* no centres verticalmente */
   margin-bottom: 10px;
+  cursor: pointer;
 }
 .tarjetaServicioVete {
   font-weight: bold;
@@ -939,12 +938,11 @@ td {
   height: 45px;
   border: 1px solid #AEADAD;
   box-shadow: 0 1px 2px #494949; /* sombreado más bajo */
-  color: #999898;
   font-size: 16px;              /* texto más grande */
   text-align: center;           /* centra el texto */
   padding: 0.5rem;
-  border-radius: 20px;
   outline: none;
+  border-radius: 12px
 }
 
 /* opcional: efecto al enfocar */
@@ -960,6 +958,10 @@ td {
     background: url(../img/filtrar.png) no-repeat right 10px center;
     background-size: 16px;
     padding-right: 15px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
 }
 .formularioAgendaDeTurnos {
   display: flex;
@@ -1188,6 +1190,3 @@ textarea.inputDiagnostico {
     align-items: center;
     align-content: center;               /* ancho controlado */
 }
-
-
-
