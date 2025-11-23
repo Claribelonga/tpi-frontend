@@ -655,17 +655,12 @@ td {
     width: 223px;
 }
 .ContenedorImagenH2{
-    display: flex;
+       display: flex;
     flex-direction: column;
-    gap: 25px;
-    /* MOVER IZQUIERDA: Ajustado de -140px a -190px (50px más a la izquierda) */
-    margin-left: -190px; /* <-- Nueva posición lateral */
-    
-    /* SEPARACIÓN: Mantiene la separación de 100px */
-    margin-right: 200px; 
-    
-    /* ELEVACIÓN: Ajustado de -270px a -320px (50px más arriba) */
-    margin-top: -320px; /* <-- Nueva posición vertical */
+    gap: 20px;
+    margin-left: -190px;
+    margin-right: 200px;
+    margin-top: -450px;
 }
 .MiPerfilH3{
     color: #777777;
@@ -673,24 +668,140 @@ td {
 .FormContenedorPerfil{
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 500px;
     padding: 2rem;
-    border-radius: 15px; /* Borde redondeado */
+    margin-top: 60px;
+    border-radius: 15px;
     background-color: #fff;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
-    
-    /* MOVER IZQUIERDA: Sin cambios */
-    margin-left: -90px; 
-    
-    /* ELEVACIÓN: Sin cambios */
-    margin-top: -20px; 
-    
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-left: -90px;
     height: auto;
 }
 .inputGenPerfil, .inputMitadPerfil{
-    margin: 15px 0;
+    margin: 13px 0;
+}
+.FormContenedorPerfil label {
+  display: flex;              /* 👈 label e input en fila */
+  align-items: center;        /* centrado vertical */
+  gap: 12px;   
+  font-weight: 500;
+  color: #777777;
+}
+/*Modal editar perfil*/
+.btnEditarPerfil {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #4A90E2;
+  color: #fff;
+  border: 1px solid #A8ACAF;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btnGuardarPerfil {
+  background: #4A90E2;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btnCancelarPerfil {
+  background: #ccc;
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  position: relative; /* 👈 necesario para que la X se posicione dentro */
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.btnCloseModal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+}
+
+.btnCloseModal:hover {
+  color: #e74c3c; /* rojo al pasar el mouse */
+}
+
+.modalActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btnGuardarPerfil {
+  background: #4A90E2;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.modalArriba{
+  padding-bottom: 10px;
+}
+.inputError {
+  border-color: red;
+  background-color: #ffe6e6;
+}
 /* agenda de turnos */
 .tarjetaTurnoVete {
   width: 330px;
@@ -765,24 +876,25 @@ td {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* sombra más marcada */
 }
-.btn-estado {
-  border: none;
-  border-radius: 6px;
-  padding: 0.4rem 0.8rem;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
+.btn-estadoVeterinario {
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    cursor: default;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+
 }
 
 /* pendiente */
-.btn-estado.pendiente {
+.btn-estadoVeterinario.pendiente {
   background-color: #B39DDB;
   color: #fff;
 }
 
 /* finalizado */
-.btn-estado.finalizado {
+.btn-estadoVeterinario.finalizado {
   background-color: #C27C7C;
   color: #fff;
 }
@@ -798,12 +910,29 @@ td {
   flex-direction: column;
   gap: 10px;
 }
-.contenedorFiltros{
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  padding: 20px 0 20px 0;
+.contenedorFiltros {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+  gap: 0.6rem;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
+
+.contenedorFiltros > div {
+  display: flex;
+}
+
+.btnClearFiltros {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  width: 25px;
+  color: #c00;
+  cursor: pointer;
+}
+
+
 .filtroSelect,
 .filtroInput {
   width: 150px;
@@ -824,13 +953,13 @@ td {
   border-color: #007bff;
 }
 .filtroSelect {
-  width: 175px;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
-  background: url("../public/img/filtrar.png") no-repeat right 10px center;
-  background-size: 16px;
+    width: 190px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url(../img/filtrar.png) no-repeat right 10px center;
+    background-size: 16px;
+    padding-right: 15px;
 }
 .formularioAgendaDeTurnos {
   display: flex;
@@ -857,10 +986,11 @@ td {
 
 .filaFicha {
   display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #AEADAD;
-  padding-bottom: 5px;
-  width: calc(100% - 20px); /* línea más corta */
+    justify-content: space-between;
+    border-bottom: 1px solid #AEADAD;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: calc(100% - 20px);
 }
 
 .datoFicha {
@@ -911,8 +1041,7 @@ textarea.inputDiagnostico {
   display: flex;
   flex-direction: column;
   gap: 10px;
-
-  max-height: 500px;       /* límite de altura */
+  max-height: 470px;       /* límite de altura */
   overflow-y: auto;        /* activa scroll vertical */
   scrollbar-width: thin;   /* estiliza scrollbar en Firefox */
   scrollbar-color: #999 #f0f0f0; /* colores en Firefox */
@@ -1037,3 +1166,28 @@ textarea.inputDiagnostico {
   display: flex;
   justify-content: first baseline;
 }
+
+.error-text {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+.sinTurnoSeleccionado {
+  margin-top: 170px;
+    
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    font-weight: 500;
+    background: linear-gradient(to right, #f9f9f9, #f1f1f1);
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    
+    width: 80%;
+    height: 200px;
+    align-items: center;
+    align-content: center;               /* ancho controlado */
+}
+
+
+

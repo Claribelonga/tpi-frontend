@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 
 export default function Listado({ turnos = [], onSeleccionar }) {
   const [seleccionado, setSeleccionado] = useState(null);
   const [estados, setEstados] = useState({});
-  const token = sessionStorage.getItem("token");
 
   // recalcular estados cada vez que cambie turnos
   useEffect(() => {
     const nuevosEstados = turnos.reduce((acc, t) => {
-      // la BD ya devuelve "pendiente" o "finalizado"
-      acc[t.id_turno] = t.estado;
+      acc[t.id_turno] = t.estado; // 
       return acc;
     }, {});
     setEstados(nuevosEstados);
@@ -29,29 +26,6 @@ export default function Listado({ turnos = [], onSeleccionar }) {
   };
 
   const formatearHora = (horaStr) => (horaStr ? horaStr.slice(0, 5) : "");
-
-  // Alternar estado con backend
-  const toggleEstado = async (id) => {
-    const nuevoEstado = estados[id] === "pendiente" ? "finalizado" : "pendiente";
-
-    try {
-      const config = { headers: { Authorization: token } };
-      await axios.put(
-        "http://localhost:5000/api/turnos/modificarestado",
-        { id_turno: id, estado: nuevoEstado },
-        config
-      );
-
-      // si se actualizó bien en backend, reflejamos en frontend
-      setEstados((prev) => ({
-        ...prev,
-        [id]: nuevoEstado,
-      }));
-    } catch (err) {
-      console.error("Error al actualizar estado:", err);
-      alert("No se pudo actualizar el estado del turno");
-    }
-  };
 
   return (
     <div className="listadoTurnoVete">
@@ -74,13 +48,8 @@ export default function Listado({ turnos = [], onSeleccionar }) {
           <div className="tarjetaHoraEstadoVete">
             <p className="tarjetaHoraVete">Hora: {formatearHora(t.hora)}</p>
             <div className="tarjetaEstadoVete">
-              <button
-                className={`btn-estado ${estados[t.id_turno]}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleEstado(t.id_turno);
-                }}
-              >
+              {/* 👇 ahora solo muestra el estado, sin modificar */}
+              <button className={`btn-estadoVeterinario ${estados[t.id_turno]}`} disabled>
                 {estados[t.id_turno] === "pendiente" ? "Pendiente" : "Finalizado"}
               </button>
             </div>
