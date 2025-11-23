@@ -90,8 +90,10 @@ export default function Main() {
   const registrarTurno = () => {
 
     axios.post(urlSacarTurno, turno, config)
-      .then(() => {
+      .then((resp) => {
         alert("Turno registrado correctamente");
+        setTurno(resp.data.turno)
+        console.log("turno enviado:", resp.data)
         setLocation("/misTurnos");
       })
       .catch(error => {
@@ -105,7 +107,7 @@ export default function Main() {
   // -------------------------
   return (
     <div className="contenedor-turno">
-
+      <h2>Sacar Turno</h2>
       <Formulario
         turno={turno}
         onChangeDato={onChangeDato}
@@ -116,11 +118,16 @@ export default function Main() {
 
       {/* Vista previa */}
       <div className="preview">
-        <p>🐾 Mascota: {turno.id_mascota}</p>
-        <p>🛠 Servicio: {turno.id_servicio}</p>
+        <p>🐾 Mascota: {mascotas.find(m => m.id_mascota == turno.id_mascota)?.nombre || "—"}</p>
+        <p>🛠 Servicio: {servicios.find(s => s.id_servicio == turno.id_servicio)?.nombre || "—"}</p>
         <p>📅 Fecha: {turno.fecha}</p>
         <p>⏰ Hora: {turno.hora}</p>
-        <p>👨‍⚕️ Veterinario: {turno.id_veterinario}</p>
+        <p>👨‍⚕️ Veterinario: {
+      veterinarios.find(v => v.id_veterinario == turno.id_veterinario)
+        ? `${veterinarios.find(v => v.id_veterinario == turno.id_veterinario).nombre_veterinario}
+           ${veterinarios.find(v => v.id_veterinario == turno.id_veterinario).apellido_veterinario}`
+        : "—"
+    }</p>
       </div>
 
       <button className="btn-violeta" onClick={registrarTurno}>

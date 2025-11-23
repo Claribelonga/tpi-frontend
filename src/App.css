@@ -399,7 +399,7 @@ td {
 
 /* Tarjeta de turno */
 .card-turno {
-  margin: 30px 0;
+  margin: 20px 0 0;
   border: 1.5px solid #9c5df5;
   border-radius: 10px;
   padding: 14px 18px;
@@ -693,7 +693,7 @@ td {
 
 /* agenda de turnos */
 .tarjetaTurnoVete {
-  width: 300px;
+  width: 330px;
   min-height: 110px;   /* altura mínima, pero puede crecer */
   border: 1px solid #AEADAD;
   border-radius: 8px;
@@ -706,6 +706,7 @@ td {
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* no centres verticalmente */
+  margin-bottom: 10px;
 }
 .tarjetaServicioVete {
   font-weight: bold;
@@ -789,7 +790,7 @@ td {
 .containerAgendaDeTurnos {
   display: flex;
   align-items: flex-start;
-  padding: 20px;
+  /* padding: 20px; */
   gap: 155px;
 }
 .leftColumna {
@@ -921,12 +922,10 @@ textarea.inputDiagnostico {
 .listadoTurnoVete::-webkit-scrollbar {
   width: 8px;
 }
-
 .listadoTurnoVete::-webkit-scrollbar-track {
   background: #f0f0f0;
   border-radius: 4px;
 }
-
 .listadoTurnoVete::-webkit-scrollbar-thumb {
   background-color: #999;
   border-radius: 4px;
@@ -948,6 +947,7 @@ textarea.inputDiagnostico {
   margin: 20px auto 0 auto; /* 👈 centra solo este hijo */
 }
 .filtro-contenedor {
+  height: max-content;
   position: relative;
   display: inline-block;
 }
@@ -961,7 +961,7 @@ textarea.inputDiagnostico {
   display: flex;
   gap: 10px;
   align-items: center;
-  margin-top: 111px;
+  /* margin-top: 111px; */
 }
 .icono-filtro {
   font-size: 18px;

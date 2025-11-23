@@ -36,12 +36,12 @@ export default function Filtros({ onChange }) {
     <div className="contenedorFiltros">
       <div>
         <select
-          className="filtroSelect"
+          className="filtro-boton"
           value={servicio}
           onChange={(e) => setServicio(e.target.value)}
         >
-          <option value="" disabled>Servicios</option>
-          <option value="">Todos</option>
+          <option value="" disabled className="filtro-opcion">Servicios</option>
+          <option value="" className="filtro-opcion">Todos</option>
           {servicios.map((s) => (
             <option key={s.id_servicio} value={s.nombre}>
               {s.nombre}
@@ -53,7 +53,7 @@ export default function Filtros({ onChange }) {
       <div>
         <input
           type="date"
-          className="filtroInput"
+          className="filtro-boton"
           value={fecha}
           onChange={(e) => setFecha(e.target.value)}
         />

@@ -1,5 +1,12 @@
 // MisMascotas/Listado.jsx
 export default function Listado({ mascotas, onEditar }) {
+  const formatearFecha = (fechaStr) => {
+  const fecha = new Date(fechaStr);
+  const dia = String(fecha.getDate()).padStart(2, "0");
+  const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+  const anio = fecha.getFullYear(); // ← si querés año completo
+  return `${dia}/${mes}/${anio}`;
+};
   return (
     <div className="listado-clientes-container">
       <table className="tabla">
@@ -23,9 +30,9 @@ export default function Listado({ mascotas, onEditar }) {
               <td>{m.nombre_especie}</td>
               <td>{m.nombre_raza}</td>
               <td>{m.sexo}</td>
-              <td>{m.fecha_nacimiento}</td>
-              <td>{m.altura}</td>
-              <td>{m.peso}</td>
+              <td>{formatearFecha(m.fecha_nacimiento)}</td>
+              <td>{m.altura} cm</td>
+              <td>{m.peso} gr</td>
 
               <td>
                 <button onClick={() => onEditar(m)} className="btn-edit" >

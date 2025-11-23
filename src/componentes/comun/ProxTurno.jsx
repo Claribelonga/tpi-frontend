@@ -3,6 +3,14 @@ import axios from "axios";
 import { Link } from "wouter";
 
 export default function ProximoTurno() {
+  const formatearFecha = (fechaStr) => {
+  const fecha = new Date(fechaStr);
+  const dia = String(fecha.getDate()).padStart(2, "0");
+  const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+  const anio = fecha.getFullYear(); // ← si querés año completo
+  return `${dia}/${mes}/${anio}`;
+};
+
   const [turno, setTurno] = useState(null);
   const [cargando, setCargando] = useState(true);
 
@@ -54,7 +62,8 @@ export default function ProximoTurno() {
         <div className="info-turno">
           <p className="titulo-turno">Próximo turno</p>
 
-          <p className="texto-turno">{turno.fecha}</p>
+          {/* <p className="texto-turno">{turno.fecha}</p> */}
+          <p>Fecha: {formatearFecha(turno.fecha)}</p>
           <p className="texto-turno">{turno.hora}</p>
           <p className="texto-turno">Mascota: {turno.nombre_mascota}</p>
         </div>
