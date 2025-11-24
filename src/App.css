@@ -15,11 +15,32 @@ html, body{
   height: 100%;
   width: 100%;
 }
+.AppSinReg{
+  /* height: 100%; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+}
+.header {
+  width: 100%;
+  height: 80px;
+  padding: 0 200px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  gap: 10px;
+}
+.btnHeader{
+  margin-right: 20px;
+}
 .PaginaLogin {
   display: flex;
   justify-content: center; /* Centrado horizontal */
   align-items: center; /* Centrado vertical */
-  height: 100vh; /* Ocupa toda la altura de la ventana */
+  margin-top: 20px;
+  /*height: 100vh;*/
   width: 100vw; /* Ocupa todo el ancho de la ventana */
 }
 .PaginaLogin .FormContenedor .FormContenedorPerfil{
@@ -95,7 +116,7 @@ html, body{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
   width: auto;
   /* overflow: hidden; */
   background-color: #fff;
@@ -200,12 +221,15 @@ html, body{
 .Logo{
   display: flex;
   flex-direction: row;
+  align-items: center;
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 40px;
+  cursor: pointer;
+  /* margin-bottom: 40px; */
 }
 .Logo img{
   height: 50px;
+  margin-right: 10px;
 }
 .vet {
   color: black; /* Vet negro */
@@ -223,6 +247,7 @@ html, body{
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-top: 30px;
 }
 .menu-item {
   text-decoration: none;

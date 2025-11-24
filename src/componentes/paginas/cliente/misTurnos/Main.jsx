@@ -60,7 +60,7 @@ export default function Main() {
   // };
   // Cuando el usuario hace click en un turno
   const verDiagnostico = (id) => {
-    const url = "http://localhost:5000/api/diagnosticos/turno?id_turno=";
+    const url = "http://localhost:5000/api/diagnosticos/turnocliente?id_turno=";
     const config = {
       headers: {Authorization: token}
     }

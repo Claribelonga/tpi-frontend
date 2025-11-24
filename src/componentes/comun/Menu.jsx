@@ -11,7 +11,7 @@ export default function Menu({rol}) {
     sessionStorage.removeItem("rol");
     window.dispatchEvent(new Event("sessionChange"));
     // 2️⃣ Redirigir al login
-    navigate("/login");
+    navigate("/inicio");
   };
 
   let menuItems;
@@ -89,7 +89,7 @@ export default function Menu({rol}) {
   }
   return (
     <div className="sidebar">
-      <div className="Logo">
+      <div className="Logo" onClick={() => navigate("/inicio")}>
         <img src="/img/logoVetSur.png" alt="logoVioleta" className="logo"></img>
         <h5 className="vet">Vet</h5><h5 className="sur">Sur</h5>
       </div>

@@ -1,4 +1,4 @@
-import { Router, Route, Redirect, Link } from "wouter";
+import { Router, Route, Redirect, Link, useLocation } from "wouter";
 import { useState, useEffect } from "react";
 //componentes comunes:
 import Menu from "./componentes/comun/Menu";
@@ -28,6 +28,7 @@ import './App.css'
 //el menu deberia estar aca fijo y cuando se logee recien mostrar el menu
 
 function App() {
+  const [, navigate] = useLocation();
   const [token, setToken] = useState(sessionStorage.getItem("token"));
   const [rol, setRol] = useState(Number(sessionStorage.getItem("rol")));
   // const [token, setToken] = useState("admin@gmail.com")
@@ -68,9 +69,29 @@ function App() {
         {/* Rutas públicas (sin menú) */}
         {!token ? (
           <>
-            <Route path="/login"><InicioSesion /></Route>
+          <div className="AppSinReg">
+            <header className="header">
+              <div className="Logo" onClick={() => navigate("/inicio")}>
+                <img src="/img/logoNegro.png" alt="logoVioleta" className="logo"></img>
+                <h5 className="vet">Vet</h5><h5 className="sur">Sur</h5>
+              </div>
+              <div>
+              <button onClick={() => navigate("/login")} className="btnHeader">Iniciar Sesión</button>
+              <button onClick={() => navigate("/registrarse")} className="btnGuardarPerfil">Registrarse</button>
+              </div>
+            </header>
+          <Route path="/inicio"><Inicio /></Route>
+          </div>
+          <Route path="/login"><InicioSesion /></Route>
+          <Route path="/registrarse"><Registrarse /></Route>
+          <Route path="/"><Redirect to="/inicio" /></Route>
+          {/* <Route path="/login"><InicioSesion /></Route>
+          <Route path="/registrarse"><Registrarse /></Route>
+          {/* Si pone cualquier otra ruta, redirige al inicio público */}
+          {/* <Route path="/"><Redirect to="/inicio" /></Route> */}
+            {/* <Route path="/login"><InicioSesion /></Route>
             <Route path="/registrarse"><Registrarse /></Route>
-            <Route path="/"><Redirect to="/login" /></Route>
+            <Route path="/"><Redirect to="/login" /></Route> */}
           </>
         ) : (
           /* Layout general con menú y contenido */
