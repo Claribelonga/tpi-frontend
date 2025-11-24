@@ -135,31 +135,31 @@ export default function Formulario({ idMascota, idTurno }) {
 };
   return (
   <div className="formularioAgendaDeTurnos">
-    <h3 className="tituloFicha">Datos del dueño</h3>
+    <h3>Datos del dueño</h3>
     {ficha ? (
       <div className="fichaDatos">
         <div className="filaFicha">
-          <p className="datoFicha">Dueño: {ficha.dueno_nombre} {ficha.dueno_apellido}</p>
-          <p className="datoFicha">DNI: {ficha.dueno_dni}</p>
+          <p><b>Dueño:</b> {ficha.dueno_nombre} {ficha.dueno_apellido}</p>
+          <p><b>DNI:</b> {ficha.dueno_dni}</p>
         </div>
         <div className="filaFicha">
-          <p className="datoFicha">Teléfono: {ficha.dueno_telefono}</p>
+          <p><b>Teléfono:</b> {ficha.dueno_telefono}</p>
         </div>
     <h3 className="tituloFicha">Datos de la mascota</h3>
         <div className="filaFicha">
-          <p className="datoFicha">Mascota: {ficha.nombre_mascota}</p>
-          <p className="datoFicha">Especie: {ficha.nombre_especie}</p>
+          <p><b>Mascota:</b> {ficha.nombre_mascota}</p>
+          <p><b>Especie:</b> {ficha.nombre_especie}</p>
           </div>
         <div className="filaFicha">
-          <p className="datoFicha">Raza: {ficha.nombre_raza}</p>
-          <p className="datoFicha">Sexo: {ficha.sexo}</p>
+          <p><b>Raza:</b> {ficha.nombre_raza}</p>
+          <p><b>Sexo:</b> {ficha.sexo}</p>
         </div>
         <div className="filaFicha">
-          <p className="datoFicha">Fecha Nac.: {formatearFecha(ficha.fecha_nacimiento)}</p>
-          <p className="datoFicha">Altura: {ficha.altura} cm</p>
+          <p><b>Fecha Nac.:</b> {formatearFecha(ficha.fecha_nacimiento)}</p>
+          <p><b>Altura:</b> {ficha.altura} cm</p>
           </div>
           <div className="filaFicha">
-          <p className="datoFicha">Peso: {ficha.peso} kg</p>
+          <p ><b>Peso:</b> {ficha.peso} kg</p>
           </div>
         
       </div>

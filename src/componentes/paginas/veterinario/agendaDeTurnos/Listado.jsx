@@ -38,7 +38,7 @@ export default function Listado({ turnos = [], onSeleccionar }) {
             onSeleccionar(t);
           }}
         >
-          <p className="tarjetaServicioVete">{t.nombre_servicio}</p>
+          <p><b>{t.nombre_servicio}</b></p>
 
           <div className="tarjetaInfoVete">
             <span>Mascota: {t.nombre_mascota}</span>

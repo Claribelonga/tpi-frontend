@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 html, body{
   height: 100vh;
@@ -818,12 +819,12 @@ td {
   margin-bottom: 10px;
   cursor: pointer;
 }
-.tarjetaServicioVete {
+/* .tarjetaServicioVete {
   font-weight: bold;
-  font-size: 16px;   /* servicio 16px */
+  font-size: 16px;   /* servicio 16px 
   margin-bottom: 0.5rem;
-  color: #767676;    /* gris */
-}
+  color: #767676;    /* gris 
+} */
 .tarjetaInfoVete {
   display: flex;
   justify-content: space-between;
@@ -975,10 +976,10 @@ td {
   height: auto;
   border: 1px solid #C6C5C5;
 }
-.tituloFicha {
+/* .tituloFicha {
   color: #999898;
   margin-bottom: 1rem;
-}
+} */
 
 .fichaDatos {
   display: flex;
@@ -995,11 +996,11 @@ td {
     width: calc(100% - 20px);
 }
 
-.datoFicha {
+/* .datoFicha {
   color: #767676;
-  font-weight: 600; /* semibold */
+  font-weight: 600; /* semibold 
   width: 48%;
-}
+} */
 
 .contenedorDiagnosticoForm {
   margin-top: 20px; /* separación */
