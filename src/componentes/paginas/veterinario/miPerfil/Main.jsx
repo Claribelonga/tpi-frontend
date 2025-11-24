@@ -36,8 +36,14 @@ export default function Main() {
       return;
     }
 
+     // Armamos el body a enviar SIN incluir la contraseña vacía
+  const datosEnviar = { ...datos };
+
+  if (!datos.contraseña || datos.contraseña.trim() === "") {
+    delete datosEnviar.contraseña;
+  }
     const config = { headers: { Authorization: token } };
-    axios.put(URL_EDITAR, datos, config)
+    axios.put(URL_EDITAR, datosEnviar, config)
       .then(() => {
         alert("Perfil actualizado correctamente");
         setShowModal(false);

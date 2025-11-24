@@ -14,8 +14,20 @@ export default function Main(){
     const [especialidades, setEspecialidades] = useState([]);
     const [mensaje, setMensaje] = useState("");
     const [tipoMensaje, setTipoMensaje] = useState("");
+    const [mostrarForm, setMostrarForm] = useState(false);
+     // Estados para mensajes
+      const [textoMensaje, setTextoMensaje] = useState("");
     const token = sessionStorage.getItem("token");
-    
+    // Función reutilizable para mostrar mensajes (se autohide)
+  const mostrarMensaje = (texto, tipo = "info", duracionMs = 3000) => {
+    setTextoMensaje(texto);
+    setTipoMensaje(tipo);
+    if (duracionMs > 0) {
+      setTimeout(() => {
+        setTextoMensaje("");
+      }, duracionMs);
+    }
+  };
     //GET especialidades para el select
     const obtenerEspecialidades = () => {
       const config = { headers: { Authorization: token } };
@@ -84,6 +96,7 @@ export default function Main(){
         .then((resp) => {
           obtenerVeterinarios();
           setMensaje("✅ Veterinario actualizado con éxito");
+          setMostrarForm(false);
           setTipoMensaje("exito");
           setVetEdit(null);
           setTimeout(() => setMensaje(""), 4000);
@@ -103,6 +116,7 @@ export default function Main(){
           obtenerVeterinarios();
           setMensaje("✅ Veterinario registrado con éxito");
           setTipoMensaje("exito");
+          setMostrarForm(false);
           setTimeout(() => setMensaje(""), 4000);
         })
         .catch((error) => {
@@ -113,6 +127,21 @@ export default function Main(){
         });
     }
   };
+
+  const restablecerContrasena = (id_usuario) => {
+  const config = { headers: { Authorization: token } };
+  const url = `http://localhost:5000/api/clientes/restablecer/${id_usuario}`;
+  
+  axios.put(url, {}, config)
+    .then(resp => {
+      mostrarMensaje("✅ Contraseña restablecida correctamente (DNI como nueva contraseña)", "exito");
+      console.log("Respuesta del backend:", resp.data);
+    })
+    .catch(err => {
+      mostrarMensaje("❌ Error al restablecer contraseña", "error");
+      console.error(err);
+    });
+};
     return(
         <div>
             {mensaje && (
@@ -124,20 +153,38 @@ export default function Main(){
             titulo={"Buscar veterinario"}
             placeholder={"Ingrese Nombre y/o Apellido"}
             />
+            {/* Botón Crear Cliente */}
+            <button className="btn-violeta" onClick={() => {
+              setVetEdit(null);
+              setMostrarForm(true);
+            }}
+            >Crear Cliente</button>
             <Listado
             veterinarios={veterinarios}
-            onEditar={(vet) => setVetEdit(vet)}
+            onEditar={(vet) => {
+              setVetEdit(vet)
+              setMostrarForm(true);
+            }}
             />
             <Paginacion
             paginaActual={paginaActual}
             totalPaginas={totalPaginas}
             cambiarPagina={cambiarPagina}
             />
-            <Formulario
+            {mostrarForm && (
+              <Formulario
+              vetEdit={vetEdit}
+              cerrar={() => setMostrarForm(false)}
+              guardarVeterinario={guardarVeterinario}
+              especialidades={especialidades}
+              restablecerContrasena={restablecerContrasena}
+              />
+            )}
+            {/* <Formulario
             guardarVeterinario={guardarVeterinario}
             vetEdit={vetEdit}
             especialidades={especialidades} //lo paso al form para el select
-            />
+            /> */}
         </div>
     )
 }

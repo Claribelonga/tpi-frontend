@@ -74,8 +74,27 @@ export default function Formulario({ perfil, datos, setDato, showModal, setShowM
 
             {Object.keys(datos).map(campo => {
               if (campo === "matricula" || campo === "id_especialidad") return null;
-
+              // Campo ESPECIAL para contraseña
+              if (campo === "contraseña") {
+                return (
+                  <label key={campo}>
+                    Contraseña (dejar vacío para mantener la actual)
+                    <input
+                      type="password"
+                      className="inputGen"
+                      value={datos[campo]}
+                      onChange={(e) => setDato(campo, e.target.value)}
+                    />
+                    {errores[campo] && (
+                      <p className="error" style={{ color: "red" }}>
+                        {errores[campo]}
+                      </p>
+                    )}
+                  </label>
+                );
+              }
               return (
+                
                 <label key={campo}>
                   {campo.charAt(0).toUpperCase() + campo.slice(1)}
                   <input

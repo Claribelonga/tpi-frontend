@@ -72,7 +72,7 @@ html, body{
   border-bottom-color: #4A90E2;
 }
 .btn-violeta {
-  width: 100%;
+  /* width: 100%; */
   padding: 8px;
   background-color: #7E57C2;
   color: white;
@@ -86,6 +86,9 @@ html, body{
 }
 .btn-violeta:hover {
   background-color: #9C51C7;
+}
+.FormContenedor .btn-violeta{
+  width: 100%;
 }
 /* Contenedor registro u general */
 .PaginaRegistro {
@@ -411,9 +414,9 @@ td {
   align-items: center;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
 }
-.card-turno .btn-violeta{
+/* .card-turno .btn-violeta{
   width: auto;
-}
+} */
 
 /* Títulos y textos */
 .titulo-turno {
@@ -428,10 +431,10 @@ td {
   margin: 2px 0;
 }
 
-.btn-violeta.grande {
+/* .btn-violeta.grande {
   padding: 10px 20px;
   font-size: 15px;
-}
+} */
 
 /* Estado sin turno */
 .sin-turno {
@@ -1130,9 +1133,9 @@ textarea.inputDiagnostico {
   flex-direction: row;
   align-items: center;
 }
-.misMascotas .btn-violeta{
+/* .misMascotas .btn-violeta{
   width: max-content;
-}
+} */
 
 /* .formulario-mascota-modal .FormContenedor{
   height: max-content;

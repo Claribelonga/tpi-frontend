@@ -12,6 +12,7 @@ export default function Main(){
   const [clientes, setClientes] = useState([]);
   const [clienteEdit, setClienteEdit] = useState(null);
   const [mostrarForm, setMostrarForm] = useState(false);
+  
   // Estados para mensajes
   const [textoMensaje, setTextoMensaje] = useState("");
   const [tipoMensaje, setTipoMensaje] = useState("info"); // "exito" | "error" | "info"

@@ -1,8 +1,8 @@
 import { useState,useEffect } from "react";
 import useUsuario from "../../../../hooks/useUsuario";
 
-export default function Formulario({ guardarCliente, clienteEdit, restablecerContrasena, cerrar }) {
-  const { datos, errores, setDato, validarTodo, limpiarInputs } = useUsuario();
+export default function Formulario({ guardarCliente, clienteEdit, restablecerContrasena, cerrar, errores }) {
+  const { datos, errores: erroresForm, setDato, validarTodo, limpiarInputs } = useUsuario();
 
   useEffect(() => {
     if (clienteEdit) {
@@ -58,20 +58,24 @@ export default function Formulario({ guardarCliente, clienteEdit, restablecerCon
               <div className="inputContainer">
                 <label>Nombre:</label>
                 <input className="inputGen" value={datos.nombre} onChange={(e) => setDato("nombre", e.target.value)} required />
+                {erroresForm.nombre && <span className="error">{erroresForm.nombre}</span>}
               </div>
               <div className="inputContainer">
                 <label>Apellido:</label>
                 <input className="inputGen" value={datos.apellido} onChange={(e) => setDato("apellido", e.target.value)} required />
+                {erroresForm.apellido && <span className="error">{erroresForm.apellido}</span>}
               </div>
               <div className="inputContainer">
                 <label>DNI:</label>
                 <input className="inputGen" value={datos.dni} onChange={(e) => setDato("dni", e.target.value)} required />
+                {erroresForm.dni && <span className="error">{erroresForm.dni}</span>}
               </div>
 
               {/* Contactos */}
               <div className="inputContainer">
                 <label>Email:</label>
                 <input className="inputGen" type="email" value={datos.email} onChange={(e) => setDato("email", e.target.value)} required />
+                {erroresForm.email && <span className="error">{erroresForm.email}</span>}
               </div>
               <div className="inputContainer">
                 <label>Contraseña:</label>
@@ -82,28 +86,34 @@ export default function Formulario({ guardarCliente, clienteEdit, restablecerCon
                   onChange={(e) => setDato("contraseña", e.target.value)}
                   required={!clienteEdit} // obligatorio solo si es crear
                 />
+                {erroresForm.contraseña && <span className="error">{erroresForm.contraseña}</span>}
               </div>
               <div className="inputContainer">
                 <label>Teléfono:</label>
                 <input className="inputGen" value={datos.telefono} onChange={(e) => setDato("telefono", e.target.value)} required />
+                {erroresForm.telefono && <span className="error">{erroresForm.telefono}</span>}
               </div>
 
               {/* Dirección */}
               <div className="inputContainer">
                 <label>Calle:</label>
                 <input className="inputGen" value={datos.calle} onChange={(e) => setDato("calle", e.target.value)} required />
+                {erroresForm.calle && <span className="error">{erroresForm.calle}</span>}
               </div>
               <div className="inputContainer">
                 <label>Número:</label>
                 <input className="inputGen" value={datos.numero} onChange={(e) => setDato("numero", e.target.value)} required />
+                {erroresForm.numero && <span className="error">{erroresForm.numero}</span>}
               </div>
               <div className="inputContainer">
                 <label>Piso:</label>
                 <input className="inputGen" value={datos.piso} onChange={(e) => setDato("piso", e.target.value)} />
+                {erroresForm.piso && <span className="error">{erroresForm.piso}</span>}
               </div>
               <div className="inputContainer">
                 <label>Departamento:</label>
                 <input className="inputGen" value={datos.departamento} onChange={(e) => setDato("departamento", e.target.value)} />
+                {erroresForm.departamento && <span className="error">{erroresForm.departamento}</span>}
               </div>
 
               {/* Botones */}
