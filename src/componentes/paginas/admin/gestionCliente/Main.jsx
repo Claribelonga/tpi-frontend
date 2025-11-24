@@ -11,6 +11,8 @@ export default function Main(){
   const [totalPaginas, setTotalPaginas] = useState(1);
   const [clientes, setClientes] = useState([]);
   const [clienteEdit, setClienteEdit] = useState(null);
+  const [mostrarForm, setMostrarForm] = useState(false);
+  
   // Estados para mensajes
   const [textoMensaje, setTextoMensaje] = useState("");
   const [tipoMensaje, setTipoMensaje] = useState("info"); // "exito" | "error" | "info"
@@ -73,6 +75,7 @@ export default function Main(){
       .then((resp) => {
         console.log("cliente actualizado: ", resp.data);
         obtenerClientes();
+        setMostrarForm(false);
         mostrarMensaje("✅ Cliente registrado con éxito");
         setTipoMensaje("exito");
         setClienteEdit(null); //limpia el formularioo
@@ -98,6 +101,21 @@ export default function Main(){
     }
   }
 
+  const restablecerContrasena = (id_usuario) => {
+  const config = { headers: { Authorization: token } };
+  const url = `http://localhost:5000/api/clientes/restablecer/${id_usuario}`;
+  
+  axios.put(url, {}, config)
+    .then(resp => {
+      mostrarMensaje("✅ Contraseña restablecida correctamente (DNI como nueva contraseña)", "exito");
+      console.log("Respuesta del backend:", resp.data);
+    })
+    .catch(err => {
+      mostrarMensaje("❌ Error al restablecer contraseña", "error");
+      console.error(err);
+    });
+};
+
   return(
     <div>
       <Mensaje texto={textoMensaje} tipo={tipoMensaje} />
@@ -107,18 +125,44 @@ export default function Main(){
       titulo={"Buscar Cliente"}
       placeholder={"Ingrese Nombre y/o Apellido"}
       />
+      {/* Botón Crear Cliente */}
+      <button className="btn-violeta" onClick={() => {
+          setClienteEdit(null);
+          setMostrarForm(true);
+        }}
+      >
+        Crear Cliente
+      </button>
       <Listado
+        clientes={clientes}
+        onEditar={(cliente) => {
+          setClienteEdit(cliente);
+          setMostrarForm(true);
+        }}
+      />
+      {/* <Listado
       clientes={clientes}
       onEditar={(cliente) => setClienteEdit(cliente)}
-      />
+      /> */}
       <Paginacion
       paginaActual={paginaActual}
       totalPaginas={totalPaginas}
       cambiarPagina={cambiarPagina}/>
-      <Formulario
+      {/* Botón Crear Cliente */}
+      {/* Formulario Modal */}
+      {mostrarForm && (
+        <Formulario
+          clienteEdit={clienteEdit}
+          cerrar={() => setMostrarForm(false)}
+          guardarCliente={guardarCliente}
+          restablecerContrasena={restablecerContrasena}
+        />
+      )}
+      {/* <Formulario
       guardarCliente={guardarCliente}
       clienteEdit={clienteEdit}
-      />
+      restablecerContrasena={restablecerContrasena}
+      /> */}
     </div>
   )   
 }

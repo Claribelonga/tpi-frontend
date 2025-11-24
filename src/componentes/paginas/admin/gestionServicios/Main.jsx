@@ -9,6 +9,7 @@ export default function Main() {
   const [totalPaginas, setTotalPaginas] = useState(1);
   const [servicios, setServicios] = useState([]);
   const [servicioEdit, setServicioEdit] = useState(null);
+  const [mostrarForm, setMostrarForm] = useState(false);
   const token = sessionStorage.getItem("token");
 
   // GET con paginacion
@@ -73,6 +74,7 @@ export default function Main() {
         alert("Servicio actualizado ✔️", "exito");
         obtenerServicios();
         setServicioEdit(null);
+        setMostrarForm(false);
       })
       .catch((error) => {
         alert("Error al actualizar servicio", "error");
@@ -97,6 +99,7 @@ export default function Main() {
       .then(() => {
         alert("Servicio creado correctamente", "exito");
         obtenerServicios()
+        setMostrarForm(false);
       })
       .catch((error) => {
         alert("Error al crear servicio", "error");
@@ -107,9 +110,18 @@ export default function Main() {
   return (
     <div>
       <h2>Gestionar Servicios</h2>
+      {/* Botón Crear Cliente */}
+            <button className="btn-violeta" onClick={() => {
+              setServicioEdit(null);
+              setMostrarForm(true);
+            }}
+            >Crear Servicio</button>
       <Listado
         servicios={servicios}
-        onEditar={(servicio) => setServicioEdit(servicio)} 
+        onEditar={(servicio) => {
+          setServicioEdit(servicio)
+          setMostrarForm(true);
+        }} 
         onCambiarEstado={cambiarEstado}
       />
       <Paginacion
@@ -117,10 +129,13 @@ export default function Main() {
         totalPaginas={totalPaginas}
         cambiarPagina={cambiarPagina}
       />
-      <Formulario 
-        onGuardar={guardarServicio} 
-        servicioEdit={servicioEdit} 
-      />
+      {mostrarForm && (
+        <Formulario
+        servicioEdit={servicioEdit}
+        cerrar={() => setMostrarForm(false)}
+        onGuardar={guardarServicio}
+        />
+      )}
     </div>
   );
 }

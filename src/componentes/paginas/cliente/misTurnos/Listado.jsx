@@ -7,6 +7,8 @@ export default function Listado({ turnos, onSeleccionar }) {
   const anio = fecha.getFullYear(); // ← si querés año completo
   return `${dia}/${mes}/${anio}`;
 };
+const formatearHora = (horaStr) => (horaStr ? horaStr.slice(0, 5) : "");
+
   const [seleccionado, setSeleccionado] = useState(null); 
   return (
     <div className="listado-turnos">
@@ -16,9 +18,8 @@ export default function Listado({ turnos, onSeleccionar }) {
           onSeleccionar(t.id_turno) 
           setSeleccionado(t.id_turno)}}>
           <p><b>🐾 {t.nombre_mascota}</b></p>
-          <p>{t.servicio}</p>
-          <p>Vet.: {t.nombre_veterinario}</p>
-          <p>Fecha: {formatearFecha(t.fecha)} | {t.hora}</p>
+          <p>Vet.: {t.nombre_veterinario} {t.apellido_veterinario}</p>
+          <p>Fecha: {formatearFecha(t.fecha)} | {formatearHora(t.hora)}</p>
           <p>Servicio: {t.nombre_servicio}</p>
         </div>
       ))}
