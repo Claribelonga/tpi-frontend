@@ -51,13 +51,13 @@ export default function Formulario({ mascota, cerrar, onGuardar, especies, razas
 
   return (
     <div className="modal-overlay">
-      <div className="FormContenedor">
+      <div className="modalContent">
 
         <form className="formulario-mascota-modal" onSubmit={enviarDatos}>
 
-          <div className="arriba-mascota">
+          <div className="modalArriba">
             <span className="text-xl">{mascota ? "Editar Mascota" : "Agregar Mascota"}</span>
-            <button type="button" onClick={cerrar}><img src="/img/equis.png" className="icono" /></button>
+            <button type="button" onClick={cerrar} className="btnCloseModal"><img src="/img/equis.png" className="icono" /></button>
           </div>
           <div className="inputContainer">
             <label>Nombre:</label>

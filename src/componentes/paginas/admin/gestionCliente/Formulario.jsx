@@ -1,102 +1,126 @@
-import { useEffect } from "react";
+import { useState,useEffect } from "react";
 import useUsuario from "../../../../hooks/useUsuario";
 
-export default function Formulario({guardarCliente, clienteEdit}){
-    const { datos, errores, setDato, validarTodo, limpiarInputs } = useUsuario();
-    useEffect(() => {
-        if (clienteEdit) {
-            setDato("nombre", clienteEdit.nombre);
-            setDato("apellido", clienteEdit.apellido);
-            setDato("contraseña",""); //no se edita visible
-            setDato("email", clienteEdit.usuario.email);
-            setDato("dni", clienteEdit.dni);
-            setDato("telefono", clienteEdit.telefono);
-            setDato("calle", clienteEdit.direccion.calle);
-            setDato("numero", clienteEdit.direccion.numero);
-            setDato("piso", clienteEdit.direccion.piso);
-            setDato("departamento", clienteEdit.direccion.departamento);
-        } else {
-            limpiarInputs();
-        }
-    }, [clienteEdit]);
+export default function Formulario({ guardarCliente, clienteEdit, restablecerContrasena, cerrar }) {
+  const { datos, errores, setDato, validarTodo, limpiarInputs } = useUsuario();
 
-    const guardar = (e) =>{
-        e.preventDefault();
-        // Validación global ANTES de enviar
-        if (!validarTodo()) {
-            console.log("Hay errores en el formulario");
-            alert("Hay errores en el formulario")
-            return;
-        }
-        console.log("datos del usuario: ", datos);
-        guardarCliente(datos);
-        limpiarInputs();
+  useEffect(() => {
+    if (clienteEdit) {
+      setDato("nombre", clienteEdit.nombre);
+      setDato("apellido", clienteEdit.apellido);
+      setDato("contraseña", ""); // contraseña no visible
+      setDato("email", clienteEdit.usuario.email);
+      setDato("dni", clienteEdit.dni);
+      setDato("telefono", clienteEdit.telefono);
+      setDato("calle", clienteEdit.direccion.calle);
+      setDato("numero", clienteEdit.direccion.numero);
+      setDato("piso", clienteEdit.direccion.piso);
+      setDato("departamento", clienteEdit.direccion.departamento);
+    } else {
+      limpiarInputs();
     }
-    return(
-        <div className="cont-form">
-            <h3>{clienteEdit ? "Guardar Cambios" : "Registrar Cliente"}</h3>
-            <form className="formulario" onSubmit={guardar}>
-                <div className="form-section">
-                    <span className="">Datos Personales</span>
-                    <div className="inputs-grid">
-                        <div>
-                        <input className="inputGen" type="text" placeholder="nombre" value={datos.nombre} onChange={(e) => setDato("nombre",e.target.value)} required/>
-                         {errores.nombre && <p className="error">{errores.nombre}</p>}
-                        </div>
-                        <div>
-                        <input className="inputGen" type="text" placeholder="apellido" value={datos.apellido} onChange={(e) => setDato("apellido",e.target.value)} required/>
-                         {errores.apellido && <p className="error">{errores.apellido}</p>}
-                        </div>
-                        <div>
-                        <input className="inputGen" type="text" placeholder="dni" value={datos.dni} onChange={(e) => setDato("dni",e.target.value)} required/>
-                         {errores.dni && <p className="error">{errores.dni}</p>}
-                        </div>
-                    </div>
-                </div>
+  }, [clienteEdit]);
 
-                <div className="form-section">
-                    <span className="">Direccion</span>
-                    <div className="inputs-grid">
-                        <div>
-                            <input className="inputGen" type="text" placeholder="calle" value={datos.calle} onChange={(e) => setDato("calle",e.target.value)} required/>
-                            {errores.calle && <p className="error">{errores.calle}</p>}
-                        </div>
-                        <div>
-                            <input className="inputGen" type="text" placeholder="numero" value={datos.numero} onChange={(e) => setDato("numero",e.target.value)} required/>
-                            {errores.numero && <p className="error">{errores.numero}</p>}
-                        </div>
-                        <div>
-                            <input className="inputGen" type="text" placeholder="piso" value={datos.piso} onChange={(e) => setDato("piso",e.target.value)}/>
-                            {errores.piso && <p className="error">{errores.piso}</p>}
-                        </div>
-                        <div>
-                            <input className="inputGen" type="text" placeholder="departamento" value={datos.departamento} onChange={(e) => setDato("departamento",e.target.value)}/>
-                            {errores.departamento && <p className="error">{errores.departamento}</p>}
-                        </div>
-                    </div>
-                </div>
+  const guardar = (e) => {
+    e.preventDefault();
+    if (!validarTodo()) {
+      console.log("Hay errores en el formulario");
+      alert("Hay errores en el formulario");
+      return;
+    }
+    console.log("Datos del usuario: ", datos);
+    guardarCliente(datos);
+    limpiarInputs();
+    cerrar();
+  };
 
-                <div className="form-section">
-                    <span className="">Contactos</span>
-                    <div className="inputs-grid">
-                        <div>
-                            <input className="inputGen" type="email" placeholder="email" value={datos.email} onChange={(e) => setDato("email",e.target.value)} required/>
-                            {errores.email && <p className="error" autoComplete="off">{errores.email}</p>}
-                        </div>
-                        <div>
-                            <input className="inputGen" type="password" placeholder="contraseña" value={datos.contraseña} onChange={(e) => setDato("contraseña",e.target.value)} required={!clienteEdit}/>
-                            {errores.contraseña && <p className="error">{errores.contraseña} autoComplete="off"</p>}
-                        </div>
-                        <div>
-                            <input className="inputGen" type="text" placeholder="teléfono" value={datos.telefono} onChange={(e) => setDato("telefono",e.target.value)} required/>
-                            {errores.telefono && <p className="error">{errores.telefono}</p>}
-                        </div>
-                    </div>
-                </div>
-                <div className="form-section form-button">
-                    <button className="btn-violeta" type="submit">{clienteEdit ? "Guardar Cambios" : "Registrar"}</button>
-                </div>
+  // Función interna para el botón de restablecer contraseña
+  const handleRestablecer = () => {
+    if (!clienteEdit) return;
+    if (window.confirm("¿Seguro que querés restablecer la contraseña de este cliente?")) {
+      restablecerContrasena(clienteEdit.usuario.id_usuario);
+    }
+  };
+
+  return (
+    <>
+        <div className="modal-overlay">
+          <div className="modalContent">
+            <form className="formulario-mascota-modal" onSubmit={guardar}>
+              <div className="modalArriba">
+                <span>{clienteEdit ? "Editar Cliente" : "Crear Cliente"}</span>
+                <button type="button" onClick={cerrar} className="btnCloseModal">
+                  <img src="/img/equis.png" className="icono" />
+                </button>
+              </div>
+
+              {/* Datos Personales */}
+              <div className="inputContainer">
+                <label>Nombre:</label>
+                <input className="inputGen" value={datos.nombre} onChange={(e) => setDato("nombre", e.target.value)} required />
+              </div>
+              <div className="inputContainer">
+                <label>Apellido:</label>
+                <input className="inputGen" value={datos.apellido} onChange={(e) => setDato("apellido", e.target.value)} required />
+              </div>
+              <div className="inputContainer">
+                <label>DNI:</label>
+                <input className="inputGen" value={datos.dni} onChange={(e) => setDato("dni", e.target.value)} required />
+              </div>
+
+              {/* Contactos */}
+              <div className="inputContainer">
+                <label>Email:</label>
+                <input className="inputGen" type="email" value={datos.email} onChange={(e) => setDato("email", e.target.value)} required />
+              </div>
+              <div className="inputContainer">
+                <label>Contraseña:</label>
+                <input
+                  className="inputGen"
+                  type="password"
+                  value={datos.contraseña}
+                  onChange={(e) => setDato("contraseña", e.target.value)}
+                  required={!clienteEdit} // obligatorio solo si es crear
+                />
+              </div>
+              <div className="inputContainer">
+                <label>Teléfono:</label>
+                <input className="inputGen" value={datos.telefono} onChange={(e) => setDato("telefono", e.target.value)} required />
+              </div>
+
+              {/* Dirección */}
+              <div className="inputContainer">
+                <label>Calle:</label>
+                <input className="inputGen" value={datos.calle} onChange={(e) => setDato("calle", e.target.value)} required />
+              </div>
+              <div className="inputContainer">
+                <label>Número:</label>
+                <input className="inputGen" value={datos.numero} onChange={(e) => setDato("numero", e.target.value)} required />
+              </div>
+              <div className="inputContainer">
+                <label>Piso:</label>
+                <input className="inputGen" value={datos.piso} onChange={(e) => setDato("piso", e.target.value)} />
+              </div>
+              <div className="inputContainer">
+                <label>Departamento:</label>
+                <input className="inputGen" value={datos.departamento} onChange={(e) => setDato("departamento", e.target.value)} />
+              </div>
+
+              {/* Botones */}
+              <div className="form-section form-button">
+                <button className="btn-violeta" type="submit">
+                  {clienteEdit ? "Guardar Cambios" : "Registrar"}
+                </button>
+
+                {clienteEdit && (
+                  <button type="button" className="btn-violeta" style={{ marginLeft: "10px" }} onClick={handleRestablecer}>
+                    Restablecer contraseña
+                  </button>
+                )}
+              </div>
             </form>
+          </div>
         </div>
-    )
+    </>
+  )
 }
