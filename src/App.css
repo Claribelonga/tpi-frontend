@@ -929,9 +929,14 @@ td {
   width: 25px;
   color: #c00;
   cursor: pointer;
+  outline: none;       /* 👉 elimina el borde de foco */
+  box-shadow: none;    /* 👉 elimina sombras que parecen borde */
 }
 
-
+.btnClearFiltros:focus {
+  outline: none;
+  box-shadow: none;
+}
 .filtroSelect,
 .filtroInput {
   width: 150px;
@@ -977,7 +982,7 @@ td {
 }
 .tituloFicha {
   color: #999898;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .fichaDatos {
@@ -995,11 +1000,6 @@ td {
     width: calc(100% - 20px);
 }
 
-.datoFicha {
-  color: #767676;
-  font-weight: 600; /* semibold */
-  width: 48%;
-}
 
 .contenedorDiagnosticoForm {
   margin-top: 20px; /* separación */
@@ -1168,7 +1168,6 @@ textarea.inputDiagnostico {
   display: flex;
   justify-content: first baseline;
 }
-
 .error-text {
   color: red;
   font-size: 0.9rem;
@@ -1190,3 +1189,142 @@ textarea.inputDiagnostico {
     align-items: center;
     align-content: center;               /* ancho controlado */
 }
+/*Diagnosticos*/
+.mainBuscadorMascotas {
+  display: flex;              /* activa flexbox */
+  align-items: center;        /* centra verticalmente */
+  gap: 20px;                  /* espacio entre buscador y filtro */
+  padding: 10px;
+}
+.listaMascotas {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* Contenedor principal */
+.formularioDiagnosticos {
+  display: flex;
+  flex-direction: column;
+  width: 820px;
+  padding: 8px 30px 30px 30px; /* más aire */
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 24px;
+  border: 1px solid #C6C5C5;
+}
+.tituloFicha {
+  color: #999898;
+  margin-bottom: 0.5rem;
+}
+.fichaDatos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.filaFicha {
+  display: flex;
+  flex-wrap: wrap; /* permite que se acomoden si son muchos */
+  justify-content: space-between;
+  border-bottom: 1px solid #AEADAD;
+  padding: 5px 0;
+}
+.datoFicha {
+  color: #000;
+  font-weight: 600;
+  flex: 1 1 30%; /* hasta 3 datos por fila */
+  margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+}
+/* Diagnósticos */
+.diagnosticoCard {
+  width: 745px;
+  height: 400px;       /* 👉 altura fija */
+  background: #E3F1F9;
+  border-radius: 10px;
+  padding: 20px 20px 4px 20px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.diagBody {
+  flex: 1;             /* ocupa todo el espacio disponible */
+  overflow-y: auto;    /* 👉 scroll vertical si se pasa del alto */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px;
+}
+
+.diagHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.circle {
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  border-radius: 50%;
+}
+.fechaDiag {
+  font-size: 1rem;
+  color: #000;
+}
+.diagBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.textoDiag {
+  color: #454343;
+  font-size: 0.95rem;
+  font-weight: 600; /* semibold */
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.btnEditarDiag {
+  align-self: flex-end;
+  padding: 8px 16px;
+  background: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 5px;
+}
+.fichaContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.headerHistorial {
+   display: flex;
+    height: 46px;
+    width: 100%;
+    border-bottom: 1px solid #AEADAD;
+    padding: 0 10px;
+    align-items: center;
+}
+.iconoHistorial {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.tituloHistorial {
+  font-weight: 600;
+  color: #000;
+}
+
+
+
+
+
