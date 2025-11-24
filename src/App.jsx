@@ -16,7 +16,6 @@ import GestionServicios from "./componentes/paginas/admin/gestionServicios/Main"
 import AgendaTurnos from "./componentes/paginas/veterinario/agendaDeTurnos/Main"
 import Diagnosticos from "./componentes/paginas/veterinario/diagnosticos/Main"
 import MiPefil from "./componentes/paginas/veterinario/miPerfil/Main"
-import Pacientes from "./componentes/paginas/veterinario/pacientes/Main"
 //Pantallas Cliente:
 import MiPerfilC from "./componentes/paginas/cliente/miPerfil/Main"
 import MisMascotas from "./componentes/paginas/cliente/misMascotas/Main"
@@ -122,7 +121,6 @@ function App() {
                   <Route path="/agendaDeTurnos"><AgendaTurnos /></Route>
                   <Route path="/diagnosticos"><Diagnosticos /></Route>
                   <Route path="/miPerfil"><MiPefil /></Route>
-                  <Route path="/pacientes"><Pacientes /></Route>
                 </>
               )}
 
