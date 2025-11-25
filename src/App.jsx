@@ -2,15 +2,13 @@ import { Router, Route, Redirect, Link, useLocation } from "wouter";
 import { useState, useEffect } from "react";
 //componentes comunes:
 import Menu from "./componentes/comun/Menu";
-// import PantallaGeneral from "./componentes/comun/PantallaGeneral";
 import Inicio from "./componentes/comun/Inicio";
 //login y registro:
 import InicioSesion from "./componentes/logins/inicioSesion/Main"
 import Registrarse from "./componentes/logins/registrarse/Main"
-//Pantallas segun rol: 
+//Pantallas de admin: 
 import GestionCliente from "./componentes/paginas/admin/gestionCliente/Main"
 import GestionVete from "./componentes/paginas/admin/gestionVete/Main"
-// import GestionEspe from "./componentes/paginas/admin/gestionEspecialidades/Main"
 import GestionServicios from "./componentes/paginas/admin/gestionServicios/Main"
 //Pantallas de veterinario:
 import AgendaTurnos from "./componentes/paginas/veterinario/agendaDeTurnos/Main"
@@ -84,13 +82,6 @@ function App() {
           <Route path="/login"><InicioSesion /></Route>
           <Route path="/registrarse"><Registrarse /></Route>
           <Route path="/"><Redirect to="/inicio" /></Route>
-          {/* <Route path="/login"><InicioSesion /></Route>
-          <Route path="/registrarse"><Registrarse /></Route>
-          {/* Si pone cualquier otra ruta, redirige al inicio público */}
-          {/* <Route path="/"><Redirect to="/inicio" /></Route> */}
-            {/* <Route path="/login"><InicioSesion /></Route>
-            <Route path="/registrarse"><Registrarse /></Route>
-            <Route path="/"><Redirect to="/login" /></Route> */}
           </>
         ) : (
           /* Layout general con menú y contenido */
@@ -100,7 +91,7 @@ function App() {
             </div>
             <div className="area-contenido">
                {mensaje && (
-                <div className="mensaje-bienvenida">
+                <div className="mensaje-toast exito">
                   {mensaje}
                 </div>
               )}

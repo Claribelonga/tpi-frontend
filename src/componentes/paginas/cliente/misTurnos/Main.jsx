@@ -86,18 +86,14 @@ export default function Main() {
       });
   };
   return (
-    <div className="diagnosticos-container">
+    <div>
       <h2>Mis Turnos</h2>
 
       <div className="arriba-turno">
         <ProximoTurno />
         <div>
-
         <span>Filtro por mascota: </span>
         <Filtro
-          // opciones={mascotas}
-          // onChange={(value) => setFiltroMascota(value)}
-          // textoDefault="Todas las mascotas"
           opciones={mascotas}
           onChange={(id) => setFiltroMascota(id)}
           textoDefault="Todas las mascotas"
@@ -120,10 +116,10 @@ export default function Main() {
             diagnostico ? (
               <Diagnostico datos={diagnostico} />
             ) : (
-              <p>Este turno aún no tiene diagnóstico</p>
+              <p className="sinTurnoSeleccionado">Este turno aún no tiene diagnóstico</p>
             )
           ) : (
-            <p>Selecciona un turno para ver el diagnóstico</p>
+            <p className="sinTurnoSeleccionado">Selecciona un turno para ver el diagnóstico</p>
           )}
         </div>
       </div>

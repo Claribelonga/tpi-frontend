@@ -11,7 +11,7 @@ const formatearHora = (horaStr) => (horaStr ? horaStr.slice(0, 5) : "");
 
   const [seleccionado, setSeleccionado] = useState(null); 
   return (
-    <div className="listado-turnos">
+    <div className="listadoTurnoVete">
       {turnos.map(t => (
         <div className={`tarjetaTurnoVete ${seleccionado === t.id_turno ? "seleccionada" : ""}`} key={t.id_turno} 
         onClick={() => {

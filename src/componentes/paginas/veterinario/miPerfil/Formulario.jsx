@@ -75,8 +75,9 @@ export default function Formulario({ perfil, datos, errores, setDato, showModal,
       {showModal && (
         <div className="modalOverlay">
           <div className="modalContent">
+            <form onSubmit={actualizarPerfil}>
             <div className="modalArriba">
-              <button className="btnCloseModal" onClick={() => setShowModal(false)}>
+              <button type="button" className="btnCloseModal" onClick={() => setShowModal(false)}>
                 <img src="/img/equis.png" className="icono" />
               </button>
               <h3>Editar datos personales</h3>
@@ -117,8 +118,9 @@ export default function Formulario({ perfil, datos, errores, setDato, showModal,
             })}
 
             <div className="modalActions">
-              <button className="btnGuardarPerfil" onClick={actualizarPerfil}>Actualizar datos</button>
+              <button className="btnGuardarPerfil" type="submit">Actualizar datos</button>
             </div>
+            </form>
           </div>
         </div>
       )}
