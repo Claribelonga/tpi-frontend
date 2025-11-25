@@ -48,7 +48,7 @@ export default function Listado({ turnos = [], onSeleccionar }) {
           <div className="tarjetaHoraEstadoVete">
             <p className="tarjetaHoraVete">Hora: {formatearHora(t.hora)}</p>
             <div className="tarjetaEstadoVete">
-              {/* 👇 ahora solo muestra el estado, sin modificar */}
+              {/* 👇 ahora solo muestra el estado, sin modificar*/}
               <button className={`btn-estadoVeterinario ${estados[t.id_turno]}`} disabled>
                 {estados[t.id_turno] === "pendiente" ? "Pendiente" : "Finalizado"}
               </button>

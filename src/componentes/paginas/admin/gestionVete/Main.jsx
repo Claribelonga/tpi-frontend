@@ -41,7 +41,7 @@ export default function Main(){
         .catch((error) => console.error(error));
     };
     //GET de veterinarios con busqueda y paginacion
-    const obtenerVeterinarios = (busqueda = "", pagina = 1, esp = []) => {
+    const obtenerVeterinarios = (busqueda = "", pagina = 1, esp = especialidades) => {
     const config = {
       headers: { Authorization: token },
     };
@@ -66,19 +66,11 @@ export default function Main(){
   };
   useEffect(() => {
     obtenerEspecialidades().then((esp) => {
-        obtenerVeterinarios("", paginaActual, esp);
+    obtenerVeterinarios("", paginaActual, esp);
     });
   }, []);
   
-//   useEffect(() => {
-//     obtenerEspecialidades().then((esp) => {
-//       obtenerVeterinarios("", paginaActual, esp);
-//     });
-//   }, []);
-//   useEffect(() => {
-//     obtenerVeterinarios("", paginaActual);
-//     obtenerEspecialidades();
-//   }, []);
+
   const cambiarPagina = (nuevaPagina) => {
     if (nuevaPagina < 1 || nuevaPagina > totalPaginas) return;
     obtenerVeterinarios("", nuevaPagina);
@@ -90,11 +82,17 @@ export default function Main(){
 
     if (vetEdit) {
       // Editar veterinario
-      const url = `http://localhost:5000/api/veterinarios/${vetEdit.usuario.id_usuario}`;
+      const url = `http://localhost:5000/api/veterinarios/editarvete/${vetEdit.usuario.id_usuario}`;
+      // // Copio los datos
+      // const datosEnviar = { ...datos };
+      // //Si la contraseña está vacía no se manda 
+      // if (!datos.contraseña || datos.contraseña.trim() === "") {
+      //   delete datosEnviar.contraseña;
+      // }
       axios
         .put(url, datos, config)
         .then((resp) => {
-          obtenerVeterinarios();
+          obtenerVeterinarios("", paginaActual);
           setMensaje("✅ Veterinario actualizado con éxito");
           setMostrarForm(false);
           setTipoMensaje("exito");
@@ -109,11 +107,11 @@ export default function Main(){
         });
     } else {
       // Crear veterinario
-      const url = "http://localhost:5000/api/veterinarios";
+      const url = "http://localhost:5000/api/veterinarios/crearveterinario";
       axios
         .post(url, datos, config)
         .then((resp) => {
-          obtenerVeterinarios();
+          obtenerVeterinarios("", paginaActual);
           setMensaje("✅ Veterinario registrado con éxito");
           setTipoMensaje("exito");
           setMostrarForm(false);
@@ -158,7 +156,7 @@ export default function Main(){
               setVetEdit(null);
               setMostrarForm(true);
             }}
-            >Crear Cliente</button>
+            >Crear Veterinario</button>
             <Listado
             veterinarios={veterinarios}
             onEditar={(vet) => {
@@ -180,11 +178,6 @@ export default function Main(){
               restablecerContrasena={restablecerContrasena}
               />
             )}
-            {/* <Formulario
-            guardarVeterinario={guardarVeterinario}
-            vetEdit={vetEdit}
-            especialidades={especialidades} //lo paso al form para el select
-            /> */}
         </div>
     )
 }

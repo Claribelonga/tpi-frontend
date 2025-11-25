@@ -3,101 +3,90 @@ import { Link } from "wouter";
 import useUsuario from "../../../hooks/useUsuario"
 
 export default function Formulario({onGuardar}){
-    const { datos: usuario, setDato, limpiarInputs, errores } = useUsuario();
-
-    const validarDatos = (datos) => {
-  const errores = [];
-
-  const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
-  if (!soloLetras.test(datos.nombre)) errores.push("El nombre solo puede contener letras");
-  if (!soloLetras.test(datos.apellido)) errores.push("El apellido solo puede contener letras");
-
-  // 8 nros para el dni
-  if (!/^\d{8}$/.test(datos.dni)) errores.push("El DNI debe tener 8 números");
-
-  // telefono 10 dígitos (sin espacios)
-  if (!/^\d{10}$/.test(datos.telefono)) errores.push("El teléfono debe tener 10 dígitos");
-
-  // Número de calle: solo números
-  if (!/^\d+$/.test(datos.numero)) errores.push("El número de calle debe ser numérico");
-
-  // Email: aunque HTML lo valida, lo reforzamos
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.email)) errores.push("El email no es válido");
-
-  // Contraseña mínima 6 caracteres
-  if (datos.contraseña.length < 6) errores.push("La contraseña debe tener al menos 6 caracteres");
-
-  return errores;
-};
-
-    const guardar = (e) =>{
-        e.preventDefault();
-        const errores = validarDatos(usuario);
-        if(errores.length>0){
-            alert ("errorres encontrados: " + errores.join("\n-"))
-            return;
-        }
-        console.log("datos del usuario: ", usuario);
-        onGuardar(usuario);
+    const { datos, errores: erroresForm, setDato, validarTodo, limpiarInputs } = useUsuario();
+ const guardar = (e) => {
+    e.preventDefault();
+    if (!validarTodo()) {
+      console.log("Hay errores en el formulario");
+      alert("Hay errores en el formulario");
+      return;
     }
+    console.log("Datos del usuario: ", datos);
+    onGuardar(datos);
+    limpiarInputs();
+  };
 
     return(
         <div className="PaginaRegistro">
             <div className="ContenedorForm">
                 <form className="FormContenedor" onSubmit={guardar}>
-                <img src="img/logoVetSur.png" alt="logoVioleta" className="logo"></img>
+                {/* <img src="img/logoVetSur.png" alt="logoVioleta" className="logo"></img> */}
                 <span className="titulo">Crea tu cuenta</span>
 
                 <div className="filaInputs">
                     <div className="inputContainer">
                         <label>Nombre:</label>
-                    <input className="inputMitad" type="text" placeholder="nombre" value={usuario.nombre} onChange={(e) => setDato("nombre",e.target.value)} required/>
+                        <input className="inputMitad" type="text" placeholder="nombre" value={datos.nombre} onChange={(e) => setDato("nombre",e.target.value)} required/>
+                        {erroresForm.nombre && <span className="error">{erroresForm.nombre}</span>}
                     </div>
                     <div className="inputContainer">
                         <label>Apellido:</label>
-                    <input className="inputMitad" type="text" placeholder="apellido" value={usuario.apellido} onChange={(e) => setDato("apellido",e.target.value)} required/>
+                        <input className="inputMitad" type="text" placeholder="apellido" value={datos.apellido} onChange={(e) => setDato("apellido",e.target.value)} required/>
+                        {erroresForm.apellido && <span className="error">{erroresForm.apellido}</span>}
                     </div>
                 </div>
                 <div className="inputContainer">
                     <label>Contraseña:</label>
-                <input className="inputGen" type="password" placeholder="contraseña" value={usuario.contraseña} onChange={(e) => setDato("contraseña",e.target.value)} required/>
+                    <input className="inputGen" type="password" placeholder="contraseña" value={datos.contraseña} onChange={(e) => setDato("contraseña",e.target.value)} required/>
+                    {erroresForm.contraseña && <span className="error">{erroresForm.contraseña}</span>}
                 </div>
                 <div className="inputContainer">
                     <label>Email:</label>
-                <input className="inputGen" type="email" placeholder="email" value={usuario.email} onChange={(e) => setDato("email",e.target.value)} required/>
+                    <input className="inputGen" type="email" placeholder="email" value={datos.email} onChange={(e) => setDato("email",e.target.value)} required/>
+                    {erroresForm.email && <span className="error">{erroresForm.email}</span>}
                 </div>
+                <div className="filaInputs">
                 <div className="inputContainer">
                     <label>DNI:</label>
-                <input className="inputGen" type="text" placeholder="dni" value={usuario.dni} onChange={(e) => setDato("dni",e.target.value)} required/>
+                    <input className="inputMitad" type="text" placeholder="dni" value={datos.dni} onChange={(e) => setDato("dni",e.target.value)} required/>
+                    {erroresForm.dni && <span className="error">{erroresForm.dni}</span>}
                 </div>
                 <div className="inputContainer">
                     <label>Teléfono:</label>
-                <input className="inputGen" type="text" placeholder="teléfono" value={usuario.telefono} onChange={(e) => setDato("telefono",e.target.value)} required/>
+                    <input className="inputMitad" type="text" placeholder="teléfono" value={datos.telefono} onChange={(e) => setDato("telefono",e.target.value)} required/>
+                    {erroresForm.telefono && <span className="error">{erroresForm.telefono}</span>}
                 </div>
+                </div>
+                <div className="filaInputs">
                 <div className="inputContainer">
                     <label>Calle:</label>
-                <input className="inputGen" type="text" placeholder="calle" value={usuario.calle} onChange={(e) => setDato("calle",e.target.value)} required/>
+                    <input className="inputMitad" type="text" placeholder="calle" value={datos.calle} onChange={(e) => setDato("calle",e.target.value)} required/>
+                    {erroresForm.calle && <span className="error">{erroresForm.calle}</span>}
                 </div>
                 <div className="inputContainer">
                     <label>Número:</label>
-                <input className="inputGen" type="text" placeholder="numero" value={usuario.numero} onChange={(e) => setDato("numero",e.target.value)} required/>
+                    <input className="inputMitad" type="text" placeholder="numero" value={datos.numero} onChange={(e) => setDato("numero",e.target.value)} required/>
+                    {erroresForm.numero && <span className="error">{erroresForm.numero}</span>}
                 </div>
+                </div>
+                <div className="filaInputs">
                 <div className="inputContainer">
                     <label>Piso:</label>
-                <input className="inputGen" type="text" placeholder="piso" value={usuario.piso} onChange={(e) => setDato("piso",e.target.value)}/>
+                    <input className="inputMitad" type="text" placeholder="piso" value={datos.piso} onChange={(e) => setDato("piso",e.target.value)}/>
+                    {erroresForm.piso && <span className="error">{erroresForm.piso}</span>}
                 </div>
                 <div className="inputContainer">
                     <label>Departamento:</label>
-                <input className="inputGen" type="text" placeholder="departamento" value={usuario.departamento} onChange={(e) => setDato("departamento",e.target.value)}/>
+                    <input className="inputMitad" type="text" placeholder="departamento" value={datos.departamento} onChange={(e) => setDato("departamento",e.target.value)}/>
+                    {erroresForm.departamento && <span className="error">{erroresForm.departamento}</span>}
+                </div>
                 </div>
                 <button className="btn-violeta" type="submit">Registrarse</button>
                 <p className="pNegrita">¿Ya tenes cuenta? {""} 
                     <Link href="/login"> Inicia Sesión</Link>
                 </p>
             </form>
-                
             </div>
-
             <div className="ContenedorImagen">
                 <img src="img/perro.jpg" alt="perro" className="perro" />
             </div>
