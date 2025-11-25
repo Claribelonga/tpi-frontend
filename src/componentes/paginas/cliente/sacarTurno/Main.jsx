@@ -21,7 +21,7 @@ export default function Main() {
   const [turno, setTurno] = useState({
     fecha: "",
     hora: "",
-    estado: "Pendiente",
+    estado:"pendiente",
     id_servicio: "",
     id_mascota: "",
     id_veterinario: ""
@@ -40,7 +40,7 @@ export default function Main() {
   // -------------------------
   const urlMascotas = "http://localhost:5000/api/mascotas";
   const urlServicios = "http://localhost:5000/api/servicios/select";
-  const urlVets = "http://localhost:5000/api/publico/veterinarios";
+  const urlVets = "http://localhost:5000/api/veterinarios/select";
   const urlSacarTurno = "http://localhost:5000/api/turnos/sacarturno";
 
   const config = {
