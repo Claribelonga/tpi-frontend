@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import useUsuario from "../../../../hooks/useUsuario";
 
-export default function Formulario({guardarVeterinario, vetEdit, especialidades, restablecerContrasena, cerrar}){
-    const {datos, errores, setDato, validarTodo, limpiarInputs} = useUsuario(["matricula","id_especialidad"]);
+export default function Formulario({guardarVeterinario, vetEdit, especialidades, restablecerContrasena, cerrar, errores}){
+    const {datos, errores: erroresForm, setDato, validarTodo, limpiarInputs} = useUsuario(["matricula","id_especialidad"]);
 
     // Cargar datos si estamos editando
   useEffect(() => {
     if (vetEdit) {
       setDato("nombre", vetEdit.nombre);
       setDato("apellido", vetEdit.apellido);
-      setDato("contraseña", ""); // no se edita visible
+      // setDato("contraseña", "");
       setDato("email", vetEdit.usuario.email);
       setDato("dni", vetEdit.dni);
       setDato("telefono", vetEdit.telefono);
@@ -41,6 +41,8 @@ export default function Formulario({guardarVeterinario, vetEdit, especialidades,
     }
   };
 
+  console.log("especialidades en formulario:", especialidades);
+
   return(
     <>
         <div className="modal-overlay">
@@ -57,23 +59,50 @@ export default function Formulario({guardarVeterinario, vetEdit, especialidades,
               <div className="inputContainer">
                 <label>Nombre:</label>
                 <input className="inputGen" value={datos.nombre} onChange={(e) => setDato("nombre", e.target.value)} required />
+                {erroresForm.nombre && <span className="error">{erroresForm.nombre}</span>}
               </div>
               <div className="inputContainer">
                 <label>Apellido:</label>
                 <input className="inputGen" value={datos.apellido} onChange={(e) => setDato("apellido", e.target.value)} required />
+                {erroresForm.apellido && <span className="error">{erroresForm.apellido}</span>}
               </div>
               <div className="inputContainer">
                 <label>DNI:</label>
                 <input className="inputGen" value={datos.dni} onChange={(e) => setDato("dni", e.target.value)} required />
+                {erroresForm.dni && <span className="error">{erroresForm.dni}</span>}
               </div>
+              <div className="inputContainer">
+                <label>Matricula:</label>
+                <input className="inputGen" value={datos.matricula} onChange={(e) => setDato("matricula", e.target.value)} />
+                {erroresForm.matricula && <span className="error">{erroresForm.matricula}</span>}
+              </div>
+              <div className="inputContainer">
+                
+              </div>
+              {/* especialidades */}
+      <div className="inputContainer">
+      <label>Especialidades:</label>
+      <select className="inputGen" 
+        value={datos.especialidad || ""}
+        onChange={(e) => setDato("id_especialidad", e.target.value)}
+      >
+        <option value="">Selecciones una Especialidad</option>
+        {especialidades.map(esp => (
+          <option key={esp.id_especialidad} value={esp.id_especialidad}>
+            {esp.nombre}
+          </option>
+        ))}
+      </select>
+      </div>
 
               {/* Contactos */}
               <div className="inputContainer">
                 <label>Email:</label>
                 <input className="inputGen" type="email" value={datos.email} onChange={(e) => setDato("email", e.target.value)} required />
+                {erroresForm.email && <span className="error">{erroresForm.email}</span>}
               </div>
-              <div className="inputContainer">
-                <label>Contraseña:</label>
+              {/* <div className="inputContainer">
+                <label>Contraseña  (dejar vacío para mantener la actual)</label>
                 <input
                   className="inputGen"
                   type="password"
@@ -81,28 +110,33 @@ export default function Formulario({guardarVeterinario, vetEdit, especialidades,
                   onChange={(e) => setDato("contraseña", e.target.value)}
                   required={!vetEdit} // obligatorio solo si es crear
                 />
-              </div>
+              </div> */}
               <div className="inputContainer">
                 <label>Teléfono:</label>
                 <input className="inputGen" value={datos.telefono} onChange={(e) => setDato("telefono", e.target.value)} required />
+                {erroresForm.telefono && <span className="error">{erroresForm.telefono}</span>}
               </div>
 
               {/* Dirección */}
               <div className="inputContainer">
                 <label>Calle:</label>
                 <input className="inputGen" value={datos.calle} onChange={(e) => setDato("calle", e.target.value)} required />
+                {erroresForm.calle && <span className="error">{erroresForm.calle}</span>}
               </div>
               <div className="inputContainer">
                 <label>Número:</label>
                 <input className="inputGen" value={datos.numero} onChange={(e) => setDato("numero", e.target.value)} required />
+                {erroresForm.numero && <span className="error">{erroresForm.numero}</span>}
               </div>
               <div className="inputContainer">
                 <label>Piso:</label>
                 <input className="inputGen" value={datos.piso} onChange={(e) => setDato("piso", e.target.value)} />
+                {erroresForm.piso && <span className="error">{erroresForm.piso}</span>}
               </div>
               <div className="inputContainer">
                 <label>Departamento:</label>
                 <input className="inputGen" value={datos.departamento} onChange={(e) => setDato("departamento", e.target.value)} />
+                {erroresForm.departamento && <span className="error">{erroresForm.departamento}</span>}
               </div>
 
               {/* Botones */}
@@ -122,140 +156,4 @@ export default function Formulario({guardarVeterinario, vetEdit, especialidades,
         </div>
     </>
   )
-    //     <div className="cont-form">
-    //   <h3> {vetEdit ? "Guardar Cambios" : "Registrar Veterinario"}</h3>
-    //   <form className="formulario" onSubmit={guardar}>
-    //     <div className="form-section">
-    //       <span>Datos Personales</span>
-    //       <div className="inputs-grid">
-    //         <div>
-    //           <input
-    //             className="inputGen"
-    //             type="text"
-    //             placeholder="Nombre"
-    //             value={datos.nombre}
-    //             onChange={(e) => setDato("nombre", e.target.value)}
-    //             required
-    //           />
-    //           {errores.nombre && <p className="error">{errores.nombre}</p>}
-    //         </div>
-    //         <div>
-    //           <input
-    //             className="inputGen"
-    //             type="text"
-    //             placeholder="Apellido"
-    //             value={datos.apellido}
-    //             onChange={(e) => setDato("apellido", e.target.value)}
-    //             required
-    //           />
-    //           {errores.apellido && <p className="error">{errores.apellido}</p>}
-    //         </div>
-    //         <div>
-    //           <input
-    //             className="inputGen"
-    //             type="text"
-    //             placeholder="dni"
-    //             value={datos.dni}
-    //             onChange={(e) => setDato("dni", e.target.value)}
-    //             required
-    //           />
-    //           {errores.dni && <p className="error">{errores.dni}</p>}
-    //         </div>
-    //         <div>
-    //           <input
-    //             className="inputGen"
-    //             type="email"
-    //             placeholder="Email"
-    //             value={datos.email}
-    //             onChange={(e) => setDato("email", e.target.value)}
-    //             required
-    //           />
-    //           {errores.email && <p className="error">{errores.email}</p>}
-    //         </div>
-    //         <div>
-    //           <input
-    //             className="inputGen"
-    //             type="password"
-    //             placeholder="Contraseña"
-    //             value={datos.contraseña}
-    //             onChange={(e) => setDato("contraseña", e.target.value)}
-    //             required={!vetEdit}
-    //           />
-    //           {errores.contraseña && <p className="error">{errores.contraseña}</p>}
-    //         </div>
-    //         <div>
-    //           <input
-    //             className="inputGen"
-    //             type="text"
-    //             placeholder="Teléfono"
-    //             value={datos.telefono}
-    //             onChange={(e) => setDato("telefono", e.target.value)}
-    //             required
-    //           />
-    //           {errores.telefono && <p className="error">{errores.telefono}</p>}
-    //         </div>
-    //       </div>
-    //     </div>
-
-    //     <div className="form-section">
-    //       <span>Datos Profesionales</span>
-    //       <div className="inputs-grid">
-    //         <div>
-    //           <input
-    //             className="inputGen"
-    //             type="text"
-    //             placeholder="Matrícula"
-    //             value={datos.matricula}
-    //             onChange={(e) => setDato("matricula", e.target.value)}
-    //             required
-    //           />
-    //           {errores.matricula && <p className="error">{errores.matricula}</p>}
-    //         </div>
-    //         <div>
-    //           <select
-    //             className="inputGen"
-    //             value={datos.id_especialidad}
-    //             onChange={(e) => setDato("id_especialidad", e.target.value)}
-    //             required
-    //           >
-    //             <option value="">-- Seleccionar Especialidad --</option>
-    //             {especialidades.map((e) => (
-    //               <option key={e.id} value={e.id}>
-    //                 {e.nombre}
-    //               </option>
-    //             ))}
-    //           </select>
-    //           {errores.id_especialidad && <p className="error">{errores.id_especialidad}</p>}
-    //         </div>
-    //       </div>
-    //     </div>
-    //     <div className="form-section">
-    //         <span className="">Direccion</span>
-    //         <div className="inputs-grid">
-    //             <div>
-    //                 <input className="inputGen" type="text" placeholder="calle" value={datos.calle} onChange={(e) => setDato("calle",e.target.value)} required/>
-    //                 {errores.calle && <p className="error">{errores.calle}</p>}
-    //             </div>
-    //             <div>
-    //                 <input className="inputGen" type="text" placeholder="numero" value={datos.numero} onChange={(e) => setDato("numero",e.target.value)} required/>
-    //                 {errores.numero && <p className="error">{errores.numero}</p>}
-    //             </div>
-    //             <div>
-    //                 <input className="inputGen" type="text" placeholder="piso" value={datos.piso} onChange={(e) => setDato("piso",e.target.value)}/>
-    //                 {errores.piso && <p className="error">{errores.piso}</p>}
-    //             </div>
-    //             <div>
-    //                 <input className="inputGen" type="text" placeholder="departamento" value={datos.departamento} onChange={(e) => setDato("departamento",e.target.value)}/>
-    //                 {errores.departamento && <p className="error">{errores.departamento}</p>}
-    //             </div>
-    //         </div>
-    //     </div>
-
-    //     <div className="form-section form-button">
-    //       <button className="btn-violeta" type="submit">
-    //         {vetEdit ? "Guardar Cambios" : "Registrar"}
-    //       </button>
-    //     </div>
-    //   </form>
-    // </div>
 }

@@ -8,7 +8,7 @@ export default function Formulario({ guardarCliente, clienteEdit, restablecerCon
     if (clienteEdit) {
       setDato("nombre", clienteEdit.nombre);
       setDato("apellido", clienteEdit.apellido);
-      setDato("contraseña", ""); // contraseña no visible
+      //setDato("contraseña", "");
       setDato("email", clienteEdit.usuario.email);
       setDato("dni", clienteEdit.dni);
       setDato("telefono", clienteEdit.telefono);
@@ -53,7 +53,6 @@ export default function Formulario({ guardarCliente, clienteEdit, restablecerCon
                   <img src="/img/equis.png" className="icono" />
                 </button>
               </div>
-
               {/* Datos Personales */}
               <div className="inputContainer">
                 <label>Nombre:</label>
@@ -77,8 +76,8 @@ export default function Formulario({ guardarCliente, clienteEdit, restablecerCon
                 <input className="inputGen" type="email" value={datos.email} onChange={(e) => setDato("email", e.target.value)} required />
                 {erroresForm.email && <span className="error">{erroresForm.email}</span>}
               </div>
-              <div className="inputContainer">
-                <label>Contraseña:</label>
+              {/* <div className="inputContainer">
+                <label>Contraseña (dejar vacío para mantener la actual)</label>
                 <input
                   className="inputGen"
                   type="password"
@@ -87,7 +86,7 @@ export default function Formulario({ guardarCliente, clienteEdit, restablecerCon
                   required={!clienteEdit} // obligatorio solo si es crear
                 />
                 {erroresForm.contraseña && <span className="error">{erroresForm.contraseña}</span>}
-              </div>
+              </div> */}
               <div className="inputContainer">
                 <label>Teléfono:</label>
                 <input className="inputGen" value={datos.telefono} onChange={(e) => setDato("telefono", e.target.value)} required />

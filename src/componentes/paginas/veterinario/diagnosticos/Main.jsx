@@ -42,6 +42,7 @@ export default function Main() {
 
   return (
     <>
+    <h2>Gestionar Diagnósticos</h2>
       <div className="mainBuscadorMascotas">
         <Buscador
           titulo="Buscar por DNI"

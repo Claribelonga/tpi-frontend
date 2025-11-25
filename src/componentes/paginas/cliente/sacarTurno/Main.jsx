@@ -21,7 +21,7 @@ export default function Main() {
   const [turno, setTurno] = useState({
     fecha: "",
     hora: "",
-    estado: "Pendiente",
+    estado: "pendiente",
     id_servicio: "",
     id_mascota: "",
     id_veterinario: ""

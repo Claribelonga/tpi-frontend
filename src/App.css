@@ -752,7 +752,11 @@ td {
   gap: 10px;
   margin-top: 20px;
 }
-
+select, option {
+  color: black !important;
+  background-color: white !important;
+  z-index: 99999 !important;
+}
 .btnGuardarPerfil {
   background: #4A90E2;
   color: #fff;
