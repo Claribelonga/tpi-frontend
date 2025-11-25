@@ -2,6 +2,8 @@ import Formulario from "./Formulario";
 import Listado from "./Listado";
 import Buscador from "../../../comun/Buscador";
 import Paginacion from "../../../comun/paginacion";
+import Mensaje from "../../../comun/Mensaje";
+import useMensaje from "../../../../hooks/useMensaje";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -12,22 +14,15 @@ export default function Main(){
     const [veterinarios, setVeterinarios] = useState([]);
     const [vetEdit, setVetEdit] = useState(null);
     const [especialidades, setEspecialidades] = useState([]);
-    const [mensaje, setMensaje] = useState("");
-    const [tipoMensaje, setTipoMensaje] = useState("");
     const [mostrarForm, setMostrarForm] = useState(false);
-     // Estados para mensajes
-      const [textoMensaje, setTextoMensaje] = useState("");
+    const {
+          textoMensaje,
+          tipoMensaje,
+          visible,
+          mostrarMensaje
+        } = useMensaje();
     const token = sessionStorage.getItem("token");
-    // Función reutilizable para mostrar mensajes (se autohide)
-  const mostrarMensaje = (texto, tipo = "info", duracionMs = 3000) => {
-    setTextoMensaje(texto);
-    setTipoMensaje(tipo);
-    if (duracionMs > 0) {
-      setTimeout(() => {
-        setTextoMensaje("");
-      }, duracionMs);
-    }
-  };
+
     //GET especialidades para el select
     const obtenerEspecialidades = () => {
       const config = { headers: { Authorization: token } };
@@ -83,27 +78,17 @@ export default function Main(){
     if (vetEdit) {
       // Editar veterinario
       const url = `http://localhost:5000/api/veterinarios/editarvete/${vetEdit.usuario.id_usuario}`;
-      // // Copio los datos
-      // const datosEnviar = { ...datos };
-      // //Si la contraseña está vacía no se manda 
-      // if (!datos.contraseña || datos.contraseña.trim() === "") {
-      //   delete datosEnviar.contraseña;
-      // }
       axios
         .put(url, datos, config)
         .then((resp) => {
           obtenerVeterinarios("", paginaActual);
-          setMensaje("✅ Veterinario actualizado con éxito");
+          mostrarMensaje("✅ Veterinario actualizado con éxito", "exito");
           setMostrarForm(false);
-          setTipoMensaje("exito");
           setVetEdit(null);
-          setTimeout(() => setMensaje(""), 4000);
         })
         .catch((error) => {
           console.error(error);
-          setMensaje("❌ Error al actualizar veterinario");
-          setTipoMensaje("error");
-          setTimeout(() => setMensaje(""), 4000);
+          mostrarMensaje("❌ Error al actualizar veterinario", "error");
         });
     } else {
       // Crear veterinario
@@ -112,16 +97,12 @@ export default function Main(){
         .post(url, datos, config)
         .then((resp) => {
           obtenerVeterinarios("", paginaActual);
-          setMensaje("✅ Veterinario registrado con éxito");
-          setTipoMensaje("exito");
+          mostrarMensaje("✅ Veterinario registrado con éxito", "exito");
           setMostrarForm(false);
-          setTimeout(() => setMensaje(""), 4000);
         })
         .catch((error) => {
           console.error(error);
-          setMensaje("❌ Error al registrar veterinario");
-          setTipoMensaje("error");
-          setTimeout(() => setMensaje(""), 4000);
+          mostrarMensaje("❌ Error al registrar veterinario", "error");
         });
     }
   };
@@ -132,7 +113,7 @@ export default function Main(){
   
   axios.put(url, {}, config)
     .then(resp => {
-      mostrarMensaje("✅ Contraseña restablecida correctamente (DNI como nueva contraseña)", "exito");
+      mostrarMensaje("✅ Contraseña restablecida correctamente (DNI asignado)", "exito");
       console.log("Respuesta del backend:", resp.data);
     })
     .catch(err => {
@@ -141,10 +122,8 @@ export default function Main(){
     });
 };
     return(
-        <div>
-            {mensaje && (
-                <div className={`mensaje-bienvenida ${tipoMensaje}`}>{mensaje}</div>
-            )}
+      <div>
+          <Mensaje texto={textoMensaje} tipo={tipoMensaje} visible={visible} />
             <h2>Gestionar Veterinarios</h2>
             <Buscador
             onBuscar={obtenerVeterinarios}
@@ -178,6 +157,6 @@ export default function Main(){
               restablecerContrasena={restablecerContrasena}
               />
             )}
-        </div>
+      </div>
     )
 }

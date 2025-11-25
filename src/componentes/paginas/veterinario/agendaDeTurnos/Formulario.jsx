@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import useMensaje from "../../../../hooks/useMensaje";
+import Mensaje from "../../../comun/Mensaje";
 
 export default function Formulario({ idMascota, idTurno }) {
   const [ficha, setFicha] = useState(null);
@@ -10,6 +12,7 @@ export default function Formulario({ idMascota, idTurno }) {
   const [archivos, setArchivos] = useState([]);
   const [diagnosticoExistente, setDiagnosticoExistente] = useState(null);
   const [errors, setErrors] = useState({});
+  const { textoMensaje, tipoMensaje, visible, mostrarMensaje } = useMensaje();
 
   const token = sessionStorage.getItem("token");
 
@@ -143,13 +146,16 @@ export default function Formulario({ idMascota, idTurno }) {
       config
     );
     setFicha(respFicha.data.ficha);
+    mostrarMensaje("Diagnótico registrado correctamente", "exito")
   } catch (err) {
     console.error("Error al registrar diagnóstico:", err);
+    mostrarMensaje("Error al registrar diagnóstico", "error")
   }
 };
 
   return (
   <div className="formularioAgendaDeTurnos">
+    <Mensaje texto={textoMensaje} tipo={tipoMensaje} visible={visible} />
     <h3>Datos del dueño</h3>
     {ficha ? (
       <div className="fichaDatos">

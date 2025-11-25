@@ -21,8 +21,7 @@ export default function Menu({rol}) {
       menuItems = (
         <>
         <Link href="/inicio" className="menu-item">
-            <img src="/img/casa.png" alt="home" className="icono" />
-            Inicio
+            <img src="/img/casa.png" alt="home" className="icono" />Inicio
           </Link>
           <Link href="/gestionCliente" className="menu-item">
             <img src="/img/usuario.png" alt="clientes" className="icono" />

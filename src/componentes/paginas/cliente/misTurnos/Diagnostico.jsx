@@ -3,7 +3,7 @@ export default function Diagnostico({ datos }) {
     <div className="panel-diagnostico">
       <h2 className="titulo-historial">Diagnóstico</h2>
       {!datos ? (
-        <p className="sin-diagnostico">Este turno aún no tiene diagnóstico.</p>
+        <div className="sinTurnoSeleccionado"> <p>Este turno aún no tiene diagnóstico.</p></div>
       ) : (
         <div className="card-diagnostico">
           <p><strong>Diagnóstico:</strong> {datos.diagnostico}</p>

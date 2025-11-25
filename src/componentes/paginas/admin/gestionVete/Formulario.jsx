@@ -71,6 +71,9 @@ export default function Formulario({guardarVeterinario, vetEdit, especialidades,
                 <input className="inputGen" value={datos.dni} onChange={(e) => setDato("dni", e.target.value)} required />
                 {erroresForm.dni && <span className="error">{erroresForm.dni}</span>}
               </div>
+               <div className="inputContainer">
+                <label>Contraseña Inicial: DNI</label>
+              </div>
               <div className="inputContainer">
                 <label>Matricula:</label>
                 <input className="inputGen" value={datos.matricula} onChange={(e) => setDato("matricula", e.target.value)} />
@@ -80,17 +83,15 @@ export default function Formulario({guardarVeterinario, vetEdit, especialidades,
                 
               </div>
               {/* especialidades */}
-      <div className="inputContainer">
-      <label>Especialidades:</label>
-      <select className="inputGen" 
-        value={datos.especialidad || ""}
-        onChange={(e) => setDato("id_especialidad", e.target.value)}
-      >
-        <option value="">Selecciones una Especialidad</option>
-        {especialidades.map(esp => (
-          <option key={esp.id_especialidad} value={esp.id_especialidad}>
-            {esp.nombre}
-          </option>
+              <div className="inputContainer">
+                <label>Especialidades:</label>
+                <select className="inputGen" 
+                value={datos.especialidad || ""}
+                onChange={(e) => setDato("id_especialidad", e.target.value)}
+                >
+                <option value="">Selecciones una Especialidad</option>
+                  {especialidades.map(esp => (
+                <option key={esp.id_especialidad} value={esp.id_especialidad}>{esp.nombre}</option>
         ))}
       </select>
       </div>
@@ -101,16 +102,6 @@ export default function Formulario({guardarVeterinario, vetEdit, especialidades,
                 <input className="inputGen" type="email" value={datos.email} onChange={(e) => setDato("email", e.target.value)} required />
                 {erroresForm.email && <span className="error">{erroresForm.email}</span>}
               </div>
-              {/* <div className="inputContainer">
-                <label>Contraseña  (dejar vacío para mantener la actual)</label>
-                <input
-                  className="inputGen"
-                  type="password"
-                  value={datos.contraseña}
-                  onChange={(e) => setDato("contraseña", e.target.value)}
-                  required={!vetEdit} // obligatorio solo si es crear
-                />
-              </div> */}
               <div className="inputContainer">
                 <label>Teléfono:</label>
                 <input className="inputGen" value={datos.telefono} onChange={(e) => setDato("telefono", e.target.value)} required />

@@ -1,9 +1,10 @@
-export default function Mensaje({ texto, tipo }) {
-  if (!texto) return null;
+
+export default function Mensaje({ texto, tipo, visible }) {
+  if (!visible) return null;
 
   return (
-    <div className={`mensaje-alerta ${tipo}`}>
-      {texto}
+    <div className={`mensaje-toast ${tipo}`}>
+      <p>{texto}</p>
     </div>
   );
 }

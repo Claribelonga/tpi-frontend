@@ -69,6 +69,9 @@ export default function Formulario({ guardarCliente, clienteEdit, restablecerCon
                 <input className="inputGen" value={datos.dni} onChange={(e) => setDato("dni", e.target.value)} required />
                 {erroresForm.dni && <span className="error">{erroresForm.dni}</span>}
               </div>
+              <div className="inputContainer">
+                <label>Contraseña Inicial: DNI</label>
+              </div>
 
               {/* Contactos */}
               <div className="inputContainer">

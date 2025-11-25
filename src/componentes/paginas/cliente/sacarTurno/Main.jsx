@@ -1,23 +1,25 @@
 import { useEffect, useState } from "react";
 import Formulario from "./Formulario";
+import Mensaje from "../../../comun/Mensaje";
+import useMensaje from "../../../../hooks/useMensaje";
 import axios from "axios";
-import { useLocation } from "wouter";
+// import { useLocation } from "wouter";
 
 export default function Main() {
-
   // navegación
-  const [, setLocation] = useLocation();
-
+  // const [, setLocation] = useLocation();
   // token
   const token = sessionStorage.getItem("token");
-
-  // -------------------------
-  // ESTADOS
-  // -------------------------
+  // estados
   const [mascotas, setMascotas] = useState([]);
   const [servicios, setServicios] = useState([]);
   const [veterinarios, setVeterinarios] = useState([]);
-
+  const {
+    textoMensaje,
+    tipoMensaje,
+    visible,
+    mostrarMensaje
+    } = useMensaje();
   const [turno, setTurno] = useState({
     fecha: "",
     hora: "",
@@ -35,9 +37,8 @@ export default function Main() {
     }));
   };
 
-  // -------------------------
-  // PETICIONES
-  // -------------------------
+
+  // urls
   const urlMascotas = "http://localhost:5000/api/mascotas";
   const urlServicios = "http://localhost:5000/api/servicios/select";
   const urlVets = "http://localhost:5000/api/veterinarios/select";
@@ -91,22 +92,20 @@ export default function Main() {
 
     axios.post(urlSacarTurno, turno, config)
       .then((resp) => {
-        alert("Turno registrado correctamente");
-        setTurno(resp.data.turno)
+        mostrarMensaje("Turno registrado correctamente", "exito");
+        // setTurno(resp.data.turno)
         console.log("turno enviado:", resp.data)
-        setLocation("/misTurnos");
+        // setLocation("/misTurnos");
       })
       .catch(error => {
         console.log(error);
-        alert("Error al registrar turno");
+        mostrarMensaje("Error al registrar turno", "error");
       });
   };
 
-  // -------------------------
-  // RENDER
-  // -------------------------
   return (
     <div className="contenedor-turno">
+      <Mensaje texto={textoMensaje} tipo={tipoMensaje} visible={visible} />
       <h2>Sacar Turno</h2>
       <Formulario
         turno={turno}
@@ -129,7 +128,6 @@ export default function Main() {
         : "—"
     }</p>
       </div>
-
       <button className="btn-violeta" onClick={registrarTurno}>
         Confirmar Turno
       </button>

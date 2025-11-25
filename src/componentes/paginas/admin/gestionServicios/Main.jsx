@@ -1,6 +1,8 @@
 import Formulario from "./Formulario";
 import Listado from "./Listado";
 import Paginacion from "../../../comun/paginacion";
+import useMensaje from "../../../../hooks/useMensaje";
+import Mensaje from "../../../comun/Mensaje";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -10,6 +12,12 @@ export default function Main() {
   const [servicios, setServicios] = useState([]);
   const [servicioEdit, setServicioEdit] = useState(null);
   const [mostrarForm, setMostrarForm] = useState(false);
+  const {
+      textoMensaje,
+      tipoMensaje,
+      visible,
+      mostrarMensaje
+    } = useMensaje();
   const token = sessionStorage.getItem("token");
 
   // GET con paginacion
@@ -52,12 +60,12 @@ export default function Main() {
     const nuevoEstado = estadoActual === 1 ? 0 : 1;
     axios.put(url, { estado: nuevoEstado }, config)
       .then(() => {
-        alert("Estado actualizado correctamente", "exito");
+        mostrarMensaje("Estado actualizado correctamente", "exito");
         obtenerServicios()
       })
       .catch((error) => {
         console.error(error)
-        alert("Error al cambiar el estado", "error");
+        mostrarMensaje("Error al cambiar el estado", "error");
       });
   };
 
@@ -71,13 +79,13 @@ export default function Main() {
     const url = `http://localhost:5000/api/servicios/modificarservicio/${id}`;
     axios.put(url, datos, config)
       .then(() => {
-        alert("Servicio actualizado ✔️", "exito");
+        mostrarMensaje("Servicio actualizado", "exito");
         obtenerServicios();
         setServicioEdit(null);
         setMostrarForm(false);
       })
       .catch((error) => {
-        alert("Error al actualizar servicio", "error");
+        mostrarMensaje("Error al actualizar servicio", "error");
         console.error(error)
       });
   };
@@ -97,18 +105,19 @@ export default function Main() {
     }
     axios.post(url, servicio, config)
       .then(() => {
-        alert("Servicio creado correctamente", "exito");
+        mostrarMensaje("Servicio creado correctamente", "exito");
         obtenerServicios()
         setMostrarForm(false);
       })
       .catch((error) => {
-        alert("Error al crear servicio", "error");
+        mostrarMensaje("Error al crear servicio", "error");
         console.error(error)
       });
   };
 
   return (
     <div>
+      <Mensaje texto={textoMensaje} tipo={tipoMensaje} visible={visible} />
       <h2>Gestionar Servicios</h2>
       {/* Botón Crear Cliente */}
             <button className="btn-violeta" onClick={() => {

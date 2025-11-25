@@ -212,7 +212,6 @@ html, body{
 .sidebar{
   width: 220px;
   height: 100%; 
-  /* background-color: #d5e5f8; azul clarito como en la imagen */
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -256,12 +255,13 @@ html, body{
   padding: 15px;
   border-radius: 10px;
   transition: background-color 0.5s;
-  /* font-family: "Poppins", sans-serif; */
 }
 .menu-item:hover, .menu-item:focus {
   background-color: #abccf1; /* efecto hover */
   color: black;
-  /* font-weight: 600; */
+}
+.menu-item .icono{
+  margin-right: 10px;
 }
 .icono{
   height: 20px;
@@ -275,7 +275,7 @@ html, body{
 }
 
 h2 {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   font-size: 1.6rem;
   color: #222;
 }
@@ -388,31 +388,50 @@ td {
 .btn-estado.inactivo {
   background-color: #dc3545; /* rojo */
 }
-.mensaje-bienvenida {
-  display: flex;
-  justify-content: center;
+.mensaje-toast {
   position: fixed;
-  left: 40%;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;           /* 🔥 por encima de toda la app */
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  font-size: 1rem;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+  opacity: 0;
+  animation: aparecer 0.3s ease-out forwards,
+             desaparecer 0.4s ease-out forwards 3s; /* se auto-oculta */
+}
+
+/* Éxito */
+.mensaje-toast.exito {
   background-color: #d4edda;
   color: #155724;
-  border: 1px solid #c3e6cb;
-  padding: 10px 15px;
-  border-radius: 8px;
-  margin: 15px;
-  font-weight: bold;
-  animation: fadeOut 4s ease forwards;
 }
-.mensaje-bienvenida.exito{
-  background-color: #d4edda;
-}
-.mensaje-bienvenida.error{
+
+/* Error */
+.mensaje-toast.error {
   background-color: #dc3545;
 }
-@keyframes fadeOut {
-  0% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { opacity: 0; display: none; }
+
+/* Info */
+.mensaje-toast.info {
+  background-color: #6c757d;
 }
+
+/* Animaciones */
+@keyframes aparecer {
+  from { opacity: 0; transform: translate(-50%, -10px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes desaparecer {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
 
 /*home*/
 /* Contenedor principal */
@@ -428,7 +447,7 @@ td {
 
 /* Tarjeta de turno */
 .card-turno {
-  margin: 20px 0 0;
+  /* margin: 20px 0 0; */
   border: 1.5px solid #9c5df5;
   border-radius: 10px;
   padding: 14px 18px;
@@ -829,10 +848,10 @@ select, option {
 .modalArriba{
   padding-bottom: 10px;
 }
-.inputError {
+/* .inputError {
   border-color: red;
   background-color: #ffe6e6;
-}
+} */
 /* agenda de turnos */
 .tarjetaTurnoVete {
   width: 330px;
@@ -1201,14 +1220,93 @@ textarea.inputDiagnostico {
   display: flex;
   justify-content: first baseline;
 }
-.error-text {
+/* .error-text {
   color: red;
   font-size: 0.9rem;
   margin-top: 4px;
+} */
+ /* Panel general */
+.panel-diagnostico {
+  padding: 20px;
+  width: 100%;
 }
+
+/* Título */
+.titulo-historial {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #4a437f;
+}
+
+/* Mensaje cuando NO hay diagnóstico */
+.sin-diagnostico {
+  margin: 40px auto;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  font-weight: 500;
+  background: linear-gradient(to right, #f9f9f9, #f1f1f1);
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  padding: 40px;
+  width: 80%;
+  max-width: 600px;
+}
+
+/* Tarjeta del diagnóstico */
+.card-diagnostico {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px 25px;
+  width: 85%;
+  max-width: 650px;
+  margin: 0 auto;
+  
+  /* Sombras lindas similares a UI modernas */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Texto dentro de la tarjeta */
+.card-diagnostico p {
+  font-size: 1.1rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.card-diagnostico strong {
+  color: #333;
+  font-weight: 600;
+}
+
+/* Hover suave */
+.card-diagnostico:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Animación suave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .sinTurnoSeleccionado {
   margin-top: 170px;
-    
     text-align: center;
     font-size: 1.2rem;
     color: #666;
@@ -1216,11 +1314,10 @@ textarea.inputDiagnostico {
     background: linear-gradient(to right, #f9f9f9, #f1f1f1);
     border: 2px dashed #ccc;
     border-radius: 8px;
-    
     width: 80%;
     height: 200px;
     align-items: center;
-    align-content: center;               /* ancho controlado */
+    align-content: center;
 }
 /*Diagnosticos*/
 .mainBuscadorMascotas {
@@ -1275,7 +1372,7 @@ textarea.inputDiagnostico {
 .diagnosticoCard {
   width: 745px;
   height: 400px;       /* 👉 altura fija */
-  background: #E3F1F9;
+  background: #E9F1FF;
   border-radius: 10px;
   padding: 20px 20px 4px 20px;
   margin: 20px auto;
