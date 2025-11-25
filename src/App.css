@@ -1356,6 +1356,31 @@ textarea.inputDiagnostico {
   font-weight: 600;
   color: #000;
 }
+/* Link de descarga */
+.linkDescargar {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.linkDescargar:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+.diagArchivos{
+  display: flex;
+  gap: 4px;
+}
+.diagArchivos ul {
+  list-style: none;   /* quita los bullets */
+  margin: 0;
+  padding: 0;
+}
+
+.diagArchivos li {
+  margin-bottom: 6px; /* opcional: espacio entre links */
+}
 
 
 

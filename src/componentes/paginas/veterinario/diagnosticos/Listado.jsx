@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import fileDownload from "js-file-download";
 import Paginacion from "../../../comun/paginacion";
 
 export default function Listado({ idMascota, token }) {
@@ -32,7 +33,10 @@ export default function Listado({ idMascota, token }) {
 
     const config = { headers: { Authorization: token } };
     axios
-      .get(`http://localhost:5000/api/diagnosticos?id_mascota=${idMascota}&pagina=${paginaActual}`, config)
+      .get(
+        `http://localhost:5000/api/diagnosticos?id_mascota=${idMascota}&pagina=${paginaActual}`,
+        config
+      )
       .then((resp) => {
         setDiagnosticos(resp.data.diagnosticos || []);
         setTotalPaginas(resp.data.totalPaginas || 1);
@@ -51,9 +55,9 @@ export default function Listado({ idMascota, token }) {
 
   const handleSave = async () => {
     if (!formData.peso_actual || formData.peso_actual <= 0) {
-    alert("El peso debe ser mayor a 0");
-    return;
-  }
+      alert("El peso debe ser mayor a 0");
+      return;
+    }
     try {
       const config = { headers: { Authorization: token } };
       await axios.put(
@@ -78,15 +82,38 @@ export default function Listado({ idMascota, token }) {
     setShowModal(false);
   };
 
+  //  función para descargar archivo
+  const handleDownload = async (id_archivo, nombre) => {
+    try {
+      const resp = await axios.get(
+        `http://localhost:5000/api/archivos/${id_archivo}`,
+        {
+          headers: { Authorization: token }, // 🔹 sin Bearer
+          responseType: "blob",
+        }
+      );
+      fileDownload(resp.data, nombre);
+    } catch (err) {
+      console.error("Error al descargar archivo:", err);
+    }
+  };
+
   if (!idMascota) {
-    return <p className="sinTurnoSeleccionado">Selecciona una mascota para ver la ficha de datos</p>;
+    return (
+      <p className="sinTurnoSeleccionado">
+        Selecciona una mascota para ver la ficha de datos
+      </p>
+    );
   }
 
   return (
     <div className="formularioDiagnosticos">
-      {/* Sección superior con título e imagen */}
       <div className="headerHistorial">
-        <img src="/img/consulta.png" alt="icono consulta" className="iconoHistorial" />
+        <img
+          src="/img/consulta.png"
+          alt="icono consulta"
+          className="iconoHistorial"
+        />
         <h3 className="tituloHistorial">Historial</h3>
       </div>
 
@@ -131,18 +158,51 @@ export default function Listado({ idMascota, token }) {
                 <div key={d.id_diagnostico} className="diagnosticoCard">
                   <div className="diagHeader">
                     <div className="circle"></div>
-                    <span className="fechaDiag">{formatearFecha(d.fecha_turno)}</span>
+                    <span className="fechaDiag">
+                      {formatearFecha(d.fecha_turno)}
+                    </span>
                   </div>
                   <div className="diagBody">
                     <p className="textoDiag">Diagnóstico: {d.diagnostico}</p>
                     <p className="textoDiag">Tratamiento: {d.tratamiento}</p>
                     <p className="textoDiag">Observaciones: {d.observaciones}</p>
-                    <p className="textoDiag">Peso actual: {d.peso_actual} kg</p>
+                    <p className="textoDiag">
+                      Peso actual: {d.peso_actual} kg
+                    </p>
                   </div>
+
+                 {/* 👇 sección de archivos */}
+                  {d.archivos && d.archivos.length > 0 && (
+                    <div className="diagArchivos">
+                      <p>
+                        <b>Archivos adjuntos:</b>
+                      </p>
+                      <ul>
+                        {d.archivos.map((a) => (
+                          <li key={a.id_archivo}>
+                            {/* link que dispara handleDownload */}
+                            <a
+                              href="#"
+                              className="linkDescargar"
+                              onClick={(e) => {
+                                e.preventDefault(); // evita navegación
+                                handleDownload(a.id_archivo, a.nombre);
+                              }}
+                            >
+                              {a.nombre}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+
+
                   <button
                     className="btnEditarDiag"
                     onClick={() => {
-                      setFormData(d); // cargar datos del diagnóstico en el modal
+                      setFormData(d);
                       setShowModal(true);
                     }}
                   >
@@ -161,7 +221,9 @@ export default function Listado({ idMascota, token }) {
           )}
         </>
       ) : (
-        <p className="sinTurnoSeleccionado">No se pudo cargar la ficha de la mascota seleccionada</p>
+        <p className="sinTurnoSeleccionado">
+          No se pudo cargar la ficha de la mascota seleccionada
+        </p>
       )}
 
       {/* Modal */}

@@ -7,7 +7,7 @@ export default function Formulario({ idMascota, idTurno }) {
   const [tratamiento, setTratamiento] = useState("");
   const [observaciones, setObservaciones] = useState("");
   const [pesoActual, setPesoActual] = useState("");
-  const [archivo, setArchivo] = useState(null);
+  const [archivos, setArchivos] = useState([]);
   const [diagnosticoExistente, setDiagnosticoExistente] = useState(null);
   const [errors, setErrors] = useState({});
 
@@ -46,7 +46,7 @@ export default function Formulario({ idMascota, idTurno }) {
       setTratamiento("");
       setObservaciones("");
       setPesoActual("");
-      setArchivo(null);
+      setArchivos([]);
       return;
     }
     const config = { headers: { Authorization: token } };
@@ -67,7 +67,7 @@ export default function Formulario({ idMascota, idTurno }) {
           setTratamiento("");
           setObservaciones("");
           setPesoActual("");
-          setArchivo(null);
+          setArchivos([]);
         }
       })
       .catch((err) => {
@@ -77,7 +77,7 @@ export default function Formulario({ idMascota, idTurno }) {
         setTratamiento("");
         setObservaciones("");
         setPesoActual("");
-        setArchivo(null);
+        setArchivos([]);
       });
   }, [idTurno, token]);
 
@@ -92,38 +92,52 @@ export default function Formulario({ idMascota, idTurno }) {
 
   if (Object.keys(newErrors).length > 0) {
     setErrors(newErrors);
-    return; // corta el envío
+    return;
   }
 
-  setErrors({}); // limpia errores si todo está bien
-
+  setErrors({});
   const config = { headers: { Authorization: token } };
   const pesoAEnviar = pesoActual ? pesoActual : ficha?.peso;
 
-  const formData = {
-    id_turno: idTurno,
-    diagnostico,
-    tratamiento,
-    observaciones,
-    peso_actual: pesoAEnviar,
-  };
-
-  if (archivo) {
-    formData.archivo_nombre = archivo.name;
-    formData.archivo_ruta = archivo.name;
-    formData.fecha_subida = new Date().toISOString().slice(0, 19).replace("T", " ");
-  }
-
   try {
-    const resp = await axios.post("http://localhost:5000/api/diagnosticos", formData, config);
-    setDiagnosticoExistente(resp.data.diagnostico);
+    // 1. Crear diagnóstico
+    const resp = await axios.post(
+      "http://localhost:5000/api/diagnosticos",
+      {
+        id_turno: idTurno,
+        diagnostico,
+        tratamiento,
+        observaciones,
+        peso_actual: pesoAEnviar,
+      },
+      config
+    );
 
+    const diagCreado = resp.data.diagnostico;
+    setDiagnosticoExistente(diagCreado);
+
+    // 2. Subir archivo si existe
+    if (archivos.length > 0) {
+  for (const archivo of archivos) {
+    const fd = new FormData();
+    fd.append("id_diagnostico", diagCreado.id_diagnostico);
+    fd.append("archivo", archivo);
+
+    await axios.post("http://localhost:5000/api/archivos", fd, {
+      headers: { Authorization: token },
+    });
+  }
+}
+
+
+    // 3. Actualizar estado del turno
     await axios.put(
       "http://localhost:5000/api/turnos/modificarestado",
       { id_turno: idTurno, estado: "finalizado" },
       config
     );
 
+    // 4. Refrescar ficha
     const respFicha = await axios.get(
       `http://localhost:5000/api/turnos/fichadatos?id_mascota=${idMascota}`,
       config
@@ -133,6 +147,7 @@ export default function Formulario({ idMascota, idTurno }) {
     console.error("Error al registrar diagnóstico:", err);
   }
 };
+
   return (
   <div className="formularioAgendaDeTurnos">
     <h3>Datos del dueño</h3>
@@ -219,12 +234,22 @@ export default function Formulario({ idMascota, idTurno }) {
           />
         </div>
         <div>
-          <input
+         <input
             type="file"
             className="inputDiagnostico"
-            onChange={(e) => setArchivo(e.target.files[0])}
+            multiple
+            onChange={(e) => {
+            const files = Array.from(e.target.files);
+            if (files.length > 3) {
+              alert("Máximo 3 archivos permitidos");
+              return;
+            }
+              setArchivos(files);
+            }}
+
             disabled={!!diagnosticoExistente}
           />
+
         </div>
         {!diagnosticoExistente && (
           <button type="submit" className="btnGuardar">Guardar diagnóstico</button>
