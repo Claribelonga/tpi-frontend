@@ -41,7 +41,7 @@ export default function Main() {
   // urls
   const urlMascotas = "http://localhost:5000/api/mascotas";
   const urlServicios = "http://localhost:5000/api/servicios/select";
-  const urlVets = "http://localhost:5000/api/publico/veterinarios";
+  const urlVets = "http://localhost:5000/api/veterinarios/select";
   const urlSacarTurno = "http://localhost:5000/api/turnos/sacarturno";
 
   const config = {
