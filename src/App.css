@@ -1467,13 +1467,30 @@ textarea.inputDiagnostico {
 }
 .diagArchivos{
   display: flex;
-  gap: 4px;
+    gap: 4px;
+    align-items: center;
 }
 .diagArchivos ul {
-  list-style: none;   /* quita los bullets */
-  margin: 0;
+  list-style: none;
   padding: 0;
+  margin: 0;
+  display: flex;          /* los pone en fila */
+  flex-wrap: wrap;        /* permite que bajen si son muchos */
+  gap: 5px;               /* espacio entre items */
 }
+
+.diagArchivos li::after {
+  content: "-";           /* agrega guion después de cada link */
+  margin-left: 8px;
+  font-size: 20px;        /* 👈 más grande */
+  font-weight: bold;      /* 👈 en negrita */
+  color: #333;            /* color más oscuro */
+}
+
+.diagArchivos li:last-child::after {
+  content: "";            /* quita guion del último */
+}
+
 
 .diagArchivos li {
   margin-bottom: 6px; /* opcional: espacio entre links */

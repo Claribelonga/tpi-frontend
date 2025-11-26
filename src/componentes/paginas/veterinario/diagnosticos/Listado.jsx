@@ -10,6 +10,8 @@ export default function Listado({ idMascota, token }) {
   const [totalPaginas, setTotalPaginas] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({});
+  const [errores, setErrores] = useState({});
+
 
   useEffect(() => {
     if (!idMascota) {
@@ -88,7 +90,7 @@ export default function Listado({ idMascota, token }) {
       const resp = await axios.get(
         `http://localhost:5000/api/archivos/${id_archivo}`,
         {
-          headers: { Authorization: token }, // 🔹 sin Bearer
+          headers: { Authorization: token }, 
           responseType: "blob",
         }
       );
@@ -169,7 +171,7 @@ export default function Listado({ idMascota, token }) {
                     <p className="textoDiag">
                       Peso actual: {d.peso_actual} kg
                     </p>
-                  </div>
+                  
 
                  {/* 👇 sección de archivos */}
                   {d.archivos && d.archivos.length > 0 && (
@@ -196,9 +198,7 @@ export default function Listado({ idMascota, token }) {
                       </ul>
                     </div>
                   )}
-
-
-
+                  </div>
                   <button
                     className="btnEditarDiag"
                     onClick={() => {
@@ -226,63 +226,92 @@ export default function Listado({ idMascota, token }) {
         </p>
       )}
 
-      {/* Modal */}
       {showModal && (
-        <div className="modalOverlay">
-          <div className="modalContent">
-            <div className="modalArriba">
-              <button className="btnCloseModal" onClick={() => setShowModal(false)}>
-                <img src="/img/equis.png" className="icono" />
-              </button>
-              <h3>Modificar diagnóstico</h3>
-            </div>
-            <label>
-              Diagnóstico
-              <input
-                name="diagnostico"
-                type="text"
-                className="inputGenPerfil"
-                value={formData.diagnostico || ""}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Tratamiento
-              <input
-                name="tratamiento"
-                type="text"
-                className="inputGenPerfil"
-                value={formData.tratamiento || ""}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Observaciones
-              <textarea
-                name="observaciones"
-                className="inputGenPerfil textareaDiag"
-                value={formData.observaciones || ""}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Peso actual
-              <input
-                name="peso_actual"
-                type="number"
-                className="inputGenPerfil"
-                value={formData.peso_actual || ""}
-                onChange={handleChange}
-              />
-            </label>
-            <div className="modalActions">
-              <button onClick={handleSave} className="btnGuardarPerfil">
-                Actualizar diagnóstico
-              </button>
-            </div>
-          </div>
+  <div className="modalOverlay">
+    <div className="modalContent">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          const newErrors = {};
+
+          if (!formData.diagnostico?.trim()) newErrors.diagnostico = "El diagnóstico es obligatorio";
+          if (!formData.tratamiento?.trim()) newErrors.tratamiento = "El tratamiento es obligatorio";
+          if (!formData.observaciones?.trim()) newErrors.observaciones = "Las observaciones son obligatorias";
+          if (!formData.peso_actual || formData.peso_actual <= 0) newErrors.peso_actual = "El peso es obligatorio";
+
+          if (Object.keys(newErrors).length > 0) {
+            setErrores(newErrors); // 👈 guarda errores en estado
+            return; // 👈 no deja enviar
+          }
+
+          setErrores({});
+          handleSave(); // 👈 tu función original
+        }}
+      >
+        <div className="modalArriba">
+          <button type="button" className="btnCloseModal" onClick={() => setShowModal(false)}>
+            <img src="/img/equis.png" className="icono" />
+          </button>
+          <h3>Modificar diagnóstico</h3>
         </div>
-      )}
+
+        <label>
+          Diagnóstico
+          <input
+            name="diagnostico"
+            type="text"
+            value={formData.diagnostico || ""}
+            onChange={handleChange}
+            className={`inputGenPerfil ${errores?.diagnostico ? "inputError" : ""}`}
+          />
+          {errores?.diagnostico && <p className="error-text">{errores.diagnostico}</p>}
+        </label>
+
+        <label>
+          Tratamiento
+          <input
+            name="tratamiento"
+            type="text"
+            value={formData.tratamiento || ""}
+            onChange={handleChange}
+            className={`inputGenPerfil ${errores?.tratamiento ? "inputError" : ""}`}
+          />
+          {errores?.tratamiento && <p className="error-text">{errores.tratamiento}</p>}
+        </label>
+
+        <label>
+          Observaciones
+          <textarea
+            name="observaciones"
+            value={formData.observaciones || ""}
+            onChange={handleChange}
+            className={`inputGenPerfil textareaDiag ${errores?.observaciones ? "inputError" : ""}`}
+          />
+          {errores?.observaciones && <p className="error-text">{errores.observaciones}</p>}
+        </label>
+
+        <label>
+          Peso actual
+          <input
+            name="peso_actual"
+            type="number"
+            value={formData.peso_actual || ""}
+            onChange={handleChange}
+            className={`inputGenPerfil ${errores?.peso_actual ? "inputError" : ""}`}
+          />
+          {errores?.peso_actual && <p className="error-text">{errores.peso_actual}</p>}
+        </label>
+
+        <div className="modalActions">
+          <button type="submit" className="btnGuardarPerfil">
+            Actualizar diagnóstico
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }

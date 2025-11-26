@@ -153,6 +153,12 @@ export default function Formulario({ idMascota, idTurno }) {
   }
 };
 
+const eliminarArchivo = (idx) => {
+  const nuevosArchivos = archivos.filter((_, i) => i !== idx);
+  setArchivos(nuevosArchivos);
+};
+
+
   return (
   <div className="formularioAgendaDeTurnos">
     <Mensaje texto={textoMensaje} tipo={tipoMensaje} visible={visible} />
@@ -241,20 +247,35 @@ export default function Formulario({ idMascota, idTurno }) {
         </div>
         <div>
          <input
-            type="file"
-            className="inputDiagnostico"
-            multiple
-            onChange={(e) => {
+          type="file"
+          className="inputDiagnostico"
+          multiple
+          onChange={(e) => {
             const files = Array.from(e.target.files);
-            if (files.length > 3) {
+            const nuevosArchivos = [...archivos, ...files]; // 👈 acumula
+            if (nuevosArchivos.length > 3) {
               alert("Máximo 3 archivos permitidos");
               return;
             }
-              setArchivos(files);
-            }}
-
-            disabled={!!diagnosticoExistente}
-          />
+            setArchivos(nuevosArchivos);
+          }}
+          disabled={!!diagnosticoExistente}
+        />
+          {archivos.length > 0 && (
+          <ul>
+            {archivos.map((file, idx) => (
+              <li key={idx} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                {file.name}
+                <img
+                  src="/img/equis.png"
+                  alt="Eliminar"
+                  onClick={() => eliminarArchivo(idx)}
+                  style={{ cursor: "pointer", width: "20px", height: "20px" }}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
 
         </div>
         {!diagnosticoExistente && (
