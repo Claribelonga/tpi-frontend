@@ -54,7 +54,7 @@ export default function Main() {
           {loading && <p>Cargando...</p>}
           {error && <p className="error-text">{error}</p>}
           {!loading && mascotas.length === 0 && !error && (
-            <p>No se encontraron mascotas</p>
+            <p style={{marginTop: '22px'}}>No se encontraron mascotas</p>
           )}
           {!loading && mascotas.length > 0 && (
             <Filtro

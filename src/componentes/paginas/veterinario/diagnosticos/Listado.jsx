@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import fileDownload from "js-file-download";
 import Paginacion from "../../../comun/paginacion";
 
 export default function Listado({ idMascota, token }) {
@@ -9,6 +10,8 @@ export default function Listado({ idMascota, token }) {
   const [totalPaginas, setTotalPaginas] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({});
+  const [errores, setErrores] = useState({});
+
 
   useEffect(() => {
     if (!idMascota) {
@@ -32,7 +35,10 @@ export default function Listado({ idMascota, token }) {
 
     const config = { headers: { Authorization: token } };
     axios
-      .get(`http://localhost:5000/api/diagnosticos?id_mascota=${idMascota}&pagina=${paginaActual}`, config)
+      .get(
+        `http://localhost:5000/api/diagnosticos?id_mascota=${idMascota}&pagina=${paginaActual}`,
+        config
+      )
       .then((resp) => {
         setDiagnosticos(resp.data.diagnosticos || []);
         setTotalPaginas(resp.data.totalPaginas || 1);
@@ -51,9 +57,9 @@ export default function Listado({ idMascota, token }) {
 
   const handleSave = async () => {
     if (!formData.peso_actual || formData.peso_actual <= 0) {
-    alert("El peso debe ser mayor a 0");
-    return;
-  }
+      alert("El peso debe ser mayor a 0");
+      return;
+    }
     try {
       const config = { headers: { Authorization: token } };
       await axios.put(
@@ -78,15 +84,38 @@ export default function Listado({ idMascota, token }) {
     setShowModal(false);
   };
 
+  //  función para descargar archivo
+  const handleDownload = async (id_archivo, nombre) => {
+    try {
+      const resp = await axios.get(
+        `http://localhost:5000/api/archivos/${id_archivo}`,
+        {
+          headers: { Authorization: token }, 
+          responseType: "blob",
+        }
+      );
+      fileDownload(resp.data, nombre);
+    } catch (err) {
+      console.error("Error al descargar archivo:", err);
+    }
+  };
+
   if (!idMascota) {
-    return <p className="sinTurnoSeleccionado">Selecciona una mascota para ver la ficha de datos</p>;
+    return (
+      <p className="sinTurnoSeleccionado">
+        Selecciona una mascota para ver la ficha de datos
+      </p>
+    );
   }
 
   return (
     <div className="formularioDiagnosticos">
-      {/* Sección superior con título e imagen */}
       <div className="headerHistorial">
-        <img src="/img/consulta.png" alt="icono consulta" className="iconoHistorial" />
+        <img
+          src="/img/consulta.png"
+          alt="icono consulta"
+          className="iconoHistorial"
+        />
         <h3 className="tituloHistorial">Historial</h3>
       </div>
 
@@ -131,18 +160,49 @@ export default function Listado({ idMascota, token }) {
                 <div key={d.id_diagnostico} className="diagnosticoCard">
                   <div className="diagHeader">
                     <div className="circle"></div>
-                    <span className="fechaDiag">{formatearFecha(d.fecha_turno)}</span>
+                    <span className="fechaDiag">
+                      {formatearFecha(d.fecha_turno)}
+                    </span>
                   </div>
                   <div className="diagBody">
                     <p className="textoDiag">Diagnóstico: {d.diagnostico}</p>
                     <p className="textoDiag">Tratamiento: {d.tratamiento}</p>
                     <p className="textoDiag">Observaciones: {d.observaciones}</p>
-                    <p className="textoDiag">Peso actual: {d.peso_actual} kg</p>
+                    <p className="textoDiag">
+                      Peso actual: {d.peso_actual} kg
+                    </p>
+                  
+
+                 {/* 👇 sección de archivos */}
+                  {d.archivos && d.archivos.length > 0 && (
+                    <div className="diagArchivos">
+                      <p>
+                        <b>Archivos adjuntos:</b>
+                      </p>
+                      <ul>
+                        {d.archivos.map((a) => (
+                          <li key={a.id_archivo}>
+                            {/* link que dispara handleDownload */}
+                            <a
+                              href="#"
+                              className="linkDescargar"
+                              onClick={(e) => {
+                                e.preventDefault(); // evita navegación
+                                handleDownload(a.id_archivo, a.nombre);
+                              }}
+                            >
+                              {a.nombre}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                   </div>
                   <button
                     className="btnGuardar"
                     onClick={() => {
-                      setFormData(d); // cargar datos del diagnóstico en el modal
+                      setFormData(d);
                       setShowModal(true);
                     }}
                   >
@@ -161,66 +221,97 @@ export default function Listado({ idMascota, token }) {
           )}
         </>
       ) : (
-        <p className="sinTurnoSeleccionado">No se pudo cargar la ficha de la mascota seleccionada</p>
+        <p className="sinTurnoSeleccionado">
+          No se pudo cargar la ficha de la mascota seleccionada
+        </p>
       )}
 
-      {/* Modal */}
       {showModal && (
-        <div className="modalOverlay">
-          <div className="modalContent">
-            <div className="modalArriba">
-              <button className="btnCloseModal" onClick={() => setShowModal(false)}>
-                <img src="/img/equis.png" className="icono" />
-              </button>
-              <h3>Modificar diagnóstico</h3>
-            </div>
-            <label>
-              Diagnóstico
-              <input
-                name="diagnostico"
-                type="text"
-                className="inputGenPerfil"
-                value={formData.diagnostico || ""}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Tratamiento
-              <input
-                name="tratamiento"
-                type="text"
-                className="inputGenPerfil"
-                value={formData.tratamiento || ""}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Observaciones
-              <textarea
-                name="observaciones"
-                className="inputGenPerfil textareaDiag"
-                value={formData.observaciones || ""}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Peso actual
-              <input
-                name="peso_actual"
-                type="number"
-                className="inputGenPerfil"
-                value={formData.peso_actual || ""}
-                onChange={handleChange}
-              />
-            </label>
-            <div className="modalActions">
-              <button onClick={handleSave} className="btnGuardar">
-                Actualizar diagnóstico
-              </button>
-            </div>
-          </div>
+  <div className="modalOverlay">
+    <div className="modalContent">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          const newErrors = {};
+
+          if (!formData.diagnostico?.trim()) newErrors.diagnostico = "El diagnóstico es obligatorio";
+          if (!formData.tratamiento?.trim()) newErrors.tratamiento = "El tratamiento es obligatorio";
+          if (!formData.observaciones?.trim()) newErrors.observaciones = "Las observaciones son obligatorias";
+          if (!formData.peso_actual || formData.peso_actual <= 0) newErrors.peso_actual = "El peso es obligatorio";
+
+          if (Object.keys(newErrors).length > 0) {
+            setErrores(newErrors); // 👈 guarda errores en estado
+            return; // 👈 no deja enviar
+          }
+
+          setErrores({});
+          handleSave(); // 👈 tu función original
+        }}
+      >
+        <div className="modalArriba">
+          <button type="button" className="btnCloseModal" onClick={() => setShowModal(false)}>
+            <img src="/img/equis.png" className="icono" />
+          </button>
+          <h3>Modificar diagnóstico</h3>
         </div>
-      )}
+
+        <label>
+          Diagnóstico
+          <input
+            name="diagnostico"
+            type="text"
+            value={formData.diagnostico || ""}
+            onChange={handleChange}
+            className={`inputGenPerfil ${errores?.diagnostico ? "inputError" : ""}`}
+          />
+          {errores?.diagnostico && <p className="error-text">{errores.diagnostico}</p>}
+        </label>
+
+        <label>
+          Tratamiento
+          <input
+            name="tratamiento"
+            type="text"
+            value={formData.tratamiento || ""}
+            onChange={handleChange}
+            className={`inputGenPerfil ${errores?.tratamiento ? "inputError" : ""}`}
+          />
+          {errores?.tratamiento && <p className="error-text">{errores.tratamiento}</p>}
+        </label>
+
+        <label>
+          Observaciones
+          <textarea
+            name="observaciones"
+            value={formData.observaciones || ""}
+            onChange={handleChange}
+            className={`inputGenPerfil textareaDiag ${errores?.observaciones ? "inputError" : ""}`}
+          />
+          {errores?.observaciones && <p className="error-text">{errores.observaciones}</p>}
+        </label>
+
+        <label>
+          Peso actual
+          <input
+            name="peso_actual"
+            type="number"
+            value={formData.peso_actual || ""}
+            onChange={handleChange}
+            className={`inputGenPerfil ${errores?.peso_actual ? "inputError" : ""}`}
+          />
+          {errores?.peso_actual && <p className="error-text">{errores.peso_actual}</p>}
+        </label>
+
+        <div className="modalActions">
+          <button type="submit" className="btnGuardarPerfil">
+            Actualizar diagnóstico
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
