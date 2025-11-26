@@ -91,7 +91,7 @@ export default function Main() {
 
       <div className="arriba-turno">
         <ProximoTurno />
-        <div>
+        <div className="divFiltro">
         <span>Filtro por mascota: </span>
         <Filtro
           opciones={mascotas}

@@ -77,7 +77,7 @@ function App() {
                 <img src="/img/logoNegro.png" alt="logoVioleta" className="logo"></img>
                 <h5 className="vet">Vet</h5><h5 className="sur">Sur</h5>
               </div>
-              <div>
+              <div className="divBtn">
               <button onClick={() => navigate("/login")} className="btnHeader">Iniciar Sesión</button>
               <button onClick={() => navigate("/registrarse")} className="btnGuardar">Registrarse</button>
               </div>

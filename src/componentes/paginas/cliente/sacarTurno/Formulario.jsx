@@ -6,6 +6,21 @@ export default function Formulario({
   onChangeDato
 }) {
 
+  function generarHoras() {
+  const horas = [];
+  let inicio = 9 * 60;   // 09:00
+  let fin = 21 * 60;     // 21:00
+  let paso = 30;         // minutos
+
+  for (let m = inicio; m <= fin; m += paso) {
+    const hh = String(Math.floor(m / 60)).padStart(2, '0');
+    const mm = String(m % 60).padStart(2, '0');
+    horas.push(`${hh}:${mm}`);
+  }
+
+  return horas;
+}
+
   return (
     <div className="FormContenedor">
       {/* Mascota */}
@@ -53,11 +68,21 @@ export default function Formulario({
       {/* Hora */}
       <div className="inputContainer">
       <label>Hora</label>
-      <input className="inputGen"
+       <select
+       className="inputGen hora"
+       value={turno.hora}
+       onChange={(e) => onChangeDato("hora", e.target.value)}
+      >
+        {generarHoras().map(h => (
+          <option key={h} value={h}>{h}</option>
+        ))}
+  </select>
+      {/* <input className="inputGen"
         type="time"
+        
         value={turno.hora}
         onChange={(e) => onChangeDato("hora", e.target.value)}
-      />
+      /> */}
       </div>
 
       {/* Veterinario */}

@@ -60,6 +60,7 @@ html, body{
   align-items: center;
   height: calc(100vh - 40px);
   width: 400px;
+  /* overflow-y: auto; */
   /* padding: 2rem; */
   border-radius: 15px;
   background-color: #fff;
@@ -455,9 +456,6 @@ td {
   align-items: center;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
 }
-/* .card-turno .btn-violeta{
-  width: auto;
-} */
 
 /* Títulos y textos */
 .titulo-turno {
@@ -472,21 +470,6 @@ td {
   margin: 2px 0;
 }
 
-/* .btn-violeta.grande {
-  padding: 10px 20px;
-  font-size: 15px;
-} */
-
-/* Estado sin turno */
-/* .sin-turno {
-  margin: 30px 0;
-  border: 1.7px solid #9c5df5;
-  border-radius: 10px;
-  padding: 14px 18px;
-  width: 330px;
-  background-color: #fff;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
-} */
 /*servicios seccion*/
 .servicios-container {
   text-align: left;
@@ -749,7 +732,6 @@ td {
 select, option {
   color: black !important;
   background-color: white !important;
-  z-index: 99999 !important;
 }
 /* .btnGuardarPerfil {
   background: #4A90E2;
@@ -1072,7 +1054,7 @@ textarea.inputDiagnostico {
 }
 .filtro-contenedor {
   height: max-content;
-  position: relative;
+  /* position: relative; */
   display: inline-block;
 }
 .filtro-boton {
@@ -1090,8 +1072,12 @@ textarea.inputDiagnostico {
 .icono-filtro {
   font-size: 18px;
 }
+.divFiltro{
+  display: flex;
+  flex-direction: column;
+}
 .filtro-menu {
-  position: absolute;
+  /* position: absolute; */
   top: 110%;
   left: 0;
   background: white;
@@ -1100,7 +1086,7 @@ textarea.inputDiagnostico {
   padding: 8px 0;
   width: 180px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  z-index: 20;
+ 
 }
 .filtro-opcion {
   padding: 8px 14px;
@@ -1376,6 +1362,43 @@ textarea.inputDiagnostico {
   font-weight: 600;
   color: #000;
 }
+/* Link de descarga */
+.linkDescargar {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+.linkDescargar:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+.diagArchivos{
+  display: flex;
+    gap: 4px;
+    align-items: center;
+}
+.diagArchivos ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;          /* los pone en fila */
+  flex-wrap: wrap;        /* permite que bajen si son muchos */
+  gap: 5px;               /* espacio entre items */
+}
+.diagArchivos li::after {
+  content: "-";           /* agrega guion después de cada link */
+  margin-left: 8px;
+  font-size: 20px;        /* 👈 más grande */
+  font-weight: bold;      /* 👈 en negrita */
+  color: #333;            /* color más oscuro */
+}
+.diagArchivos li:last-child::after {
+  content: "";            /* quita guion del último */
+}
+.diagArchivos li {
+  margin-bottom: 6px; /* opcional: espacio entre links */
+}
 /*Escritorio*/
 @media (min-width: 769px) {
   .hamburger {
@@ -1385,6 +1408,74 @@ textarea.inputDiagnostico {
 
 /*Mobiles*/
 @media (max-width: 769px) {
+  /* Home - Contenedor turno */
+  .AppSinReg{
+    padding: 10px;
+  }
+  .contenedor-turno {
+    width: 100%;
+    align-items: center;
+  }
+
+  .card-turno {
+    width: 100%;
+    max-width: 100%;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  /* Servicios */
+  .servicios-container {
+    margin: 20px 0;
+  }
+
+  .grid-servicios {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .card-servicio {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Veterinarios */
+  .img-vete {
+    width: 120px;
+    height: 120px;
+    padding: 10px;
+  }
+
+  .vete-img {
+    height: 80px;
+  }
+
+  /* Footer */
+  .footer {
+    width: calc(100vw - 40px);
+    max-width: calc(100vw - 40px);
+    padding: 20px 15px;
+    margin: 20px auto;
+  }
+
+  .footer-contenido {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .footer-contacto {
+    text-align: center;
+  }
+
+  .footer-contacto p {
+    justify-content: center;
+  }
+
+  .footer-logos {
+    justify-content: center;
+  }
   /* Oculto por defecto */
   .menu-lateral {
     transform: translateX(-110%);
@@ -1413,15 +1504,34 @@ textarea.inputDiagnostico {
     margin-right: 0;
     padding: 60px 15px 15px 15px; /* más padding arriba por el hamburger */
   }
-
-  /* Header */
+  .banner{
+    width: 100%;
+  }
   .header {
-    padding: 0 60px 0 60px; /* espacio para el hamburger */
+    padding: 0 15px 0 60px; /* espacio para el hamburger a la izquierda */
     height: auto;
     min-height: 60px;
-    flex-wrap: wrap;
+    flex-direction: row; /* mantiene los elementos en fila */
+    justify-content: space-between; /* logo a la izq, botones a la der */
+    flex-wrap: nowrap; /* no permite que se envuelvan */
   }
 
+  .header .logo {
+    order: 1; /* logo primero */
+  }
+
+  .header .btnHeader {
+    order: 2; /* botones después */
+    margin-right: 0;
+    display: flex;
+    gap: 10px;
+  }
+  .divBtn {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+  }
   /* Formularios */
   .FormContenedor,
   .FormContenedorPerfil,
@@ -1487,12 +1597,6 @@ textarea.inputDiagnostico {
   .listado-clientes-container {
     padding: 5px;
     overflow-x: auto;
-  }
-
-  /* Grid de servicios */
-  .grid-servicios {
-    grid-template-columns: 1fr;
-    gap: 20px;
   }
 
   .card-servicio {
@@ -1596,7 +1700,6 @@ textarea.inputDiagnostico {
 
   /* Paginación */
   .paginacion {
-    flex-wrap: wrap;
     gap: 8px;
   }
 
@@ -1722,5 +1825,34 @@ textarea.inputDiagnostico {
   .fichaContainer {
     margin-bottom: 20px;
     margin-top: 20px;
+  }
+}
+/* Pantallas extra pequeñas (320px) */
+@media (max-width: 377px) {
+  .header {
+    padding: 0 10px 0 50px; /* menos padding */
+  }
+
+  .header .btnHeader,
+  .header .btnGuardar {
+    font-size: 0.7rem;
+    padding: 5px 8px;
+  }
+
+  .divBtn {
+    gap: 5px;
+  }
+
+  .Logo h5 {
+    font-size: 1rem;
+  }
+
+  .logo {
+    height: 35px;
+  }
+
+  .hamburger {
+    font-size: 1.5rem;
+    left: 5px;
   }
 }
