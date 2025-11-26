@@ -11,13 +11,13 @@ export default function Veterinarios() {
     const url = `http://localhost:5000/api/publico/veterinarios?pagina=${pagina}`;
     axios.get(url)
       .then((resp) => {
-        console.log("Respuesta GET veterinarios:", resp.data);
+        // console.log("Respuesta GET veterinarios:", resp.data);
         setVeterinarios(resp.data.veterinarios);
         setPaginaActual(resp.data.paginaActual);
         setTotalPaginas(resp.data.totalPaginas);
       })
       .catch((error) => {
-        console.error("Error al obtener veterinarios:", error);
+        // console.error("Error al obtener veterinarios:", error);
         alert("Ocurrió un error al obtener los veterinarios");
       });
   };

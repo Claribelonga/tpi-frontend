@@ -31,7 +31,7 @@ export default function Main() {
 
     axios.get(url, config)
       .then((resp) => {
-        console.log("Respuesta GET:", resp.data);
+        // console.log("Respuesta GET:", resp.data);
         setServicios(resp.data.data);
         setPaginaActual(resp.data.paginaActual);
         setTotalPaginas(resp.data.totalPaginas);

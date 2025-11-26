@@ -8,10 +8,7 @@ export default function Formulario({ onLogin, error }){
 
     const enviarDatos = (e) => {
         e.preventDefault(); // Evita que la página se recargue
-        console.log('Intento de inicio de sesión con:', { user, pass });
         onLogin({user, pass}) //llama a la funcion que viene del Main y le pasa el email y la contraseña
-        // alert(`Intentando iniciar sesión con Email: ${email}`);
-        //  navigate("/inicio");
     };
 
     return(

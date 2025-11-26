@@ -412,6 +412,7 @@ td {
 /* Error */
 .mensaje-toast.error {
   background-color: #dc3545;
+  color: #000;
 }
 
 /* Info */
@@ -1077,16 +1078,13 @@ textarea.inputDiagnostico {
   flex-direction: column;
 }
 .filtro-menu {
-  /* position: absolute; */
-  top: 110%;
-  left: 0;
+  position: absolute;
   background: white;
   border: 1px solid #ddd;
   border-radius: 12px;
   padding: 8px 0;
   width: 180px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
- 
 }
 .filtro-opcion {
   padding: 8px 14px;
@@ -1789,6 +1787,7 @@ textarea.inputDiagnostico {
   }
 
   .filtro-menu {
+    position: unset;
     width: 100%;
   }
 

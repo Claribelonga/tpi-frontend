@@ -8,12 +8,12 @@ export default function Main(){
     const [, navigate] = useLocation();
     const [error, setError] = useState("");
 
-    const handleLogin = (datos) =>{
+    const onLogin = (datos) =>{
         const url = "http://localhost:5000/api/usuarios/login/";
         //enviamos los datos ingresados
         axios.post( url, {user: datos.user, pass: datos.pass}) 
         .then ((res) => {
-            console.log("Respuesta del servidor:", res.data);
+            // console.log("Respuesta del servidor:", res.data);
             
             if (res.data.status === "ok") {
               setError(""); // Limpiar error
@@ -41,7 +41,7 @@ export default function Main(){
     }
     return(
         <div className="PaginaLogin">
-            <Formulario onLogin={handleLogin} error={error}/>
+            <Formulario onLogin={onLogin} error={error}/>
         </div>
     )
 }

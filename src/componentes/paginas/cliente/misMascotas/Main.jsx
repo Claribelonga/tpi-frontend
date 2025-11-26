@@ -40,7 +40,7 @@ export default function Main() {
   const obtenerEspecies = () => {
     axios.get(URL_ESPECIES, config)
       .then(res => {
-        console.log("ESPECIES", res.data);
+        // console.log("ESPECIES", res.data);
         setEspecies(res.data);
       })
       .catch(err => console.log("Error especies:", err));
@@ -52,7 +52,7 @@ export default function Main() {
   const obtenerRazas = (idEspecie) => {
     axios.get(`${URL_RAZAS}?id_especie=${idEspecie}`, config)
       .then(res => {
-        console.log("RAZAS", res.data);
+        // console.log("RAZAS", res.data);
         setRazas(res.data);
       })
       .catch(err => console.log("Error razas:", err));
@@ -66,7 +66,7 @@ export default function Main() {
 
     axios.get(URL_MASCOTAS, config)
       .then(res => {
-        console.log(" MASCOTAS", res.data.mascotas);
+        // console.log(" MASCOTAS", res.data.mascotas);
         setMascotas(res.data.mascotas || []);
       })
       .catch(err => console.log("Error mascotas:", err))
@@ -82,7 +82,7 @@ export default function Main() {
   // Guardar o editar mascota
   // ===============================
   const guardarMascota = (datos) => {
-    console.log("📤 Enviando datos:", datos);
+    // console.log("📤 Enviando datos:", datos);
 
     const isEdit = !!datos.idMascota;
 

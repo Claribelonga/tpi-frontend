@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import useUsuario from "../../../../hooks/useUsuario";
 
-export default function Formulario({ guardarCliente, clienteEdit, restablecerContrasena, cerrar, errores }) {
+export default function Formulario({ guardarCliente, clienteEdit, restablecerContrasena, cerrar }) {
   const { datos, errores: erroresForm, setDato, validarTodo, limpiarInputs } = useUsuario();
 
   useEffect(() => {

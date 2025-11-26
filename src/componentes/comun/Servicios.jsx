@@ -12,13 +12,13 @@ export default function Servicios() {
     const url = `http://localhost:5000/api/publico/servicios?pagina=${pagina}`;
     axios.get(url)
       .then((resp) => {
-        console.log("Respuesta GET:", resp.data);
+        // console.log("Respuesta GET:", resp.data);
         setServicios(resp.data.servicios);
         setPaginaActual(resp.data.paginaActual);
         setTotalPaginas(resp.data.totalPaginas);
       })
       .catch((error) => {
-        console.error("Error al obtener servicios:", error);
+        // console.error("Error al obtener servicios:", error);
         alert("Ocurrió un error al obtener los servicios");
       });
   };

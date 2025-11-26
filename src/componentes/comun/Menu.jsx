@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function Menu({rol, toggleMenu}) {
   const [, navigate] = useLocation();
   const [open, setOpen] = useState(false); 
-  const handleLogout = () => {
+  const onLogout = () => {
     // 1️⃣ Borrar los datos del usuario
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("rol");
@@ -98,7 +98,7 @@ export default function Menu({rol, toggleMenu}) {
           {menuItems}
         </div>
         <div className="inferior">
-          <Link className="menu-item" onClick={handleLogout}>
+          <Link className="menu-item" onClick={onLogout}>
              <img src="/img/salida.png" alt="home" className="icono"></img>
              Cerrar Sesión
           </Link>

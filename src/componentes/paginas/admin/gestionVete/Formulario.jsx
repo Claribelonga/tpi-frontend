@@ -41,7 +41,6 @@ export default function Formulario({guardarVeterinario, vetEdit, especialidades,
     }
   };
 
-  console.log("especialidades en formulario:", especialidades);
 
   return(
     <>

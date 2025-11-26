@@ -42,7 +42,7 @@ export default function Main() {
     const url= "http://localhost:5000/api/turnos/cliente";
     axios.get(url, config)
       .then((resp) => {
-        console.log(resp.data.turnos)
+        // console.log(resp.data.turnos)
         setTurnos(resp.data.turnos || []);
       })
       .catch((err) => console.error(err));
@@ -74,13 +74,6 @@ export default function Main() {
         }
       })
       .catch((err) => {
-      //   if (err.response && err.response.status === 404) {
-      //   // Si no hay diagnóstico, lo tratamos como null
-      //   setDiagnostico(null);
-      // } else {
-      //   console.log("Error cargando diagnóstico:", err);
-      //   alert("No se pudo cargar el diagnóstico");
-      // }
         console.log("Error cargando diagnóstico:", err);
         alert("No se pudo cargar el diagnóstico");
       });

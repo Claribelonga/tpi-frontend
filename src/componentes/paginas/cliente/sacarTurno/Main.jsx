@@ -37,7 +37,6 @@ export default function Main() {
     }));
   };
 
-
   // urls
   const urlMascotas = "http://localhost:5000/api/mascotas";
   const urlServicios = "http://localhost:5000/api/servicios/select";
@@ -52,7 +51,7 @@ export default function Main() {
   const obtenerMascotas = () => {
     axios.get(urlMascotas, config)
       .then(resp => {
-        console.log(resp.data)
+        // console.log(resp.data)
         setMascotas(resp.data.mascotas || []);
       })
       .catch(err => console.log(err));
@@ -62,7 +61,7 @@ export default function Main() {
   const obtenerServicios = () => {
     axios.get(urlServicios, config)
       .then(resp => {
-        console.log("SERVICIOS:", resp.data);
+        // console.log("SERVICIOS:", resp.data);
         setServicios(resp.data)
     })
       .catch(err => console.log(err));
@@ -72,7 +71,7 @@ export default function Main() {
   const obtenerVeterinarios = () => {
     axios.get(urlVets, config)
       .then(resp => {
-        console.log(resp.data.veterinarios)
+        // console.log(resp.data.veterinarios)
         setVeterinarios(resp.data.veterinarios)
     })
       .catch(err => console.log(err));
@@ -94,12 +93,12 @@ export default function Main() {
       .then((resp) => {
         mostrarMensaje("Turno registrado correctamente", "exito");
         // setTurno(resp.data.turno)
-        console.log("turno enviado:", resp.data)
+        // console.log("turno enviado:", resp.data)
         // setLocation("/misTurnos");
       })
       .catch(error => {
         console.log(error);
-        mostrarMensaje("Error al registrar turno", "error");
+        mostrarMensaje("Error al registrar turno, complete el formulario", "error");
       });
   };
 

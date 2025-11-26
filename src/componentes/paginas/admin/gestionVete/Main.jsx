@@ -29,7 +29,7 @@ export default function Main(){
       return axios
         .get("http://localhost:5000/api/especialidades/select", config)
         .then((resp) => {
-          console.log(resp.data)
+          // console.log(resp.data)
           setEspecialidades(resp.data)
           return resp.data; //devuelve la lista para usarla luego
         })
@@ -52,7 +52,7 @@ export default function Main(){
           id_especialidad: v.veterinario.id_especialidad,
           especialidad: esp.find((e => e.id_especialidad === v.veterinario.id_especialidad)) || null,
         }));
-        console.log(resp.data.veterinarios)
+        // console.log(resp.data.veterinarios)
         setVeterinarios(vets);
         setPaginaActual(resp.data.paginaActual);
         setTotalPaginas(resp.data.totalPaginas);
@@ -114,7 +114,7 @@ export default function Main(){
   axios.put(url, {}, config)
     .then(resp => {
       mostrarMensaje("✅ Contraseña restablecida correctamente (DNI asignado)", "exito");
-      console.log("Respuesta del backend:", resp.data);
+      // console.log("Respuesta del backend:", resp.data);
     })
     .catch(err => {
       mostrarMensaje("❌ Error al restablecer contraseña", "error");

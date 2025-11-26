@@ -77,12 +77,6 @@ export default function Formulario({
           <option key={h} value={h}>{h}</option>
         ))}
   </select>
-      {/* <input className="inputGen"
-        type="time"
-        
-        value={turno.hora}
-        onChange={(e) => onChangeDato("hora", e.target.value)}
-      /> */}
       </div>
 
       {/* Veterinario */}

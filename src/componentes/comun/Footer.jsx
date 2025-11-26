@@ -8,12 +8,14 @@ export default function Footer() {
           <p><span className="icono">📧</span> atencionvetsur@gmail.com</p>
           <p><span className="icono">📍</span> Magallanes 1234</p>
           <p><span className="icono">🕓</span> Lunes a Sábado: 9:00 a 19:00 hs</p>
+          <p><b>¿Olvidaste tu contraseña?</b></p>
+          <p>Comunicate con: 2901 643170</p>
         </div>
 
         <div className="footer-logos">
-          <img src="/img/zoetis.png" alt="Zoetis" />
+          {/* <img src="/img/zoetis.png" alt="Zoetis" />
           <img src="/img/elanco.png" alt="Elanco" />
-          <img src="/img/virbac.png" alt="Virbac" />
+          <img src="/img/virbac.png" alt="Virbac" /> */}
         </div>
       </div>
 
