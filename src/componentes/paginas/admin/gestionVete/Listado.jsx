@@ -33,7 +33,7 @@ export default function Listado({ veterinarios, onEditar }) {
                 <td data-label="Matrícula">{v.matricula}</td>
                 <td data-label="Especialidad">{v.especialidad?.nombre || "-"}</td>
                 <td>
-                  <button className="btn-edit" onClick={() => onEditar(v)} >
+                  <button onClick={() => onEditar(v)} >
                     <img src="/img/lapiz.png" alt="lapiz" className="icono"/>
                   </button>
                 </td>

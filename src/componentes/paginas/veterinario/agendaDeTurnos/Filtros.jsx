@@ -42,7 +42,7 @@ export default function Filtros({ onChange }) {
     <div className="contenedorFiltros">
       <div>
         <select
-          className="filtroSelect"
+          className="filtro-boton"
           value={servicio}
           onChange={(e) => setServicio(e.target.value)}
         >
@@ -59,17 +59,16 @@ export default function Filtros({ onChange }) {
         <div className="filtroFecha">
           <input
             type="date"
-            className="filtroInput"
+            className="filtro-boton"
             value={fecha}
             onChange={(e) => setFecha(e.target.value)}
           />
-          <button className="btnClearFiltros" onClick={limpiarFiltros}>✕</button>
+          <button onClick={limpiarFiltros}><img src="/img/equis.png" className="icono" /></button>
         </div>
-
 
         <div>
           <select
-            className="filtroSelect"
+            className="filtro-boton"
             value={estado}
             onChange={(e) => setEstado(e.target.value)}
           >

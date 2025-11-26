@@ -68,7 +68,7 @@ export default function Formulario({ perfil, datos, errores, setDato, showModal,
             <input className="inputGenPerfil" type="text" value={perfil.nombre_especialidad || ""} readOnly />
           </label>
 
-          <button className="btnEditarPerfil" onClick={() => setShowModal(true)}>Editar perfil</button>
+          <button className="btnGuardar Grande" onClick={() => setShowModal(true)}>Editar perfil</button>
         </div>
       </div>
 
@@ -118,7 +118,7 @@ export default function Formulario({ perfil, datos, errores, setDato, showModal,
             })}
 
             <div className="modalActions">
-              <button className="btnGuardarPerfil" type="submit">Actualizar datos</button>
+              <button className="btnGuardar" type="submit">Actualizar datos</button>
             </div>
             </form>
           </div>

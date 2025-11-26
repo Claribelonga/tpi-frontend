@@ -26,16 +26,16 @@ export default function Listado({ mascotas, onEditar }) {
         <tbody>
           {mascotas.map((m) => (
             <tr key={m.id_mascota}>
-              <td>{m.nombre}</td>
-              <td>{m.nombre_especie}</td>
-              <td>{m.nombre_raza}</td>
-              <td>{m.sexo}</td>
-              <td>{formatearFecha(m.fecha_nacimiento)}</td>
-              <td>{m.altura} cm</td>
-              <td>{m.peso} kg</td>
+              <td data-label="Nombre">{m.nombre}</td>
+              <td data-label="Especie">{m.nombre_especie}</td>
+              <td data-label="Raza">{m.nombre_raza}</td>
+              <td data-label="Sexo">{m.sexo}</td>
+              <td data-label="Fec.Nacimiento">{formatearFecha(m.fecha_nacimiento)}</td>
+              <td data-label="Altura">{m.altura} cm</td>
+              <td data-label="Peso">{m.peso} kg</td>
 
               <td>
-                <button onClick={() => onEditar(m)} className="btn-edit" >
+                <button onClick={() => onEditar(m)} >
                   <img src="/img/lapiz.png" alt="lapiz" className="icono"/>
                 </button>
               </td>

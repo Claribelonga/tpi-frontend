@@ -140,7 +140,7 @@ export default function Listado({ idMascota, token }) {
                     <p className="textoDiag">Peso actual: {d.peso_actual} kg</p>
                   </div>
                   <button
-                    className="btnEditarDiag"
+                    className="btnGuardar"
                     onClick={() => {
                       setFormData(d); // cargar datos del diagnóstico en el modal
                       setShowModal(true);
@@ -214,7 +214,7 @@ export default function Listado({ idMascota, token }) {
               />
             </label>
             <div className="modalActions">
-              <button onClick={handleSave} className="btnGuardarPerfil">
+              <button onClick={handleSave} className="btnGuardar">
                 Actualizar diagnóstico
               </button>
             </div>

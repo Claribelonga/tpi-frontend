@@ -103,6 +103,7 @@ export default function Formulario({ onGuardar, servicioEdit, mostrarMensaje, ce
           <label>Nombre:</label>
           <input
             className="inputGen"
+            placeholder="Ingrese servicio"
             type="text"
             value={datos.nombre}
             onChange={(e) => manejarCambios("nombre", e.target.value)}
@@ -116,6 +117,7 @@ export default function Formulario({ onGuardar, servicioEdit, mostrarMensaje, ce
           <input
             className="inputGen"
             type="number"
+            placeholder="Ingrese el precio"
             value={datos.precio}
             onChange={(e) => manejarCambios("precio", e.target.value)}
             onKeyDown={(e) =>

@@ -118,7 +118,7 @@ export default function Formulario({ mascota, cerrar, onGuardar, especies, razas
             value={peso} onChange={e => setPeso(e.target.value)} />
           </div>
 
-          <button className="btnGuardar" type="submit">Guardar</button>
+          <button className="btnGuardar Grande" type="submit">Guardar</button>
         </form>
       </div>
     </div>

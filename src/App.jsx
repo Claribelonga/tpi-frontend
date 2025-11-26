@@ -25,6 +25,8 @@ import './App.css'
 //el menu deberia estar aca fijo y cuando se logee recien mostrar el menu
 
 function App() {
+  const [open, setOpen] = useState(false);
+
   const [, navigate] = useLocation();
   const [token, setToken] = useState(sessionStorage.getItem("token"));
   const [rol, setRol] = useState(Number(sessionStorage.getItem("rol")));
@@ -60,6 +62,9 @@ function App() {
     }
   }, [token, rol]);
 
+  const toggleMenu = () => {
+    setOpen(prev => !prev);
+  };
   return (
      <div className="App">
        <Router>
@@ -74,7 +79,7 @@ function App() {
               </div>
               <div>
               <button onClick={() => navigate("/login")} className="btnHeader">Iniciar Sesión</button>
-              <button onClick={() => navigate("/registrarse")} className="btnGuardarPerfil">Registrarse</button>
+              <button onClick={() => navigate("/registrarse")} className="btnGuardar">Registrarse</button>
               </div>
             </header>
           <Route path="/inicio"><Inicio /></Route>
@@ -86,8 +91,10 @@ function App() {
         ) : (
           /* Layout general con menú y contenido */
           <div className="layout">
-            <div className="menu-lateral">
-              <Menu rol={rol}/>
+            {/* Botón hamburguesa - SIEMPRE fuera del menú */}
+            <button className="hamburger" onClick={toggleMenu}>☰</button>
+            <div className={`menu-lateral ${open ? "open" : ""}`}>
+              <Menu rol={rol} toggleMenu={() => setOpen(!open)}/>
             </div>
             <div className="area-contenido">
                {mensaje && (

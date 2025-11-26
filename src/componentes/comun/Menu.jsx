@@ -1,10 +1,10 @@
 import { Link} from "wouter"
 import { useLocation } from "wouter";
+import { useState } from "react";
 //estructura del menu compartida, un switch/ ifelse con 
-export default function Menu({rol}) {
-
+export default function Menu({rol, toggleMenu}) {
   const [, navigate] = useLocation();
-
+  const [open, setOpen] = useState(false); 
   const handleLogout = () => {
     // 1️⃣ Borrar los datos del usuario
     sessionStorage.removeItem("token");

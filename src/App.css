@@ -307,10 +307,10 @@ span {
   flex-direction: row;
   justify-content: flex-end;
 }
-.form-button .btn-violeta{
+/* .form-button .btn-violeta{
   width: 150px;
   margin-top: 0;
-}
+} */
 .cont-buscador{
   display: flex;
   flex-direction: row;
@@ -365,9 +365,6 @@ td {
 }
 .thead tr:first-child th:last-child {
   border-top-right-radius: 10px;
-}
-.btn-edit{
-  color: #7E57C2;
 }
 .btn-estado {
   border: none;
@@ -481,7 +478,7 @@ td {
 } */
 
 /* Estado sin turno */
-.sin-turno {
+/* .sin-turno {
   margin: 30px 0;
   border: 1.7px solid #9c5df5;
   border-radius: 10px;
@@ -489,7 +486,7 @@ td {
   width: 330px;
   background-color: #fff;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
-}
+} */
 /*servicios seccion*/
 .servicios-container {
   text-align: left;
@@ -639,29 +636,7 @@ td {
   background-color: #ccc;
   cursor: not-allowed;
 }
-/*responsive*/
-@media (max-width: 768px) {
-  table, thead, tbody, th, td, tr {
-    display: block;
-  }
-  thead tr {
-    display: none; /* oculta el encabezado */
-  }
-  tbody tr {
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    padding: 0.5rem;
-  }
-  td {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem;
-  }
-  td::before {
-    content: attr(data-label);
-    font-weight: bold;
-  }
-}
+
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -734,7 +709,7 @@ td {
   color: #777777;
 }
 /*Modal editar perfil*/
-.btnEditarPerfil {
+/* .btnEditarPerfil {
   margin-top: 20px;
   padding: 10px 20px;
   background: #4A90E2;
@@ -742,7 +717,7 @@ td {
   border: 1px solid #A8ACAF;
   border-radius: 6px;
   cursor: pointer;
-}
+} */
 
 .modalOverlay {
   position: fixed;
@@ -776,23 +751,23 @@ select, option {
   background-color: white !important;
   z-index: 99999 !important;
 }
-.btnGuardarPerfil {
+/* .btnGuardarPerfil {
   background: #4A90E2;
   color: #fff;
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
-}
+} */
 
-.btnCancelarPerfil {
+/* .btnCancelarPerfil {
   background: #ccc;
   color: #000;
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
-}
+} */
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -819,16 +794,7 @@ select, option {
   position: absolute;
   top: 10px;
   right: 15px;
-  background: transparent;
-  border: none;
-  font-size: 1.8rem;
-  font-weight: bold;
   cursor: pointer;
-  color: #333;
-}
-
-.btnCloseModal:hover {
-  color: #e74c3c; /* rojo al pasar el mouse */
 }
 
 .modalActions {
@@ -837,14 +803,14 @@ select, option {
   margin-top: 20px;
 }
 
-.btnGuardarPerfil {
+/* .btnGuardarPerfil {
   background: #4A90E2;
   color: #fff;
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
-}
+} */
 .modalArriba{
   padding-bottom: 10px;
 }
@@ -937,14 +903,10 @@ select, option {
     transition: background-color 0.2s ease;
 
 }
-
-/* pendiente */
 .btn-estadoVeterinario.pendiente {
   background-color: #B39DDB;
   color: #fff;
 }
-
-/* finalizado */
 .btn-estadoVeterinario.finalizado {
   background-color: #C27C7C;
   color: #fff;
@@ -969,37 +931,12 @@ select, option {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
 }
-
 .contenedorFiltros > div {
   display: flex;
 }
-
-.btnClearFiltros {
-  background: transparent;
-  border: none;
-  font-size: 1rem;
-  width: 25px;
-  color: #c00;
-  cursor: pointer;
-  outline: none;       /* 👉 elimina el borde de foco */
-  box-shadow: none;    /* 👉 elimina sombras que parecen borde */
-}
-
-.btnClearFiltros:focus {
-  outline: none;
-  box-shadow: none;
-}
-.filtroSelect,
-.filtroInput {
-  width: 150px;
-  height: 45px;
-  border: 1px solid #AEADAD;
-  box-shadow: 0 1px 2px #494949; /* sombreado más bajo */
-  font-size: 16px;              /* texto más grande */
-  text-align: center;           /* centra el texto */
-  padding: 0.5rem;
-  outline: none;
-  border-radius: 12px
+.contenedorFiltros .filtro-boton{
+  margin: 0;
+  width: 190px;
 }
 
 /* opcional: efecto al enfocar */
@@ -1079,6 +1016,7 @@ textarea.inputDiagnostico {
 }
 
 .btnGuardar {
+  width: max-content;
   background-color: #4A90E2;
   color: #fff;
   border: none;
@@ -1087,6 +1025,9 @@ textarea.inputDiagnostico {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+}
+.btnGuardar.Grande{
+  width: 100%;
 }
 .btnGuardar:hover {
   background-color: #357ABD;
@@ -1181,13 +1122,6 @@ textarea.inputDiagnostico {
   flex-direction: row;
   align-items: center;
 }
-/* .misMascotas .btn-violeta{
-  width: max-content;
-} */
-
-/* .formulario-mascota-modal .FormContenedor{
-  height: max-content;
-} */
 .arriba-mascota{
   display: flex;
   flex-direction: row;
@@ -1417,17 +1351,6 @@ textarea.inputDiagnostico {
   word-break: break-word;
   max-width: 100%;
 }
-
-.btnEditarDiag {
-  align-self: flex-end;
-  padding: 8px 16px;
-  background: #0077cc;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin: 5px;
-}
 .fichaContainer{
     display: flex;
     flex-direction: column;
@@ -1453,8 +1376,351 @@ textarea.inputDiagnostico {
   font-weight: 600;
   color: #000;
 }
+/*Escritorio*/
+@media (min-width: 769px) {
+  .hamburger {
+    display: none;
+  }
+}
 
+/*Mobiles*/
+@media (max-width: 769px) {
+  /* Oculto por defecto */
+  .menu-lateral {
+    transform: translateX(-110%);
+    transition: transform .3s ease;
+  }
 
+  /* Mostrado cuando está "open" */
+  .menu-lateral.open {
+    transform: translateX(0);
+  }
 
+  .hamburger {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    z-index: 1100;
+    cursor: pointer;
+  }
+  
+  /* Quitar margen izquierdo del área de contenido */
+  .area-contenido {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 60px 15px 15px 15px; /* más padding arriba por el hamburger */
+  }
 
+  /* Header */
+  .header {
+    padding: 0 60px 0 60px; /* espacio para el hamburger */
+    height: auto;
+    min-height: 60px;
+    flex-wrap: wrap;
+  }
 
+  /* Formularios */
+  .FormContenedor,
+  .FormContenedorPerfil,
+  .formularioDiagnosticos,
+  .formularioAgendaDeTurnos {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .cont-form {
+    margin-right: 0;
+  }
+
+  /* Inputs en fila pasan a columna */
+  .filaInputs,
+  .inputs-grid {
+    flex-direction: column;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .inputMitad {
+    width: 100%;
+  }
+
+  /* Buscador */
+  .cont-buscador {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .buscador {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Tablas */
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  thead tr {
+    display: none;
+  }
+  tbody tr {
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+  }
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+  }
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+  }
+
+  /* Listado clientes */
+  .listado-clientes-container {
+    padding: 5px;
+    overflow-x: auto;
+  }
+
+  /* Grid de servicios */
+  .grid-servicios {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card-servicio {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Footer */
+  .footer {
+    width: 100%;
+    padding: 20px 15px;
+  }
+
+  .footer-contenido {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Perfil */
+  .ContenedorImagenH2 {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 20px;
+  }
+
+  /* Imagen del perro en registro */
+  .perro {
+    display: none;
+  }
+
+  .ContenedorImagen {
+    display: none;
+  }
+
+  /* Agenda de turnos */
+  .containerAgendaDeTurnos {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .leftColumna,
+  .rightColumna {
+    width: 100%;
+    max-height: none;
+  }
+
+  .listadoTurnoVete {
+    max-height: 400px;
+  }
+
+  /* Filtros */
+  .contenedorFiltros {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .filtroSelect,
+  .filtroInput {
+    width: 100%;
+  }
+
+  /* Tarjetas de turno */
+  .card-turno,
+  .sin-turno,
+  .tarjetaTurnoVete {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Diagnósticos */
+  .diagnosticoCard {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 300px;
+  }
+
+  /* Ficha de datos */
+  .filaFicha {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .datoFicha {
+    flex: 1 1 100%;
+  }
+
+  /* Arriba elementos */
+  .arriba-turno,
+  .arriba-mascota {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Modales */
+  .modalContent {
+    width: 90%;
+    max-width: 400px;
+    padding: 1.5rem;
+  }
+
+  /* Paginación */
+  .paginacion {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Contenedor principal de login/registro */
+  .PaginaRegistro {
+    padding: 10px;
+  }
+
+  .PaginaRegistro .FormContenedor {
+    padding: 15px;
+    margin-left: 0;
+    box-shadow: none;
+  }
+
+  /* Botones en fila */
+  .form-button {
+    justify-content: center;
+  }
+
+  .form-button .btn-violeta {
+    width: 100%;
+  }
+
+  /* Cards container */
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hora y estado en tarjeta veterinario */
+  .tarjetaHoraEstadoVete {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  /* Lista de mascotas */
+  .listaMascotas {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Main buscador mascotas */
+  .mainBuscadorMascotas {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Sin turno seleccionado */
+  .sinTurnoSeleccionado {
+    width: 95%;
+    margin-top: 50px;
+    height: auto;
+    padding: 20px;
+  }
+
+  /* Panel diagnóstico */
+  .panel-diagnostico {
+    padding: 10px;
+  }
+
+  .sin-diagnostico {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .card-diagnostico {
+    width: 95%;
+    padding: 15px;
+  }
+
+  /* Título vista */
+  .titulo-vista {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  /* Contenedor de filtros con botón */
+  .filtro-contenedor {
+    width: 100%;
+  }
+
+  .filtro-boton {
+    width: 100%;
+    justify-content: center;
+    margin: 15px 0
+  }
+
+  .filtro-menu {
+    width: 100%;
+  }
+
+  /* Logo header */
+  .logo {
+    height: 50px;
+  }
+
+  /* Gatitos */
+  .gatitos {
+    height: 200px;
+  }
+
+  /* Cards veterinario */
+  .card-vete {
+    width: 100%;
+  }
+
+  .img-vete {
+    width: 120px;
+    height: 120px;
+  }
+
+  .vete-img {
+    height: 80px;
+  }
+
+  /* Contenedor turno */
+  .contenedor-turno {
+    width: 100%;
+  }
+
+  /* Ficha container */
+  .fichaContainer {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+}

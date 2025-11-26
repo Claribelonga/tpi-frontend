@@ -58,7 +58,7 @@ export default function Formulario({ perfil, datos, setDato, showModal, setShowM
             </label>
           </div>
 
-          <button className="btnEditarPerfil" onClick={() => setShowModal(true)}>Editar perfil</button>
+          <button className="btnGuardar Grande" onClick={() => setShowModal(true)}>Editar perfil</button>
         </div>
       </div>
 
@@ -112,7 +112,7 @@ export default function Formulario({ perfil, datos, setDato, showModal, setShowM
             })}
 
             <div className="modalActions">
-              <button className="btnGuardarPerfil" type="submit">Actualizar datos</button>
+              <button className="btnGuardar" type="submit">Actualizar datos</button>
             </div>
             </form>
           </div>

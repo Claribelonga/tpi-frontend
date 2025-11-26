@@ -233,7 +233,7 @@ export default function Formulario({ idMascota, idTurno }) {
           />
         </div>
         {!diagnosticoExistente && (
-          <button type="submit" className="btnGuardar">Guardar diagnóstico</button>
+          <button type="submit" className="btnGuardar Grande">Guardar diagnóstico</button>
         )}
       </form>
     </div>
