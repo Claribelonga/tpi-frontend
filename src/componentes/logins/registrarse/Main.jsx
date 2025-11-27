@@ -1,8 +1,11 @@
 import Formulario from "./Formulario";
 import axios from "axios";
 import { useLocation } from "wouter";
+import useMensaje from "../../../hooks/useMensaje";
+import Mensaje from "../../comun/Mensaje";
 
 export default function Registrarse(){
+  const{textoMensaje,tipoMensaje,visible,mostrarMensaje}=useMensaje();
     const [, navigate] = useLocation();
      //POST
     const guardar = (datos)=>{
@@ -15,11 +18,21 @@ export default function Registrarse(){
         alert("usuario registrado")
       })
       .catch((error) =>{
-        console.error(error)
-        alert("usuario no registrard")
+        if (error.response?.data?.errores) {
+      // Recorrer todos los errores del backend
+      error.response.data.errores.forEach(err => {
+        mostrarMensaje("" + err, "error");
+      });
+    } else if (error.response?.data) {
+      // Si recibís un string viejo
+      mostrarMensaje("" + error.response.data, "error");
+    }
       })
     }
     return(
-        <Formulario onGuardar={guardar}></Formulario>
+      <>
+    <Mensaje texto={textoMensaje} tipo={tipoMensaje} visible={visible} />
+    <Formulario onGuardar={guardar}></Formulario>
+      </>
     )
 }

@@ -87,8 +87,16 @@ export default function Main(){
           setVetEdit(null);
         })
         .catch((error) => {
-          console.error(error);
-          mostrarMensaje("❌ Error al actualizar veterinario", "error");
+          if (error.response?.data?.errores) {
+      // Recorre todos los errores del backend
+      error.response.data.errores.forEach(err => {
+        mostrarMensaje("" + err, "error");
+      });
+    } else if (error.response?.data) {
+      mostrarMensaje("" + error.response.data, "error");
+    } else {
+      mostrarMensaje("Error al crear cliente", "error");
+    }
         });
     } else {
       // Crear veterinario
@@ -101,8 +109,12 @@ export default function Main(){
           setMostrarForm(false);
         })
         .catch((error) => {
-          console.error(error);
-          mostrarMensaje("❌ Error al registrar veterinario", "error");
+           if (error.response && error.response.data) {
+          // mensaje exacto que envía el backend
+          mostrarMensaje("" + error.response.data, "error");
+        } else {
+          mostrarMensaje("Error al crear veterinario", "error");
+        }
         });
     }
   };

@@ -6,7 +6,6 @@ export default function Buscador ({onBuscar, titulo, placeholder}){
   const handleBuscar = () => {
     onBuscar(texto, 1); // Llama al padre (Main) con el texto de búsqueda
   };
-
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleBuscar();

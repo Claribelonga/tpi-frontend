@@ -28,7 +28,6 @@ export default function Formulario({ guardarCliente, clienteEdit, restablecerCon
       alert("Hay errores en el formulario");
       return;
     }
-    console.log("Datos del usuario: ", datos);
     guardarCliente(datos);
     limpiarInputs();
     cerrar();

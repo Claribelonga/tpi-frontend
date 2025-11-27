@@ -61,7 +61,7 @@ export default function Main() {
     axios.put(url, { estado: nuevoEstado }, config)
       .then(() => {
         mostrarMensaje("Estado actualizado correctamente", "exito");
-        obtenerServicios()
+        obtenerServicios(paginaActual)
       })
       .catch((error) => {
         console.error(error)
@@ -80,7 +80,7 @@ export default function Main() {
     axios.put(url, datos, config)
       .then(() => {
         mostrarMensaje("Servicio actualizado", "exito");
-        obtenerServicios();
+        obtenerServicios(paginaActual);
         setServicioEdit(null);
         setMostrarForm(false);
       })

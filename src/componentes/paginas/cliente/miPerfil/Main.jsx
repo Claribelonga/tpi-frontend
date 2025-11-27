@@ -57,8 +57,17 @@ export default function Main() {
         obtenerPerfil();
       })
       .catch(err => {
-        console.error("Error al actualizar perfil:", err);
-        mostrarMensaje("Ocurrió un error al actualizar el perfil", "error");
+        if (error.response?.data?.errores) {
+      // Recorrer todos los errores del backend
+      error.response.data.errores.forEach(erro => {
+        mostrarMensaje("" + erro, "error");
+      });
+    } else if (error.response?.data) {
+      // Si recibís un string viejo
+      mostrarMensaje("" + error.response.data, "error");
+    } else {
+      mostrarMensaje("Error al crear cliente", "error");
+    }
       });
   };
 

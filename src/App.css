@@ -786,14 +786,6 @@ select, option {
   margin-top: 20px;
 }
 
-/* .btnGuardarPerfil {
-  background: #4A90E2;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-} */
 .modalArriba{
   padding-bottom: 10px;
 }
@@ -819,37 +811,16 @@ select, option {
   margin-bottom: 10px;
   cursor: pointer;
 }
-/* .tarjetaServicioVete {
-  font-weight: bold;
-  font-size: 16px;   /* servicio 16px 
-  margin-bottom: 0.5rem;
-  color: #767676;    /* gris 
-} */
 .tarjetaInfoVete {
   display: flex;
   justify-content: space-between;
   font-size: 16px;   /* fecha y mascota 16px */
   gap: 0.5rem;
   max-width: 100%;
-  position: relative;
+  /* position: relative; */
   top: -5px;         /* sube todo el bloque 5px */
 }
-.tarjetaInfoVete span {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-weight: normal; /* por defecto no bold */
-}
-.tarjetaInfoVete span:first-child {
-  font-weight: bold;
-  font-size: 18px;
-  color: #000;
-}
-.tarjetaInfoVete span:last-child {
-  font-weight: normal;
-  font-size: 16px;
-  color: #767676;
-}
+
 .tarjetaHoraEstadoVete {
   display: flex;
   justify-content: flex-start; /* hora y botón más juntos a la izquierda */
@@ -1630,19 +1601,12 @@ textarea.inputDiagnostico {
   }
 
   /* Agenda de turnos */
-  .containerAgendaDeTurnos {
-    flex-direction: column;
-    gap: 20px;
-  }
+  
 
   .leftColumna,
   .rightColumna {
     width: 100%;
     max-height: none;
-  }
-
-  .listadoTurnoVete {
-    max-height: 400px;
   }
 
   /* Filtros */

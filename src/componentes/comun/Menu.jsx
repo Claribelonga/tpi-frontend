@@ -6,11 +6,11 @@ export default function Menu({rol, toggleMenu}) {
   const [, navigate] = useLocation();
   const [open, setOpen] = useState(false); 
   const onLogout = () => {
-    // 1️⃣ Borrar los datos del usuario
+    //  Borrar los datos del usuario
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("rol");
     window.dispatchEvent(new Event("sessionChange"));
-    // 2️⃣ Redirigir al login
+    //  Redirigir al login
     navigate("/inicio");
   };
 
@@ -20,18 +20,18 @@ export default function Menu({rol, toggleMenu}) {
     case 1:
       menuItems = (
         <>
-        <Link href="/inicio" className="menu-item">
+        <Link href="/inicio" className="menu-item" onClick={toggleMenu}>
             <img src="/img/casa.png" alt="home" className="icono" />Inicio
           </Link>
-          <Link href="/gestionCliente" className="menu-item">
+          <Link href="/gestionCliente" className="menu-item" onClick={toggleMenu}>
             <img src="/img/usuario.png" alt="clientes" className="icono" />
             Gestionar Clientes
           </Link>
-          <Link href="/gestionVete" className="menu-item">
+          <Link href="/gestionVete" className="menu-item" onClick={toggleMenu}>
             <img src="/img/agenda.png" alt="veterinarios" className="icono" />
             Gestionar Veterinarios
           </Link>
-          <Link href="/gestionServicios" className="menu-item">
+          <Link href="/gestionServicios" className="menu-item" onClick={toggleMenu}>
             <img src="/img/mas.png" alt="servicios" className="icono" />
             Gestionar Servicios
           </Link>
@@ -41,19 +41,19 @@ export default function Menu({rol, toggleMenu}) {
       case 2:
         menuItems = (
           <>
-          <Link href="/inicio" className="menu-item">
+          <Link href="/inicio" className="menu-item" onClick={toggleMenu}>
             <img src="/img/casa.png" alt="home" className="icono" />
             Inicio
           </Link>
-          <Link href="/miPerfil" className="menu-item">
+          <Link href="/miPerfil" className="menu-item" onClick={toggleMenu}>
             <img src="/img/usuario.png" alt="perfil" className="icono" />
             Mi Perfil
           </Link>
-          <Link href="/agendaDeTurnos" className="menu-item">
+          <Link href="/agendaDeTurnos" className="menu-item" onClick={toggleMenu}>
             <img src="/img/agenda.png" alt="agenda" className="icono" />
             Ver Agenda de Turnos
           </Link>
-          <Link href="/diagnosticos" className="menu-item">
+          <Link href="/diagnosticos" className="menu-item" onClick={toggleMenu}>
             <img src="/img/pata.png" alt="diagnostico" className="icono" />
             Diagnósticos
           </Link>
@@ -63,25 +63,25 @@ export default function Menu({rol, toggleMenu}) {
         case 3:
            menuItems = (
         <>
-          <Link href="/inicio" className="menu-item">
+          <Link href="/inicio" className="menu-item" onClick={toggleMenu}>
             <img src="/img/casa.png" alt="home" className="icono" />
             Inicio
           </Link>
-          <Link href="/miPerfil" className="menu-item">
+          <Link href="/miPerfil" className="menu-item" onClick={toggleMenu}>
             <img src="/img/usuario.png" alt="perfil" className="icono" />
             Mi Perfil
           </Link>
-          <Link href="/misTurnos" className="menu-item">
-            <img src="/img/agenda.png" alt="turnos" className="icono" />
-            Mis Turnos
+          <Link href="/misMascotas" className="menu-item" onClick={toggleMenu}>
+            <img src="/img/pata.png" alt="mascotas" className="icono" />
+            Mis Mascotas
           </Link>
-          <Link href="/sacarTurno" className="menu-item">
+          <Link href="/sacarTurno" className="menu-item" onClick={toggleMenu}>
             <img src="/img/mas.png" alt="sacar" className="icono" />
             Sacar Turno
           </Link>
-          <Link href="/misMascotas" className="menu-item">
-            <img src="/img/pata.png" alt="mascotas" className="icono" />
-            Mis Mascotas
+          <Link href="/misTurnos" className="menu-item" onClick={toggleMenu}>
+            <img src="/img/agenda.png" alt="turnos" className="icono" />
+            Mis Turnos
           </Link>
         </>
         )

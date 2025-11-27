@@ -29,46 +29,37 @@ export default function Formulario({ mascota, cerrar, onGuardar, especies, razas
       obtenerRazas(mascota.id_especie);
     }
   }, [mascota]);
-
-  // ===== VALIDACIONES =====
   const validarNombre = (valor) => {
-    if (valor.trim().length < 3) {
-      return "El nombre debe tener mínimo 3 caracteres.";
-    }
-    if (!REGEX_NOMBRE.test(valor.trim())) {
-      return "El nombre solo puede contener letras, espacios y guiones. Mínimo 3 caracteres.";
-    }
-    return "";
-  };
-  // Validar en tiempo real
-  const manejarCambios = (campo, valor) => {
-    setDato(campo, valor);
-    let error = "";
-    if (campo === "nombre") error = validarNombre(valor);
-    setErrores({ ...errores, [campo]: error });
-  };
+  valor = valor.trim();
+
+  if (valor.length < 3) {
+    return "El nombre debe tener al menos 3 caracteres.";
+  }
+
+  if (!REGEX_NOMBRE.test(valor)) {
+    return "Solo se permiten letras y espacios.";
+  }
+
+  return ""; // sin errores
+};
+const manejarCambioNombre = (valor) => {
+  setNombre(valor);
+
+  // validar mientras escribe
+  const error = validarNombre(valor);
+  setErrores(prev => ({ ...prev, nombre: error }));
+};
+
+
   // Enviar datos
   const enviarDatos = (e) => {
     e.preventDefault();
-
-    const errNombre = validarNombre(nombre);
-
-    // si hay errores → no se envía
-    if (errNombre || !idRaza) {
-      setErrores({
-        nombre: errNombre
-      });
-      return;
-    }
-    onGuardar(datos);
-
-    // setDatos({ nombre: "", precio: "" });
-    // setErrores({ nombre: "", precio: "" });
-    // if (!idRaza) {
-    //   alert("Debes seleccionar una raza");
-    //   return;
-    // }
-
+    // validar antes de enviar
+    const errorNombre = validarNombre(nombre);
+    if (errorNombre) {
+    setErrores(prev => ({ ...prev, nombre: errorNombre }));
+    return;
+  }
     const datos = {
       idMascota: mascota?.id_mascota || null,
       nombre,
@@ -78,7 +69,7 @@ export default function Formulario({ mascota, cerrar, onGuardar, especies, razas
       altura,
       peso
     };
-    setErrores(nombre)
+    onGuardar(datos);
   };
 
   return (
@@ -94,7 +85,7 @@ export default function Formulario({ mascota, cerrar, onGuardar, especies, razas
           <div className="inputContainer">
             <label>Nombre:</label>
           <input className="inputGen" placeholder="Nombre"
-            value={nombre} onChange={e => setNombre(e.target.value)} />
+            value={nombre} onChange={e => manejarCambioNombre(e.target.value)} />
             {errores.nombre && <p className="error">{errores.nombre}</p>}
           </div>
 

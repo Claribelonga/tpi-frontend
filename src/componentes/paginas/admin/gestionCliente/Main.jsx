@@ -19,13 +19,9 @@ export default function Main(){
     visible,
     mostrarMensaje
   } = useMensaje();
-
   const token = sessionStorage.getItem("token");
-  // console.log("token: ", token);
-
   //GET para obtener clientes
   const obtenerClientes = (busqueda = "", pagina = 1) =>{
-    // console.log("Buscando: ", busqueda);
     const config = {
       headers: {
         Authorization: token,
@@ -35,8 +31,6 @@ export default function Main(){
     axios.get(url, config)
     .then((resp) =>{
       setClientes(resp.data.personas);
-      // console.log(resp.data);
-      //guardar paginacion
       setPaginaActual(resp.data.paginaActual);
       setTotalPaginas(resp.data.totalPaginas);
     })
@@ -49,12 +43,12 @@ export default function Main(){
   useEffect(() => {
     obtenerClientes("", paginaActual);
   }, [])
-
   const cambiarPagina = (nuevaPagina) => {
     if (nuevaPagina < 1 || nuevaPagina > totalPaginas) return;
     obtenerClientes("", nuevaPagina)
   }
-  //POST
+  
+  //POST/PUT
   const guardarCliente = (datos)=> {
     const config = {
       headers: {
@@ -66,28 +60,31 @@ export default function Main(){
       const url = `http://localhost:5000/api/clientes/editarcliente/${clienteEdit.usuario.id_usuario}`;
       axios.put(url, datos, config)
       .then((resp) => {
-        // console.log("cliente actualizado: ", resp.data);
-        obtenerClientes();
-        setMostrarForm(false);
-        mostrarMensaje("✅ Cliente actualizado con éxito", "exito");
-        setClienteEdit(null); //limpia el formularioo
+        obtenerClientes("", paginaActual);
+        mostrarMensaje("Cliente actualizado con éxito", "exito");
+        setClienteEdit(null);
       })
       .catch((error) => {
         console.error(error)
-        mostrarMensaje("❌ Error al registrar cliente", "error");
       })
     } else {
       //POST normal para crear cliente
       const url = "http://localhost:5000/api/clientes/crearcliente";
       axios.post(url, datos, config)
       .then((resp) => {
-        // console.log("cliente creado: ",resp.data)
-        mostrarMensaje("✅ Cliente creado con éxito", "exito");
+        mostrarMensaje("Cliente creado con éxito", "exito");
         obtenerClientes()
       })
       .catch ((error) => {
-        console.error(error);
-        mostrarMensaje("❌ Error al crear cliente", "error");
+        if (error.response?.data?.errores) {
+      error.response.data.errores.forEach(err => {
+        mostrarMensaje("" + err, "error");
+      });
+    } else if (error.response?.data) {
+      mostrarMensaje("" + error.response.data, "error");
+    } else {
+      mostrarMensaje("Error al crear cliente", "error");
+    }
       })
     }
   }

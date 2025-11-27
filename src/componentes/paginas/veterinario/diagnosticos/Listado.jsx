@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-// import fileDownload from "js-file-download";
+import fileDownload from "js-file-download";
 import Paginacion from "../../../comun/paginacion";
 
 export default function Listado({ idMascota, token }) {
@@ -303,7 +303,7 @@ export default function Listado({ idMascota, token }) {
         </label>
 
         <div className="modalActions">
-          <button type="submit" className="btnGuardarPerfil">
+          <button type="submit" className="btnGuardar">
             Actualizar diagnóstico
           </button>
         </div>
@@ -311,7 +311,6 @@ export default function Listado({ idMascota, token }) {
     </div>
   </div>
 )}
-
     </div>
   );
 }
