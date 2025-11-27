@@ -26,7 +26,6 @@ import './App.css'
 
 function App() {
   const [open, setOpen] = useState(false);
-
   const [, navigate] = useLocation();
   const [token, setToken] = useState(sessionStorage.getItem("token"));
   const [rol, setRol] = useState(Number(sessionStorage.getItem("rol")));

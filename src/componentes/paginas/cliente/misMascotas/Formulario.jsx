@@ -9,6 +9,10 @@ export default function Formulario({ mascota, cerrar, onGuardar, especies, razas
   const [fecha_nacimiento, setFN] = useState("");
   const [altura, setAltura] = useState("");
   const [peso, setPeso] = useState("");
+  const REGEX_NOMBRE = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{3,}$/;
+  const [errores, setErrores] = useState({
+    nombre: ""
+  });
 
   // CARGAR DATOS EN MODO EDICIÓN
   useEffect(() => {
@@ -26,14 +30,44 @@ export default function Formulario({ mascota, cerrar, onGuardar, especies, razas
     }
   }, [mascota]);
 
+  // ===== VALIDACIONES =====
+  const validarNombre = (valor) => {
+    if (valor.trim().length < 3) {
+      return "El nombre debe tener mínimo 3 caracteres.";
+    }
+    if (!REGEX_NOMBRE.test(valor.trim())) {
+      return "El nombre solo puede contener letras, espacios y guiones. Mínimo 3 caracteres.";
+    }
+    return "";
+  };
+  // Validar en tiempo real
+  const manejarCambios = (campo, valor) => {
+    setDato(campo, valor);
+    let error = "";
+    if (campo === "nombre") error = validarNombre(valor);
+    setErrores({ ...errores, [campo]: error });
+  };
   // Enviar datos
   const enviarDatos = (e) => {
     e.preventDefault();
 
-    if (!idRaza) {
-      alert("Debes seleccionar una raza");
+    const errNombre = validarNombre(nombre);
+
+    // si hay errores → no se envía
+    if (errNombre || !idRaza) {
+      setErrores({
+        nombre: errNombre
+      });
       return;
     }
+    onGuardar(datos);
+
+    // setDatos({ nombre: "", precio: "" });
+    // setErrores({ nombre: "", precio: "" });
+    // if (!idRaza) {
+    //   alert("Debes seleccionar una raza");
+    //   return;
+    // }
 
     const datos = {
       idMascota: mascota?.id_mascota || null,
@@ -44,9 +78,7 @@ export default function Formulario({ mascota, cerrar, onGuardar, especies, razas
       altura,
       peso
     };
-
-    console.log("📤 Datos a enviar:", datos);
-    onGuardar(datos);
+    setErrores(nombre)
   };
 
   return (
@@ -63,6 +95,7 @@ export default function Formulario({ mascota, cerrar, onGuardar, especies, razas
             <label>Nombre:</label>
           <input className="inputGen" placeholder="Nombre"
             value={nombre} onChange={e => setNombre(e.target.value)} />
+            {errores.nombre && <p className="error">{errores.nombre}</p>}
           </div>
 
           {/* ESPECIE */}
@@ -108,8 +141,10 @@ export default function Formulario({ mascota, cerrar, onGuardar, especies, razas
 
           <div className="inputContainer">
             <label>Altura:</label>
-          <input className="inputGen" placeholder="Altura"
-            value={altura} onChange={e => setAltura(e.target.value)} />
+          <input className="inputGen" type="number" placeholder="Altura"
+            value={altura} onChange={e => setAltura(e.target.value)} onKeyDown={(e) =>
+              ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
+            }/>
           </div>
 
           <div className="inputContainer">

@@ -117,6 +117,9 @@ export default function Formulario({ guardarCliente, clienteEdit, restablecerCon
                 <input className="inputGen" value={datos.departamento} onChange={(e) => setDato("departamento", e.target.value)} />
                 {erroresForm.departamento && <span className="error">{erroresForm.departamento}</span>}
               </div>
+              <div className="inputContainer">
+                <label>Restablecer contraseña a DNI</label>
+              </div>
 
               {/* Botones */}
               <div className="form-section form-button">

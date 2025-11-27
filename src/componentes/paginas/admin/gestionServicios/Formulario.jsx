@@ -41,7 +41,6 @@ export default function Formulario({ onGuardar, servicioEdit, mostrarMensaje, ce
     }
     return "";
   };
-
   const validarPrecio = (valor) => {
     if (Number(valor) <= 0 || valor === "") {
       return "El precio debe ser mayor a 0.";
@@ -52,12 +51,9 @@ export default function Formulario({ onGuardar, servicioEdit, mostrarMensaje, ce
   // Validar en tiempo real
   const manejarCambios = (campo, valor) => {
     setDato(campo, valor);
-
     let error = "";
-
     if (campo === "nombre") error = validarNombre(valor);
     if (campo === "precio") error = validarPrecio(valor);
-
     setErrores({ ...errores, [campo]: error });
   };
 

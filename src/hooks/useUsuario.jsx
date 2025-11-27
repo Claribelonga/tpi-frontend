@@ -96,7 +96,7 @@ export default function useUsuario(camposExtra = []) {
     return "";
   };
 
-  // Función para setear y validar un campo
+  // Función para setear y validar un campo setter
   const setDato = (campo, valor) => {
     setDatos(prev => ({ ...prev, [campo]: valor }));
     const error = validarCampo(campo, valor);
@@ -111,7 +111,7 @@ export default function useUsuario(camposExtra = []) {
       if (error) nuevosErrores[campo] = error;
     }
     setErrores(nuevosErrores);
-    return Object.keys(nuevosErrores).length === 0;
+    return Object.keys(nuevosErrores).length === 0; //investigar 
   };
 
   // Limpiar todos los inputs
@@ -124,3 +124,4 @@ export default function useUsuario(camposExtra = []) {
 
   return { datos, errores, setDato, validarTodo, limpiarInputs };
 }
+//investigar setter getter
